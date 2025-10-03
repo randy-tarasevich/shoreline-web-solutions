@@ -1,0 +1,91 @@
+---
+export interface Props {
+	currentPage?: string;
+}
+
+const { currentPage } = Astro.props;
+---
+
+<nav class="fixed top-0 w-full bg-transparent backdrop-blur-md z-50 transition-all duration-300" id="navbar">
+	<div class="max-w-7xl mx-auto px-6">
+		<div class="flex items-center justify-between h-16">
+			<a href="/" class="font-bold text-xl text-white drop-shadow-lg">
+				<span class="text-blue-300">Shoreline</span> Web Solutions
+			</a>
+			
+			<div class="hidden md:flex space-x-8">
+				<a href="/" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'home' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Home</a>
+				<a href="/about" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'about' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>About</a>
+				<a href="/services" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'services' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Services</a>
+				<a href="/portfolio" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'portfolio' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Portfolio</a>
+				<a href="/blog" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'blog' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Blog</a>
+				<a href="/contact" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'contact' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Contact</a>
+			</div>
+			
+			<!-- Mobile menu button -->
+			<button class="md:hidden p-2 text-white drop-shadow-sm" id="mobile-menu-button">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+				</svg>
+			</button>
+		</div>
+		
+		<!-- Mobile menu -->
+		<div class="md:hidden hidden" id="mobile-menu">
+			<div class="px-2 pt-2 pb-3 space-y-1 bg-transparent backdrop-blur-md border-t border-white/20 rounded-b-lg mx-2">
+				<a href="/" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'home' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Home</a>
+				<a href="/about" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'about' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>About</a>
+				<a href="/services" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'services' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Services</a>
+				<a href="/portfolio" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'portfolio' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Portfolio</a>
+				<a href="/blog" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'blog' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Blog</a>
+				<a href="/contact" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'contact' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Contact</a>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<script>
+	// Mobile menu toggle functionality and scroll effects
+	function initNavigation() {
+		const mobileMenuButton = document.getElementById('mobile-menu-button');
+		const mobileMenu = document.getElementById('mobile-menu');
+		const navbar = document.getElementById('navbar');
+		
+		// Mobile menu toggle
+		if (mobileMenuButton && mobileMenu) {
+			// Remove any existing event listeners to prevent duplicates
+			mobileMenuButton.replaceWith(mobileMenuButton.cloneNode(true));
+			const newMobileMenuButton = document.getElementById('mobile-menu-button');
+			
+			newMobileMenuButton.addEventListener('click', function() {
+				mobileMenu.classList.toggle('hidden');
+			});
+		}
+		
+		// Scroll effect for navbar
+		if (navbar) {
+			// Remove existing scroll listener to prevent duplicates
+			window.removeEventListener('scroll', handleNavbarScroll);
+			window.addEventListener('scroll', handleNavbarScroll);
+		}
+	}
+	
+	function handleNavbarScroll() {
+		const navbar = document.getElementById('navbar');
+		if (navbar) {
+			if (window.scrollY > 50) {
+				navbar.classList.add('bg-black/20');
+				navbar.classList.remove('bg-transparent');
+			} else {
+				navbar.classList.add('bg-transparent');
+				navbar.classList.remove('bg-black/20');
+			}
+		}
+	}
+	
+	// Initialize on page load
+	document.addEventListener('DOMContentLoaded', initNavigation);
+	
+	// Re-initialize after Astro page transitions
+	document.addEventListener('astro:page-load', initNavigation);
+</script>
