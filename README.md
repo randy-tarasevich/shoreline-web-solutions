@@ -1,46 +1,39 @@
-# Astro Starter Kit: Basics
+# Shoreline Web Solutions
 
-```sh
-npm create astro@latest -- --template basics
+A modern, responsive business website for Shoreline Web Solutions - a professional web development company. Built with Astro.js and styled with Tailwind CSS for optimal performance and user experience.
+
+## 🚀 Technologies
+
+- **[Astro](https://astro.build/)** - Modern static site builder for fast, content-focused websites
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework for custom designs
+- **HTML5 & JavaScript** - Core web technologies
+
+## ✨ Features
+
+- Fast page loads with Astro's optimized build
+- Fully responsive design for all devices
+- Modern, professional UI/UX
+- SEO-friendly structure
+- Easy to maintain and update
+
+## 📁 Project Structure
+
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── public/          # Static assets (images, fonts, etc.)
+├── src/
+│   ├── components/  # Reusable Astro components
+│   ├── layouts/     # Page layouts
+│   └── pages/       # Website pages (routes)
+├── astro.config.mjs # Astro configuration
+├── tailwind.config.mjs # Tailwind CSS configuration
+└── package.json     # Project dependencies
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 📝 License
 
-## 🧞 Commands
+© 2025 Shoreline Web Solutions. All rights reserved.
 
-All commands are run from the root of the project, from a terminal:
+## 📧 Contact
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+For inquiries about web development services, visit [Shoreline Web Solutions](https://github.com/randy-tarasevich/shoreline-web-solutions)
