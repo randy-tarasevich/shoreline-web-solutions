@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 
 // Get all blog posts from the posts collection
 const posts = await getCollection('posts');
@@ -95,10 +96,13 @@ const sortedPosts = posts.sort((a, b) => {
 							
 							<!-- Post Image -->
 							{post.data.image && (
-								<img 
+								<Image 
 									src={post.data.image} 
 									alt={post.data.title}
+									width={600}
+									height={400}
 									class="w-full h-auto group-hover:scale-105 transition-transform duration-500"
+									loading="lazy"
 								/>
 							)}
 							
@@ -146,7 +150,7 @@ const sortedPosts = posts.sort((a, b) => {
 									<!-- Read More Button -->
 									<a 
 										href={`/blog/${post.slug}`}
-										class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 group/btn"
+										class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 group/btn text-center"
 									>
 										<span>Read Article</span>
 										<svg class="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
