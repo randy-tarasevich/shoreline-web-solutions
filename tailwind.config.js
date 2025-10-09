@@ -5,7 +5,8 @@ export default {
     extend: {},
   },
   plugins: [],
+  // Ensure proper CSS generation for mobile
+  corePlugins: {
+    preflight: true,
+  },
 };
-
-
-

@@ -41,15 +41,6 @@ const { Content } = await post.render();
 					</a>
 				</nav>
 
-				<!-- Article Meta -->
-				<div class="flex flex-wrap gap-3 mb-8">
-					{post.data.tags.map((tag) => (
-						<span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-blue-200 text-sm font-semibold rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300">
-							{tag}
-						</span>
-					))}
-				</div>
-
 				<!-- Article Title -->
 				<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
 					{post.data.title}
@@ -117,29 +108,23 @@ const { Content } = await post.render();
 						<div class="blog-content max-w-none">
 							<Content />
 						</div>
+						
+						<!-- Article Tags -->
+						<div class="mt-12 pt-8 border-t border-gray-200">
+							<div class="flex flex-wrap gap-3">
+								<span class="text-sm font-medium text-gray-600 mb-3 w-full">Tags:</span>
+								{post.data.tags.map((tag) => (
+									<span class="px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-sm font-semibold rounded-full border border-blue-200 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 transition-all duration-300">
+										{tag}
+									</span>
+								))}
+							</div>
+						</div>
 					</div>
 					
 					<!-- Sidebar -->
 					<div class="lg:col-span-1">
 						<div class="sticky top-8 space-y-8">
-							<!-- Table of Contents -->
-							<div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
-								<h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-									<svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-										<path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
-									</svg>
-									Table of Contents
-								</h3>
-								<nav class="space-y-2 text-sm">
-									<a href="#introduction" class="block text-gray-600 hover:text-blue-600 transition-colors py-1">Introduction</a>
-									<a href="#trust-credibility" class="block text-gray-600 hover:text-blue-600 transition-colors py-1">Trust & Credibility</a>
-									<a href="#ownership" class="block text-gray-600 hover:text-blue-600 transition-colors py-1">Ownership Issues</a>
-									<a href="#seo-visibility" class="block text-gray-600 hover:text-blue-600 transition-colors py-1">SEO & Visibility</a>
-									<a href="#revenue-impact" class="block text-gray-600 hover:text-blue-600 transition-colors py-1">Revenue Impact</a>
-									<a href="#conclusion" class="block text-gray-600 hover:text-blue-600 transition-colors py-1">Conclusion</a>
-								</nav>
-							</div>
-							
 							<!-- Author Card -->
 							<div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-100">
 								<div class="flex items-center mb-4">
@@ -152,7 +137,7 @@ const { Content } = await post.render();
 									</div>
 								</div>
 								<p class="text-sm text-gray-700 leading-relaxed">
-									Connecticut-based web developer helping local businesses grow online with professional websites and digital marketing strategies.
+									Connecticut-based web developer helping local businesses grow online with professional websites and web applications.
 								</p>
 							</div>
 							
