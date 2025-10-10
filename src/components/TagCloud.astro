@@ -1,0 +1,124 @@
+---
+import { getAllTags, getPopularTags, createTagSlug } from '../utils/tags';
+
+export interface Props {
+  limit?: number;
+  showCount?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'cloud' | 'list' | 'pills';
+}
+
+const { 
+  limit = 20, 
+  showCount = true, 
+  size = 'md',
+  variant = 'cloud'
+} = Astro.props;
+
+const tags = await getPopularTags(limit);
+
+const sizeClasses = {
+  sm: 'text-xs px-2 py-1',
+  md: 'text-sm px-3 py-2',
+  lg: 'text-base px-4 py-3'
+};
+
+const variantClasses = {
+  cloud: 'rounded-full',
+  list: 'rounded-lg',
+  pills: 'rounded-full'
+};
+---
+
+<div class="tag-cloud-container">
+  {variant === 'cloud' && (
+    <div class="flex flex-wrap gap-2 justify-center">
+      {tags.map((tag) => {
+        // Calculate size based on usage count (larger tags = more posts)
+        const maxCount = Math.max(...tags.map(t => t.count));
+        const sizeMultiplier = tag.count / maxCount;
+        const fontSize = sizeMultiplier > 0.7 ? 'text-lg' : sizeMultiplier > 0.4 ? 'text-base' : 'text-sm';
+        const opacity = 0.6 + (sizeMultiplier * 0.4); // 0.6 to 1.0 opacity
+        
+        return (
+          <a 
+            href={`/blog/tag/${tag.slug}`}
+            class={`${fontSize} ${sizeClasses[size]} font-medium transition-all duration-300 hover:scale-110 hover:shadow-lg ${variantClasses[variant]} bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800 border border-blue-200 hover:from-blue-200 hover:to-cyan-200 hover:border-blue-300`}
+            style={`opacity: ${opacity}`}
+            title={`${tag.count} ${tag.count === 1 ? 'article' : 'articles'}`}
+          >
+            {tag.name}
+            {showCount && (
+              <span class="ml-1 text-xs opacity-75">({tag.count})</span>
+            )}
+          </a>
+        );
+      })}
+    </div>
+  )}
+
+  {variant === 'list' && (
+    <div class="space-y-2">
+      {tags.map((tag) => (
+        <a 
+          href={`/blog/tag/${tag.slug}`}
+          class={`${sizeClasses[size]} font-medium transition-all duration-300 hover:scale-105 hover:shadow-md ${variantClasses[variant]} bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-800 border border-blue-200 hover:from-blue-100 hover:to-cyan-100 hover:border-blue-300 flex items-center justify-between group`}
+        >
+          <span>{tag.name}</span>
+          {showCount && (
+            <span class="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded-full group-hover:bg-blue-300 transition-colors">
+              {tag.count}
+            </span>
+          )}
+        </a>
+      ))}
+    </div>
+  )}
+
+  {variant === 'pills' && (
+    <div class="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <a 
+          href={`/blog/tag/${tag.slug}`}
+          class={`${sizeClasses[size]} font-medium transition-all duration-300 hover:scale-105 hover:shadow-md ${variantClasses[variant]} bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800 border border-blue-200 hover:from-blue-200 hover:to-cyan-200 hover:border-blue-300`}
+        >
+          {tag.name}
+          {showCount && (
+            <span class="ml-1 text-xs opacity-75">({tag.count})</span>
+          )}
+        </a>
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  .tag-cloud-container a {
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tag-cloud-container a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+  }
+
+  .tag-cloud-container a:hover::before {
+    left: 100%;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .tag-cloud-container {
+      font-size: 0.875rem;
+    }
+  }
+</style>

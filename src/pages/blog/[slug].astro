@@ -1,7 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
 import { getCollection } from 'astro:content';
+import { createTagSlug } from '../../utils/tags';
 import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
@@ -105,20 +107,28 @@ const { Content } = await post.render();
 				<div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
 					<!-- Main Content -->
 					<div class="lg:col-span-3">
-						<div class="blog-content max-w-none">
-							<Content />
-						</div>
+            <div class="blog-content max-w-none" data-astro-cid-4sn4zg3r>
+                <Content />
+            </div>
 						
 						<!-- Article Tags -->
 						<div class="mt-12 pt-8 border-t border-gray-200">
 							<div class="flex flex-wrap gap-3">
 								<span class="text-sm font-medium text-gray-600 mb-3 w-full">Tags:</span>
 								{post.data.tags.map((tag) => (
-									<span class="px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-sm font-semibold rounded-full border border-blue-200 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 transition-all duration-300">
+									<a 
+										href={`/blog/tag/${createTagSlug(tag)}`}
+										class="px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 text-sm font-semibold rounded-full border border-blue-200 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:border-blue-300 transition-all duration-300 hover:scale-105 hover:shadow-md"
+									>
 										{tag}
-									</span>
+									</a>
 								))}
 							</div>
+						</div>
+						
+						<!-- Related Posts -->
+						<div class="mt-12">
+							<RelatedPosts currentPost={post} limit={3} showTags={true} />
 						</div>
 					</div>
 					
@@ -495,13 +505,14 @@ const { Content } = await post.render();
 	}
 
 	.blog-content pre {
-		background: #1e293b;
-		color: #e2e8f0;
+		background: #f8fafc;
+		color: #1e293b;
 		padding: 1.5rem;
 		border-radius: 1rem;
 		margin: 2rem 0;
 		overflow-x: auto;
 		box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+		border: 1px solid #e2e8f0;
 	}
 
 	.blog-content pre code {
