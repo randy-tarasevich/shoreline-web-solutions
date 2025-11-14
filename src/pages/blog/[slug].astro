@@ -262,7 +262,7 @@ const { Content } = await post.render();
 	}
 
 	.blog-content h3 {
-		color: #dc2626 !important;
+		color: #2563eb !important;
 		font-size: 2.25rem !important;
 		font-weight: 800 !important;
 		margin: 3rem 0 1.5rem 0 !important;
@@ -270,24 +270,24 @@ const { Content } = await post.render();
 		letter-spacing: -0.05em !important;
 		position: relative !important;
 		padding: 1rem 1.5rem !important;
-		background: linear-gradient(135deg, #fef2f2, #fef7f7) !important;
-		border-left: 6px solid #dc2626 !important;
+		background: linear-gradient(135deg, #dbeafe, #e0f2fe) !important;
+		border-left: 6px solid #3b82f6 !important;
 		border-radius: 0 0.75rem 0.75rem 0 !important;
-		box-shadow: 0 4px 15px -3px rgba(220, 38, 38, 0.2) !important;
+		box-shadow: 0 4px 15px -3px rgba(59, 130, 246, 0.2) !important;
 		transform: translateX(-1.5rem) !important;
 		width: calc(100% + 1.5rem) !important;
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 	}
 
 	.blog-content h3::before {
-		content: '🔥 ' !important;
+		content: '💡 ' !important;
 		position: absolute !important;
 		left: -2.5rem !important;
-		color: #dc2626 !important;
+		color: #3b82f6 !important;
 		font-size: 1.5rem !important;
 		top: 50% !important;
 		transform: translateY(-50%) !important;
-		text-shadow: 0 2px 4px rgba(220, 38, 38, 0.3) !important;
+		text-shadow: 0 2px 4px rgba(59, 130, 246, 0.3) !important;
 		display: inline !important;
 	}
 
@@ -384,8 +384,8 @@ const { Content } = await post.render();
 
 	.blog-content ol {
 		counter-reset: item;
-		background: linear-gradient(135deg, #fef7f7, #fef2f2);
-		border-left: 4px solid #dc2626;
+		background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+		border-left: 4px solid #3b82f6;
 	}
 
 	.blog-content ol li {
@@ -405,7 +405,7 @@ const { Content } = await post.render();
 		top: 0.25rem;
 		width: 2rem;
 		height: 2rem;
-		background: linear-gradient(135deg, #dc2626, #ef4444);
+		background: linear-gradient(135deg, #3b82f6, #06b6d4);
 		color: white;
 		border-radius: 50%;
 		display: flex;
@@ -413,7 +413,7 @@ const { Content } = await post.render();
 		justify-content: center;
 		font-size: 0.875rem;
 		font-weight: 700;
-		box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+		box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 	}
 
 	/* Enhanced blockquotes with more visual impact */
@@ -476,21 +476,31 @@ const { Content } = await post.render();
 	}
 
 	/* Enhanced links */
-	.blog-content a {
-		color: #3b82f6;
-		text-decoration: none;
-		font-weight: 600;
-		border-bottom: 2px solid transparent;
+	.blog-content a,
+	.blog-content em a,
+	.blog-content strong a,
+	.blog-content em strong a,
+	.blog-content strong em a {
+		color: #3b82f6 !important;
+		text-decoration: underline !important;
+		text-underline-offset: 3px !important;
+		font-weight: 600 !important;
+		border-bottom: 2px solid #3b82f6 !important;
 		transition: all 0.3s ease;
 		position: relative;
 	}
 
-	.blog-content a:hover {
-		color: #1d4ed8;
-		border-bottom-color: #3b82f6;
+	.blog-content a:hover,
+	.blog-content em a:hover,
+	.blog-content strong a:hover,
+	.blog-content em strong a:hover,
+	.blog-content strong em a:hover {
+		color: #1d4ed8 !important;
+		border-bottom-color: #1d4ed8 !important;
 		background: linear-gradient(135deg, #dbeafe, #e0f2fe);
 		padding: 0.125rem 0.25rem;
 		border-radius: 0.25rem;
+		text-decoration: underline !important;
 	}
 
 	/* Code blocks */
@@ -558,6 +568,29 @@ const { Content } = await post.render();
 
 	.blog-content tr:hover {
 		background: #f8fafc;
+	}
+
+	/* Hide the auto-generated Footnotes heading */
+	section[data-footnotes] h2#footnote-label,
+	section.footnotes h2#footnote-label,
+	h2#footnote-label.sr-only,
+	section.footnotes h2.sr-only,
+	.blog-content section[data-footnotes] h2#footnote-label,
+	.blog-content .footnotes h2#footnote-label,
+	.blog-content h2#footnote-label.sr-only,
+	.blog-content section.footnotes h2.sr-only {
+		display: none !important;
+		visibility: hidden !important;
+		opacity: 0 !important;
+		height: 0 !important;
+		width: 0 !important;
+		overflow: hidden !important;
+		position: absolute !important;
+		clip: rect(0, 0, 0, 0) !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		font-size: 0 !important;
+		line-height: 0 !important;
 	}
 
 	/* Responsive adjustments for enhanced styling */
