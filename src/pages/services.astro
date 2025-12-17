@@ -36,7 +36,7 @@ import Navigation from '../components/Navigation.astro';
 				
 				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 					<!-- Custom Web Development -->
-					<div id="web-development" class="feature-card group bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+					<div id="web-development" class="feature-card group bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
 						<div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
 							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -46,16 +46,19 @@ import Navigation from '../components/Navigation.astro';
 					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
 						Tailored websites and web applications that align with your specific business needs and objectives.
 					</p>
-						<ul class="space-y-2 text-sm text-slate-600">
+						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
 							<li>• Customer & employee portals</li>
 							<li>• Appointment booking systems</li>
 							<li>• Dashboards</li>
 							<li>• Restaurant & bar management systems</li>
 						</ul>
+						<a href="/services/custom-web-development" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 hover:scale-105 text-center">
+							Learn More
+						</a>
 					</div>
 
 					<!-- E-commerce Solutions -->
-					<div id="ecommerce-solutions" class="feature-card group bg-gradient-to-br from-teal-50 to-blue-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+					<div id="ecommerce-solutions" class="feature-card group bg-gradient-to-br from-teal-50 to-blue-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
 						<div class="w-16 h-16 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
 							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
@@ -65,16 +68,19 @@ import Navigation from '../components/Navigation.astro';
 					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
 						Complete online stores that effectively convert visitors into customers and drive sales growth.
 					</p>
-						<ul class="space-y-2 text-sm text-slate-600">
+						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
 							<li>• Shopping Cart Integration</li>
 							<li>• Payment Processing</li>
 							<li>• Inventory Management</li>
 							<li>• Order Tracking</li>
 						</ul>
+						<a href="/services/ecommerce-solutions" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold rounded-lg hover:from-teal-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 text-center">
+							Learn More
+						</a>
 					</div>
 
 					<!-- AI Integration -->
-					<div id="ai-integration" class="feature-card group bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+					<div id="ai-integration" class="feature-card group bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
 						<div class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
 							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
@@ -84,16 +90,19 @@ import Navigation from '../components/Navigation.astro';
 					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
 						Intelligent automation and AI-powered features to enhance user experience and streamline business operations.
 					</p>
-						<ul class="space-y-2 text-sm text-slate-600">
+						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
 							<li>• Chatbot Integration</li>
 							<li>• Smart Recommendations</li>
 							<li>• Automated Workflows</li>
 							<li>• Data Analytics & Insights</li>
 						</ul>
+						<a href="/services/ai-integration" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 hover:scale-105 text-center">
+							Learn More
+						</a>
 					</div>
 
 					<!-- SEO & Digital Marketing -->
-					<div id="seo-marketing" class="feature-card group bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+					<div id="seo-marketing" class="feature-card group bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
 						<div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
 							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -103,16 +112,19 @@ import Navigation from '../components/Navigation.astro';
 					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
 						Strategic optimization techniques to improve search rankings and drive targeted traffic to your website.
 					</p>
-						<ul class="space-y-2 text-sm text-slate-600">
+						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
 							<li>• Technical SEO</li>
 							<li>• Local Search Optimization</li>
 							<li>• Content Strategy</li>
 							<li>• Analytics & Reporting</li>
 						</ul>
+						<a href="/services/seo-digital-marketing" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 text-center">
+							Learn More
+						</a>
 					</div>
 
 					<!-- Performance Optimization -->
-					<div class="feature-card group bg-gradient-to-br from-cyan-50 to-teal-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+					<div class="feature-card group bg-gradient-to-br from-cyan-50 to-teal-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
 						<div class="w-16 h-16 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
 							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -122,16 +134,19 @@ import Navigation from '../components/Navigation.astro';
 					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
 						Lightning-fast loading times and optimized user experiences to enhance engagement and conversions.
 					</p>
-						<ul class="space-y-2 text-sm text-slate-600">
+						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
 							<li>• Core Web Vitals</li>
 							<li>• Image Optimization</li>
 							<li>• Code Minification</li>
 							<li>• Caching Strategies</li>
 						</ul>
+						<a href="/services/performance-optimization" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-semibold rounded-lg hover:from-cyan-500 hover:to-teal-500 transition-all duration-300 hover:scale-105 text-center">
+							Learn More
+						</a>
 					</div>
 
 					<!-- Maintenance & Support -->
-					<div id="maintenance-support" class="feature-card group bg-gradient-to-br from-green-50 to-teal-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+					<div id="maintenance-support" class="feature-card group bg-gradient-to-br from-green-50 to-teal-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
 						<div class="w-16 h-16 bg-gradient-to-r from-green-600 to-teal-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
 							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
@@ -141,12 +156,15 @@ import Navigation from '../components/Navigation.astro';
 					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
 						Ongoing support and maintenance to keep your website secure, updated, and performing optimally.
 					</p>
-						<ul class="space-y-2 text-sm text-slate-600">
+						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
 							<li>• Security Updates</li>
 							<li>• Performance Monitoring</li>
 							<li>• Content Updates</li>
 							<li>• 24/7 Support</li>
 						</ul>
+						<a href="/services/maintenance-support" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white font-semibold rounded-lg hover:from-green-500 hover:to-teal-500 transition-all duration-300 hover:scale-105 text-center">
+							Learn More
+						</a>
 					</div>
 				</div>
 			</div>
@@ -209,77 +227,106 @@ import Navigation from '../components/Navigation.astro';
 		</section>
 
 		<!-- Investment Section -->
-		<section class="py-20 bg-white">
+		<section class="py-16 bg-gradient-to-br from-slate-50 to-blue-50">
 			<div class="max-w-7xl mx-auto px-6">
-				<div class="text-center mb-16">
-					<h2 class="section-title text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+				<div class="text-center mb-12">
+					<h2 class="section-title text-4xl md:text-5xl font-bold text-slate-900 mb-4">
 						Your Investment in Digital Growth
 					</h2>
-					<p class="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
-						A professional website is not an expense—it's an investment in your business's future. Your website works 24/7 to attract customers, build credibility, and drive revenue long after the initial development.
+					<p class="text-lg text-slate-600 max-w-2xl mx-auto">
+						A professional website is an investment that works 24/7 to attract customers, build credibility, and drive revenue.
 					</p>
 				</div>
 				
-				<div class="max-w-4xl mx-auto">
-					<div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 md:p-12 rounded-2xl shadow-xl">
-						<div class="text-center mb-8">
-							<h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-								Starting at $1,000 Initial Investment
-							</h3>
-							<p class="text-lg text-slate-700 leading-relaxed mb-6">
-								Most projects begin with a $1,000 initial investment, which covers project planning, design consultation, and the foundation of your custom website. This investment ensures we start your project with a clear roadmap and a solid foundation tailored to your business goals.
-							</p>
-							<p class="text-lg text-slate-700 leading-relaxed mb-6">
-								From there, your total investment is determined by the scope and complexity of your specific needs. Whether you need a simple brochure site or a complex web application, we work with you to create a solution that delivers maximum value for your investment.
-							</p>
-							<div class="bg-white rounded-xl p-6 shadow-lg">
-								<h4 class="text-xl font-bold text-slate-900 mb-4">What Your Investment Delivers:</h4>
-								<div class="grid md:grid-cols-2 gap-4 text-left">
-									<div class="flex items-start gap-3">
-										<svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span class="text-slate-700">Increased online visibility and brand credibility</span>
-									</div>
-									<div class="flex items-start gap-3">
-										<svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span class="text-slate-700">24/7 marketing and sales presence</span>
-									</div>
-									<div class="flex items-start gap-3">
-										<svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span class="text-slate-700">Professional design that converts visitors to customers</span>
-									</div>
-									<div class="flex items-start gap-3">
-										<svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span class="text-slate-700">Scalable platform that grows with your business</span>
-									</div>
-									<div class="flex items-start gap-3">
-										<svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span class="text-slate-700">Long-term return on investment through increased revenue</span>
-									</div>
-									<div class="flex items-start gap-3">
-										<svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span class="text-slate-700">Competitive advantage in your market</span>
-									</div>
+				<div class="grid lg:grid-cols-2 gap-8 mb-12">
+					<!-- Pricing Card -->
+					<div class="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
+						<div class="flex items-center gap-4 mb-6">
+							<div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0">
+								<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-2xl font-bold text-slate-900">Starting Investment</h3>
+								<p class="text-3xl font-bold text-blue-600">$1,000</p>
+							</div>
+						</div>
+						<p class="text-slate-600 leading-relaxed mb-6">
+							Most projects begin with a $1,000 initial investment covering project planning, design consultation, and the foundation of your custom website.
+						</p>
+						<p class="text-slate-600 leading-relaxed">
+							Your total investment is determined by the scope and complexity of your needs. We work with you to create a solution that delivers maximum value.
+						</p>
+					</div>
+
+					<!-- Benefits Card -->
+					<div class="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
+						<h3 class="text-2xl font-bold text-slate-900 mb-6">What You Get</h3>
+						<div class="space-y-4">
+							<div class="flex items-start gap-3">
+								<div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+									<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+								</div>
+								<div>
+									<h4 class="font-semibold text-slate-900 mb-1">Increased Visibility</h4>
+									<p class="text-sm text-slate-600">Boost online presence and brand credibility</p>
 								</div>
 							</div>
-							<div class="mt-8">
-								<a href="/contact" class="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 hover:scale-105">
-									Discuss Your Investment
-								</a>
+							<div class="flex items-start gap-3">
+								<div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+									<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+								</div>
+								<div>
+									<h4 class="font-semibold text-slate-900 mb-1">24/7 Marketing</h4>
+									<p class="text-sm text-slate-600">Round-the-clock sales presence</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-3">
+								<div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+									<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+								</div>
+								<div>
+									<h4 class="font-semibold text-slate-900 mb-1">Conversion-Focused Design</h4>
+									<p class="text-sm text-slate-600">Professional design that turns visitors into customers</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-3">
+								<div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+									<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+								</div>
+								<div>
+									<h4 class="font-semibold text-slate-900 mb-1">Scalable Platform</h4>
+									<p class="text-sm text-slate-600">Grows seamlessly with your business</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-3">
+								<div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+									<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+								</div>
+								<div>
+									<h4 class="font-semibold text-slate-900 mb-1">Long-Term ROI</h4>
+									<p class="text-sm text-slate-600">Increased revenue and competitive advantage</p>
+								</div>
 							</div>
 						</div>
 					</div>
+				</div>
+
+				<div class="text-center">
+					<a href="/contact" class="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 hover:scale-105 shadow-lg">
+						Discuss Your Investment
+					</a>
 				</div>
 			</div>
 		</section>

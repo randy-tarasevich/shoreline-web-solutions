@@ -13,10 +13,31 @@ const { currentPage } = Astro.props;
 				<span class="text-blue-300">Shoreline</span> Web Solutions
 			</a>
 			
-			<div class="hidden md:flex space-x-8">
+			<div class="hidden md:flex space-x-8 items-center">
 				<a href="/" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'home' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Home</a>
 				<a href="/about" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'about' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>About</a>
-				<a href="/services" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'services' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Services</a>
+				
+				<!-- Services Dropdown -->
+				<div class="relative group" id="services-dropdown">
+					<button class={`font-medium transition-colors drop-shadow-sm flex items-center gap-1 ${currentPage === 'services' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>
+						Services
+						<svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</button>
+					<div class="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-white/20">
+						<div class="py-2">
+							<a href="/services" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">All Services</a>
+							<a href="/services/custom-web-development" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Custom Web Development</a>
+							<a href="/services/ecommerce-solutions" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">E-commerce Solutions</a>
+							<a href="/services/ai-integration" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">AI Integration</a>
+							<a href="/services/seo-digital-marketing" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">SEO & Digital Marketing</a>
+							<a href="/services/performance-optimization" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Performance Optimization</a>
+							<a href="/services/maintenance-support" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Maintenance & Support</a>
+						</div>
+					</div>
+				</div>
+				
 				<a href="/portfolio" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'portfolio' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Portfolio</a>
 				<a href="/blog" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'blog' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Blog</a>
 				<a href="/contact" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'contact' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Contact</a>
@@ -35,7 +56,26 @@ const { currentPage } = Astro.props;
 			<div class="px-2 pt-2 pb-3 space-y-1 bg-transparent backdrop-blur-md border-t border-white/20 rounded-b-lg mx-2">
 				<a href="/" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'home' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Home</a>
 				<a href="/about" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'about' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>About</a>
-				<a href="/services" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'services' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Services</a>
+				
+				<!-- Mobile Services Dropdown -->
+				<div class="services-mobile-dropdown">
+					<button class={`w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm flex items-center justify-between ${currentPage === 'services' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`} id="mobile-services-button">
+						<span>Services</span>
+						<svg class="w-4 h-4 transition-transform" id="mobile-services-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</button>
+					<div class="hidden pl-4 pt-1 space-y-1" id="mobile-services-menu">
+						<a href="/services" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">All Services</a>
+						<a href="/services/custom-web-development" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">Custom Web Development</a>
+						<a href="/services/ecommerce-solutions" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">E-commerce Solutions</a>
+						<a href="/services/ai-integration" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">AI Integration</a>
+						<a href="/services/seo-digital-marketing" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">SEO & Digital Marketing</a>
+						<a href="/services/performance-optimization" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">Performance Optimization</a>
+						<a href="/services/maintenance-support" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">Maintenance & Support</a>
+					</div>
+				</div>
+				
 				<a href="/portfolio" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'portfolio' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Portfolio</a>
 				<a href="/blog" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'blog' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Blog</a>
 				<a href="/contact" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'contact' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Contact</a>
@@ -50,6 +90,9 @@ const { currentPage } = Astro.props;
 		const mobileMenuButton = document.getElementById('mobile-menu-button');
 		const mobileMenu = document.getElementById('mobile-menu');
 		const navbar = document.getElementById('navbar');
+		const mobileServicesButton = document.getElementById('mobile-services-button');
+		const mobileServicesMenu = document.getElementById('mobile-services-menu');
+		const mobileServicesArrow = document.getElementById('mobile-services-arrow');
 		
 		// Mobile menu toggle
 		if (mobileMenuButton && mobileMenu) {
@@ -59,6 +102,21 @@ const { currentPage } = Astro.props;
 			
 			newMobileMenuButton.addEventListener('click', function() {
 				mobileMenu.classList.toggle('hidden');
+			});
+		}
+		
+		// Mobile services dropdown toggle
+		if (mobileServicesButton && mobileServicesMenu && mobileServicesArrow) {
+			// Remove any existing event listeners to prevent duplicates
+			mobileServicesButton.replaceWith(mobileServicesButton.cloneNode(true));
+			const newMobileServicesButton = document.getElementById('mobile-services-button');
+			const newMobileServicesMenu = document.getElementById('mobile-services-menu');
+			const newMobileServicesArrow = document.getElementById('mobile-services-arrow');
+			
+			newMobileServicesButton.addEventListener('click', function(e) {
+				e.preventDefault();
+				newMobileServicesMenu.classList.toggle('hidden');
+				newMobileServicesArrow.classList.toggle('rotate-180');
 			});
 		}
 		
