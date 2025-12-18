@@ -1,9 +1,42 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
+
+const pageTitle = "Performance Optimization Services - Shoreline Web Solutions | Fast Website Optimization";
+const pageDescription = "Website performance optimization services for Connecticut businesses. We improve Core Web Vitals, optimize images, implement caching strategies, and speed up your website to enhance user experience and SEO rankings.";
+const pageKeywords = "website performance optimization, page speed optimization, Core Web Vitals, website speed, performance tuning, Connecticut web optimization, fast websites, image optimization";
+const canonicalUrl = "/services/performance-optimization";
 ---
 
-<Layout title="Performance Optimization Services - Shoreline Web Solutions | Fast Website Optimization">
+<Layout 
+	title={pageTitle}
+	description={pageDescription}
+	keywords={pageKeywords}
+	canonical={canonicalUrl}
+	ogType="website"
+>
+	<!-- Structured Data for Service -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Service",
+		"serviceType": "Performance Optimization",
+		"provider": {
+			"@type": "LocalBusiness",
+			"name": "Shoreline Web Solutions",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Old Lyme",
+				"addressRegion": "CT",
+				"addressCountry": "US"
+			}
+		},
+		"areaServed": {
+			"@type": "State",
+			"name": "Connecticut"
+		},
+		"description": pageDescription,
+		"name": "Performance Optimization Services"
+	})} />
 	<main>
 		<!-- Navigation -->
 		<Navigation currentPage="services" />
@@ -120,4 +153,5 @@ import Navigation from '../../components/Navigation.astro';
 		</section>
 	</main>
 </Layout>
+
 

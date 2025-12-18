@@ -1,9 +1,42 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
+
+const pageTitle = "AI Integration Services - Shoreline Web Solutions | AI-Powered Web Solutions";
+const pageDescription = "AI integration services for Connecticut businesses. We implement chatbots, smart recommendations, automated workflows, and AI-powered features to enhance your website and streamline operations.";
+const pageKeywords = "AI integration, chatbot integration, AI web development, artificial intelligence services, automated workflows, smart recommendations, AI-powered websites, Connecticut AI services";
+const canonicalUrl = "/services/ai-integration";
 ---
 
-<Layout title="AI Integration Services - Shoreline Web Solutions | AI-Powered Web Solutions">
+<Layout 
+	title={pageTitle}
+	description={pageDescription}
+	keywords={pageKeywords}
+	canonical={canonicalUrl}
+	ogType="website"
+>
+	<!-- Structured Data for Service -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Service",
+		"serviceType": "AI Integration",
+		"provider": {
+			"@type": "LocalBusiness",
+			"name": "Shoreline Web Solutions",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Old Lyme",
+				"addressRegion": "CT",
+				"addressCountry": "US"
+			}
+		},
+		"areaServed": {
+			"@type": "State",
+			"name": "Connecticut"
+		},
+		"description": pageDescription,
+		"name": "AI Integration Services"
+	})} />
 	<main>
 		<!-- Navigation -->
 		<Navigation currentPage="services" />
@@ -120,4 +153,5 @@ import Navigation from '../../components/Navigation.astro';
 		</section>
 	</main>
 </Layout>
+
 

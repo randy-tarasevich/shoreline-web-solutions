@@ -1,9 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+
+const pageTitle = "Shoreline Web Solutions - Professional Web Development in Old Lyme, CT";
+const pageDescription = "Professional web development services in Old Lyme, Connecticut. We create custom websites, e-commerce solutions, and web applications for businesses along the Connecticut shoreline. Local expertise, global standards.";
+const pageKeywords = "web development Old Lyme CT, Connecticut web developer, custom websites, web design Connecticut, Old Lyme web services, shoreline web development, Connecticut web solutions";
+const canonicalUrl = "/";
 ---
 
-<Layout title="Shoreline Web Solutions - Professional Web Development in Old Lyme, CT">
+<Layout 
+	title={pageTitle}
+	description={pageDescription}
+	keywords={pageKeywords}
+	canonical={canonicalUrl}
+	ogType="website"
+>
 	<!-- Navigation -->
 	<Navigation currentPage="home" />
 	

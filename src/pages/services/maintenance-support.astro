@@ -1,9 +1,42 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
+
+const pageTitle = "Website Maintenance & Support Services - Shoreline Web Solutions | Ongoing Website Care";
+const pageDescription = "Professional website maintenance and support services for Connecticut businesses. We provide security updates, performance monitoring, content updates, and 24/7 technical support to keep your website running smoothly.";
+const pageKeywords = "website maintenance, website support, Connecticut web maintenance, website updates, security updates, website monitoring, technical support, ongoing website care";
+const canonicalUrl = "/services/maintenance-support";
 ---
 
-<Layout title="Website Maintenance & Support Services - Shoreline Web Solutions | Ongoing Website Care">
+<Layout 
+	title={pageTitle}
+	description={pageDescription}
+	keywords={pageKeywords}
+	canonical={canonicalUrl}
+	ogType="website"
+>
+	<!-- Structured Data for Service -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Service",
+		"serviceType": "Website Maintenance & Support",
+		"provider": {
+			"@type": "LocalBusiness",
+			"name": "Shoreline Web Solutions",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Old Lyme",
+				"addressRegion": "CT",
+				"addressCountry": "US"
+			}
+		},
+		"areaServed": {
+			"@type": "State",
+			"name": "Connecticut"
+		},
+		"description": pageDescription,
+		"name": "Website Maintenance & Support Services"
+	})} />
 	<main>
 		<!-- Navigation -->
 		<Navigation currentPage="services" />
@@ -120,4 +153,5 @@ import Navigation from '../../components/Navigation.astro';
 		</section>
 	</main>
 </Layout>
+
 

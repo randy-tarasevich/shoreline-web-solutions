@@ -5,40 +5,70 @@ import Footer from '../components/Footer.astro';
 
 export interface Props {
 	title?: string;
+	description?: string;
+	keywords?: string;
+	canonical?: string;
+	ogImage?: string;
+	ogType?: string;
+	noindex?: boolean;
 }
 
-const { title = "Shoreline Web Solutions - Professional Web Development in Old Lyme, CT" } = Astro.props;
+const { 
+	title = "Shoreline Web Solutions - Professional Web Development in Old Lyme, CT",
+	description = "Professional web development services in Old Lyme, Connecticut. Custom websites, performance optimization, and mobile-first design for businesses along the Connecticut shoreline.",
+	keywords = "web development, Old Lyme CT, Connecticut web developer, responsive design, custom websites",
+	canonical = Astro.url.href,
+	ogImage = "https://shorelinewebsolutions.com/og-image.jpg",
+	ogType = "website",
+	noindex = false
+} = Astro.props;
+
+const siteUrl = "https://shorelinewebsolutions.com";
+const fullCanonical = canonical.startsWith('http') ? canonical : `${siteUrl}${canonical}`;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Professional web development services in Old Lyme, Connecticut. Custom websites, performance optimization, and mobile-first design for businesses along the Connecticut shoreline." />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		{!noindex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
+		
+		<!-- Primary Meta Tags -->
 		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content="Shoreline Web Solutions" />
+		
+		<!-- Canonical URL -->
+		<link rel="canonical" href={fullCanonical} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={ogType} />
+		<meta property="og:url" content={fullCanonical} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:site_name" content="Shoreline Web Solutions" />
+		<meta property="og:locale" content="en_US" />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={fullCanonical} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		
+		<!-- Sitemap -->
+		<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 		
 		<!-- View Transitions -->
 		<ViewTransitions />
-		
-		<!-- Additional SEO meta tags -->
-		<meta name="keywords" content="web development, Old Lyme CT, Connecticut web developer, responsive design, custom websites" />
-		<meta name="author" content="Shoreline Web Solutions" />
-		
-		<!-- Open Graph tags -->
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content="Professional web development services in Old Lyme, Connecticut" />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://shorelinewebsolutions.com" />
-		
-		<!-- Sitemap and SEO -->
-		<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-		<link rel="canonical" href="https://shorelinewebsolutions.com" />
-		
-		<!-- Preload critical fonts if you add any -->
-		<!-- <link rel="preload" href="/fonts/your-font.woff2" as="font" type="font/woff2" crossorigin> -->
 		
 		<!-- Mobile-specific optimizations -->
 		<meta name="mobile-web-app-capable" content="yes" />
@@ -53,6 +83,29 @@ const { title = "Shoreline Web Solutions - Professional Web Development in Old L
 		
 	</head>
 	<body class="antialiased">
+		<!-- Structured Data (JSON-LD) -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "LocalBusiness",
+			"name": "Shoreline Web Solutions",
+			"description": "Professional web development services in Old Lyme, Connecticut. Custom websites, performance optimization, and mobile-first design for businesses along the Connecticut shoreline.",
+			"url": "https://shorelinewebsolutions.com",
+			"logo": "https://shorelinewebsolutions.com/favicon.svg",
+			"image": "https://shorelinewebsolutions.com/og-image.jpg",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Old Lyme",
+				"addressRegion": "CT",
+				"addressCountry": "US"
+			},
+			"areaServed": {
+				"@type": "State",
+				"name": "Connecticut"
+			},
+			"priceRange": "$$",
+			"telephone": "+1-860-XXX-XXXX"
+		})} />
+		
 		<slot />
 		
 		<!-- Footer -->

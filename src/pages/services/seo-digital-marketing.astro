@@ -1,9 +1,42 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
+
+const pageTitle = "SEO & Digital Marketing Services - Shoreline Web Solutions | Search Engine Optimization";
+const pageDescription = "Professional SEO and digital marketing services for Connecticut businesses. We provide technical SEO, local search optimization, content strategy, and analytics to improve your search rankings and drive traffic.";
+const pageKeywords = "SEO services, digital marketing, Connecticut SEO, local SEO, search engine optimization, content marketing, technical SEO, Connecticut digital marketing, Old Lyme SEO";
+const canonicalUrl = "/services/seo-digital-marketing";
 ---
 
-<Layout title="SEO & Digital Marketing Services - Shoreline Web Solutions | Search Engine Optimization">
+<Layout 
+	title={pageTitle}
+	description={pageDescription}
+	keywords={pageKeywords}
+	canonical={canonicalUrl}
+	ogType="website"
+>
+	<!-- Structured Data for Service -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Service",
+		"serviceType": "SEO & Digital Marketing",
+		"provider": {
+			"@type": "LocalBusiness",
+			"name": "Shoreline Web Solutions",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Old Lyme",
+				"addressRegion": "CT",
+				"addressCountry": "US"
+			}
+		},
+		"areaServed": {
+			"@type": "State",
+			"name": "Connecticut"
+		},
+		"description": pageDescription,
+		"name": "SEO & Digital Marketing Services"
+	})} />
 	<main>
 		<!-- Navigation -->
 		<Navigation currentPage="services" />
@@ -120,4 +153,5 @@ import Navigation from '../../components/Navigation.astro';
 		</section>
 	</main>
 </Layout>
+
 
