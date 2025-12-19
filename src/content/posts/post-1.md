@@ -2,7 +2,7 @@
 title: "Why Your Small Business Needs More Than Just a Facebook Page: The Critical Case for a Professional Website"
 author: "Randy Tarasevich"
 date: "2025-09-26"
-image: "/FB.png"
+image: "/images/blog/FB.png"
 tags:
   [
     "small business",

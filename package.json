@@ -7,12 +7,24 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "create-post": "node scripts/create-blog-post.js"
+    "create-post": "node scripts/create-blog-post.js",
+    "prepare": "husky",
+    "lint": "astro check"
+  },
+  "lint-staged": {
+    "*.{astro,ts,tsx}": [
+      "astro check --mode lint"
+    ]
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.13.9",
     "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7"
   }
 }

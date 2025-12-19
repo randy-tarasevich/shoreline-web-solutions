@@ -4,7 +4,6 @@ import Navigation from '../components/Navigation.astro';
 import TagCloud from '../components/TagCloud.astro';
 import { getCollection } from 'astro:content';
 import { getAllTags, createTagSlug } from '../utils/tags';
-import { Image } from 'astro:assets';
 
 // Get all blog posts from the posts collection
 const posts = await getCollection('posts');
@@ -101,11 +100,9 @@ const allTags = await getAllTags();
 							
 							<!-- Post Image -->
 							{post.data.image && (
-								<Image 
+								<img 
 									src={post.data.image} 
 									alt={post.data.title}
-									width={600}
-									height={400}
 									class="w-full h-auto group-hover:scale-105 transition-transform duration-500"
 									loading="lazy"
 								/>

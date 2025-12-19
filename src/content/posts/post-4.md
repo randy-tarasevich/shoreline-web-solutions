@@ -2,7 +2,7 @@
 title: "What is Web Accessibility and Why Does Your Website Need It?"
 author: "Randy Tarasevich"
 date: "2025-11-15"
-image: "/post-4.png"
+image: "/images/blog/post-4.png"
 tags:
   [
     "web development",

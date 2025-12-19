@@ -19,9 +19,15 @@ const { currentPage } = Astro.props;
 				
 				<!-- Services Dropdown -->
 				<div class="relative group" id="services-dropdown">
-					<button class={`font-medium transition-colors drop-shadow-sm flex items-center gap-1 ${currentPage === 'services' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>
+					<button 
+						class={`font-medium transition-colors drop-shadow-sm flex items-center gap-1 ${currentPage === 'services' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}
+						aria-label="Services menu"
+						aria-expanded="false"
+						aria-haspopup="true"
+						id="desktop-services-button"
+					>
 						Services
-						<svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</button>
@@ -44,8 +50,14 @@ const { currentPage } = Astro.props;
 			</div>
 			
 			<!-- Mobile menu button -->
-			<button class="md:hidden p-2 text-white drop-shadow-sm" id="mobile-menu-button">
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<button 
+				class="md:hidden p-2 text-white drop-shadow-sm" 
+				id="mobile-menu-button"
+				aria-label="Toggle navigation menu"
+				aria-expanded="false"
+				aria-controls="mobile-menu"
+			>
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
 				</svg>
 			</button>
@@ -59,13 +71,20 @@ const { currentPage } = Astro.props;
 				
 				<!-- Mobile Services Dropdown -->
 				<div class="services-mobile-dropdown">
-					<button class={`w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm flex items-center justify-between ${currentPage === 'services' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`} id="mobile-services-button">
+					<button 
+						class={`w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm flex items-center justify-between ${currentPage === 'services' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`} 
+						id="mobile-services-button"
+						aria-label="Toggle services menu"
+						aria-expanded="false"
+						aria-haspopup="true"
+						aria-controls="mobile-services-menu"
+					>
 						<span>Services</span>
-						<svg class="w-4 h-4 transition-transform" id="mobile-services-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg class="w-4 h-4 transition-transform" id="mobile-services-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</button>
-					<div class="hidden pl-4 pt-1 space-y-1" id="mobile-services-menu">
+					<div class="hidden pl-4 pt-1 space-y-1" id="mobile-services-menu" role="menu">
 						<a href="/services" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">All Services</a>
 						<a href="/services/custom-web-development" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">Custom Web Development</a>
 						<a href="/services/ecommerce-solutions" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">E-commerce Solutions</a>
@@ -101,7 +120,9 @@ const { currentPage } = Astro.props;
 			const newMobileMenuButton = document.getElementById('mobile-menu-button');
 			
 			newMobileMenuButton.addEventListener('click', function() {
+				const isHidden = mobileMenu.classList.contains('hidden');
 				mobileMenu.classList.toggle('hidden');
+				newMobileMenuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
 			});
 		}
 		
@@ -115,8 +136,22 @@ const { currentPage } = Astro.props;
 			
 			newMobileServicesButton.addEventListener('click', function(e) {
 				e.preventDefault();
+				const isHidden = newMobileServicesMenu.classList.contains('hidden');
 				newMobileServicesMenu.classList.toggle('hidden');
 				newMobileServicesArrow.classList.toggle('rotate-180');
+				newMobileServicesButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+			});
+		}
+		
+		// Desktop services dropdown - update aria-expanded on hover
+		const desktopServicesButton = document.getElementById('desktop-services-button');
+		const desktopServicesDropdown = document.getElementById('services-dropdown');
+		if (desktopServicesButton && desktopServicesDropdown) {
+			desktopServicesDropdown.addEventListener('mouseenter', function() {
+				desktopServicesButton.setAttribute('aria-expanded', 'true');
+			});
+			desktopServicesDropdown.addEventListener('mouseleave', function() {
+				desktopServicesButton.setAttribute('aria-expanded', 'false');
 			});
 		}
 		

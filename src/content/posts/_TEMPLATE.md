@@ -2,7 +2,7 @@
 title: "Your Compelling, SEO-Optimized Title Here"
 author: "Randy Tarasevich"
 date: "YYYY-MM-DD"
-image: "/your-image-filename.png"
+image: "/images/blog/your-image-filename.png"
 tags:
   [
     "primary-topic",
