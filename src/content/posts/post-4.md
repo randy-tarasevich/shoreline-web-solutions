@@ -105,7 +105,7 @@ Your website is often the first interaction potential customers have with your b
 
 ---
 
-_Need help making your website more accessible? Shoreline Web Solutions specializes in creating custom, accessible websites for Connecticut shoreline businesses. **[Contact us](/contact)** to discuss how we can ensure your website welcomes all visitors._
+**Need help setting up professional email for your business?** Shoreline Web Solutions can help you establish a complete branded online presence, from custom websites to professional email systems. **[Contact us](/contact)** to learn more about our services for small to medium-sized businesses.
 
 ## References
 
