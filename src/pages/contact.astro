@@ -81,36 +81,126 @@ import Navigation from '../components/Navigation.astro';
 					
 					<div class="content-visual relative">
 						<div class="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-8 text-white shadow-2xl">
-							<h3 class="text-2xl font-bold mb-6 text-center md:text-left">Ready to Get Started?</h3>
+							<h3 class="text-2xl font-bold mb-6 text-center md:text-left">Send Us a Message</h3>
 							<p class="text-lg leading-relaxed mb-6">
-								Send us an email with details about your project, and we'll get back to you with a personalized proposal and timeline.
+								Fill out the form below and we'll get back to you with a personalized proposal and timeline.
 							</p>
 							
-							<div class="space-y-4 mb-8">
-								<div class="flex items-center gap-3">
-									<svg class="w-5 h-5 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-									</svg>
-									<span>Free consultation & project assessment</span>
+							<!-- Contact Form -->
+							<form 
+								action="https://api.web3forms.com/submit" 
+								method="POST"
+								class="space-y-4"
+								id="contact-form"
+							>
+								<input 
+									type="hidden" 
+									name="access_key" 
+									value={import.meta.env.PUBLIC_WEB3FORMS_KEY || ""}
+								/>
+								<input type="hidden" name="subject" value="New Contact Form Submission - Shoreline Web Solutions" />
+								<input type="hidden" name="from_name" value="Shoreline Web Solutions Contact Form" />
+								<input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+								
+								<div>
+									<label for="name" class="block text-sm font-semibold mb-2 text-white">Name *</label>
+									<input 
+										type="text" 
+										id="name" 
+										name="name" 
+										required
+										class="w-full px-4 py-3 rounded-lg bg-white text-slate-900 border-2 border-white/30 focus:border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all placeholder:text-slate-400"
+										placeholder="Your name"
+										aria-invalid="false"
+										aria-describedby="name-error"
+									/>
+									<p id="name-error" class="mt-1 text-sm text-red-200 hidden" role="alert"></p>
 								</div>
-								<div class="flex items-center gap-3">
-									<svg class="w-5 h-5 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-									</svg>
-									<span>Detailed project timeline & pricing</span>
+								
+								<div>
+									<label for="email" class="block text-sm font-semibold mb-2 text-white">Email *</label>
+									<input 
+										type="email" 
+										id="email" 
+										name="email" 
+										required
+										class="w-full px-4 py-3 rounded-lg bg-white text-slate-900 border-2 border-white/30 focus:border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all placeholder:text-slate-400"
+										placeholder="your.email@example.com"
+										aria-invalid="false"
+										aria-describedby="email-error"
+									/>
+									<p id="email-error" class="mt-1 text-sm text-red-200 hidden" role="alert"></p>
 								</div>
-								<div class="flex items-center gap-3">
-									<svg class="w-5 h-5 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-									</svg>
-									<span>No obligation to proceed</span>
+								
+								<div>
+									<label for="phone" class="block text-sm font-semibold mb-2 text-white">Phone (Optional)</label>
+									<input 
+										type="tel" 
+										id="phone" 
+										name="phone"
+										class="w-full px-4 py-3 rounded-lg bg-white text-slate-900 border-2 border-white/30 focus:border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all placeholder:text-slate-400"
+										placeholder="(860) 555-1234"
+										aria-invalid="false"
+										aria-describedby="phone-error"
+									/>
+									<p id="phone-error" class="mt-1 text-sm text-red-200 hidden" role="alert"></p>
 								</div>
-							</div>
+								
+								<div>
+									<label for="project_type" class="block text-sm font-semibold mb-2 text-white">Project Type</label>
+									<select 
+										id="project_type" 
+										name="project_type"
+										class="w-full px-4 py-3 rounded-lg bg-white text-slate-900 border-2 border-white/30 focus:border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all"
+									>
+										<option value="">Select a project type...</option>
+										<option value="custom-web-development">Custom Web Development</option>
+										<option value="ecommerce">E-commerce Solutions</option>
+										<option value="ai-chat-assistant">AI Chat Assistant</option>
+										<option value="seo-marketing">SEO & Digital Marketing</option>
+										<option value="performance-optimization">Performance Optimization</option>
+										<option value="maintenance-support">Maintenance & Support</option>
+										<option value="other">Other</option>
+									</select>
+								</div>
+								
+								<div>
+									<label for="message" class="block text-sm font-semibold mb-2 text-white">Message *</label>
+									<textarea 
+										id="message" 
+										name="message" 
+										required
+										rows="5"
+										class="w-full px-4 py-3 rounded-lg bg-white text-slate-900 border-2 border-white/30 focus:border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 transition-all resize-none placeholder:text-slate-400"
+										placeholder="Tell us about your project, timeline, budget, and goals..."
+										aria-invalid="false"
+										aria-describedby="message-error"
+									></textarea>
+									<p id="message-error" class="mt-1 text-sm text-red-200 hidden" role="alert"></p>
+								</div>
+								
+								<!-- Success/Error Messages -->
+								<div id="form-message" class="hidden p-4 rounded-lg text-sm font-medium"></div>
+								
+								<button 
+									type="submit"
+									class="w-full px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-blue-600"
+									id="submit-btn"
+								>
+									<span id="submit-text">Send Message</span>
+									<span id="submit-loading" class="hidden">Sending...</span>
+								</button>
+							</form>
 							
-							<a href="mailto:info@shorelinewebsolutions.com?subject=Project Inquiry - Ready to Get Started&body=Hi there,%0D%0A%0D%0AI'm interested in discussing a web development project with Shoreline Web Solutions.%0D%0A%0D%0APlease find below some details about my project:%0D%0A%0D%0AProject Overview:%0D%0A%0D%0ATimeline & Budget:%0D%0A%0D%0AGoals & Inspiration:%0D%0A%0D%0AThank you for your time, and I look forward to hearing from you.%0D%0A%0D%0ABest regards," 
-								 class="block w-full text-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105">
-								Send Us an Email
-							</a>
+							<div class="mt-6 pt-6 border-t border-white/20">
+								<p class="text-sm text-center text-cyan-100 mb-3">Or send us an email directly:</p>
+								<a 
+									href="mailto:info@shorelinewebsolutions.com?subject=Project Inquiry - Ready to Get Started&body=Hi there,%0D%0A%0D%0AI'm interested in discussing a web development project with Shoreline Web Solutions.%0D%0A%0D%0APlease find below some details about my project:%0D%0A%0D%0AProject Overview:%0D%0A%0D%0ATimeline & Budget:%0D%0A%0D%0AGoals & Inspiration:%0D%0A%0D%0AThank you for your time, and I look forward to hearing from you.%0D%0A%0D%0ABest regards," 
+									class="block w-full text-center px-6 py-2 text-white border-2 border-white/30 rounded-lg hover:bg-white/10 transition-all duration-300 text-sm"
+								>
+									Email Us Instead
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -237,4 +327,210 @@ import Navigation from '../components/Navigation.astro';
 			</div>
 		</section>
 	</main>
+	
+	<script>
+		function initContactForm() {
+			const form = document.getElementById('contact-form');
+			if (!form) return;
+			
+			const formMessage = document.getElementById('form-message');
+			const submitBtn = document.getElementById('submit-btn');
+			const submitText = document.getElementById('submit-text');
+			const submitLoading = document.getElementById('submit-loading');
+
+			if (!formMessage || !submitBtn || !submitText || !submitLoading) return;
+
+			// Real-time validation
+			const nameInput = document.getElementById('name');
+			const emailInput = document.getElementById('email');
+			const phoneInput = document.getElementById('phone');
+			const messageInput = document.getElementById('message');
+
+			function validateName() {
+				const value = nameInput.value.trim();
+				const errorEl = document.getElementById('name-error');
+				if (!value) {
+					showError(nameInput, errorEl, 'Name is required');
+					return false;
+				} else if (value.length < 2) {
+					showError(nameInput, errorEl, 'Name must be at least 2 characters');
+					return false;
+				} else if (/\d/.test(value)) {
+					showError(nameInput, errorEl, 'Name cannot contain numbers');
+					return false;
+				} else if (!/^[a-zA-Z\s\-'\.]+$/.test(value)) {
+					showError(nameInput, errorEl, 'Name can only contain letters, spaces, hyphens, apostrophes, and periods');
+					return false;
+				} else {
+					showSuccess(nameInput, errorEl);
+					return true;
+				}
+			}
+
+			function validateEmail() {
+				const value = emailInput.value.trim();
+				const errorEl = document.getElementById('email-error');
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				if (!value) {
+					showError(emailInput, errorEl, 'Email is required');
+					return false;
+				} else if (!emailRegex.test(value)) {
+					showError(emailInput, errorEl, 'Please enter a valid email address');
+					return false;
+				} else {
+					showSuccess(emailInput, errorEl);
+					return true;
+				}
+			}
+
+			function validatePhone() {
+				const value = phoneInput.value.trim();
+				const errorEl = document.getElementById('phone-error');
+				if (value) {
+					const phoneRegex = /^[\d\s\(\)\-]+$/;
+					if (!phoneRegex.test(value) || value.replace(/\D/g, '').length < 10) {
+						showError(phoneInput, errorEl, 'Please enter a valid phone number');
+						return false;
+					} else {
+						showSuccess(phoneInput, errorEl);
+						return true;
+					}
+				} else {
+					showSuccess(phoneInput, errorEl);
+					return true;
+				}
+			}
+
+			function validateMessage() {
+				const value = messageInput.value.trim();
+				const errorEl = document.getElementById('message-error');
+				if (!value) {
+					showError(messageInput, errorEl, 'Message is required');
+					return false;
+				} else if (value.length < 10) {
+					showError(messageInput, errorEl, 'Message must be at least 10 characters');
+					return false;
+				} else {
+					showSuccess(messageInput, errorEl);
+					return true;
+				}
+			}
+
+			function showError(input, errorEl, message) {
+				input.setAttribute('aria-invalid', 'true');
+				input.classList.remove('border-white/30', 'border-green-400');
+				input.classList.add('border-red-400', 'ring-2', 'ring-red-300');
+				if (errorEl) {
+					errorEl.textContent = message;
+					errorEl.classList.remove('hidden');
+				}
+			}
+
+			function showSuccess(input, errorEl) {
+				input.setAttribute('aria-invalid', 'false');
+				input.classList.remove('border-red-400', 'ring-red-300', 'border-white/30');
+				input.classList.add('border-green-400');
+				if (errorEl) {
+					errorEl.classList.add('hidden');
+				}
+			}
+
+			// Add real-time validation listeners
+			nameInput.addEventListener('blur', validateName);
+			nameInput.addEventListener('input', function() {
+				if (nameInput.value.trim()) validateName();
+			});
+
+			emailInput.addEventListener('blur', validateEmail);
+			emailInput.addEventListener('input', function() {
+				if (emailInput.value.trim()) validateEmail();
+			});
+
+			phoneInput.addEventListener('blur', validatePhone);
+			phoneInput.addEventListener('input', function() {
+				if (phoneInput.value.trim()) validatePhone();
+			});
+
+			messageInput.addEventListener('blur', validateMessage);
+			messageInput.addEventListener('input', function() {
+				if (messageInput.value.trim()) validateMessage();
+			});
+
+			form.addEventListener('submit', function(e) {
+				e.preventDefault();
+				
+				// Validate all fields
+				const isNameValid = validateName();
+				const isEmailValid = validateEmail();
+				const isPhoneValid = validatePhone();
+				const isMessageValid = validateMessage();
+
+				if (!isNameValid || !isEmailValid || !isPhoneValid || !isMessageValid) {
+					formMessage.textContent = 'Please fix the errors above before submitting.';
+					formMessage.classList.remove('hidden');
+					formMessage.classList.add('bg-red-500/20', 'text-red-100', 'border', 'border-red-500/50');
+					return;
+				}
+				
+				// Hide previous messages
+				formMessage.classList.add('hidden');
+				formMessage.classList.remove('bg-green-500/20', 'text-green-100', 'border-green-500/50', 'bg-red-500/20', 'text-red-100', 'border-red-500/50');
+				
+				// Show loading state
+				submitBtn.disabled = true;
+				submitText.classList.add('hidden');
+				submitLoading.classList.remove('hidden');
+				
+				const formData = new FormData(form);
+				
+				fetch(form.action, {
+					method: 'POST',
+					body: formData,
+				})
+				.then(function(response) {
+					return response.json();
+				})
+				.then(function(data) {
+					if (data.success) {
+						// Success message
+						formMessage.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.';
+						formMessage.classList.remove('hidden');
+						formMessage.classList.add('bg-green-500/20', 'text-green-100', 'border', 'border-green-500/50');
+						
+						// Reset form and validation states
+						form.reset();
+						[nameInput, emailInput, phoneInput, messageInput].forEach(function(input) {
+							input.classList.remove('border-green-400', 'border-red-400', 'ring-red-300');
+							input.classList.add('border-white/30');
+							input.setAttribute('aria-invalid', 'false');
+						});
+					} else {
+						throw new Error(data.message || 'Something went wrong');
+					}
+				})
+				.catch(function(error) {
+					// Error message
+					formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or email us directly.';
+					formMessage.classList.remove('hidden');
+					formMessage.classList.add('bg-red-500/20', 'text-red-100', 'border', 'border-red-500/50');
+				})
+				.finally(function() {
+					// Reset button state
+					submitBtn.disabled = false;
+					submitText.classList.remove('hidden');
+					submitLoading.classList.add('hidden');
+				});
+			});
+		}
+
+		// Initialize on page load
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initContactForm);
+		} else {
+			initContactForm();
+		}
+		
+		// Re-initialize after Astro page transitions
+		document.addEventListener('astro:page-load', initContactForm);
+	</script>
 </Layout>
