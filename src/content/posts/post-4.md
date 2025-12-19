@@ -25,15 +25,10 @@ Think of it this way: when you design a physical storefront, you include ramps, 
 This includes considerations for people who:
 
 - Use screen readers to navigate websites
-
 - Have difficulty seeing small text or distinguishing colors
-
 - Cannot use a mouse and rely on keyboard navigation
-
 - Have hearing impairments and need captions for video content
-
 - Experience cognitive disabilities that make complex navigation challenging
-
 - Use assistive technologies like voice recognition software
 
 ## Why Accessibility Matters for Your Website

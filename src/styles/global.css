@@ -130,6 +130,27 @@ section.footnotes h2.sr-only,
   text-underline-offset: 3px !important;
 }
 
+/* Ensure blog lists display properly - override Tailwind resets */
+.blog-content ul,
+.blog-content ol {
+  list-style-type: revert !important;
+  display: block !important;
+  padding-left: 2rem !important;
+}
+
+.blog-content ul {
+  list-style-type: disc !important;
+}
+
+.blog-content ol {
+  list-style-type: decimal !important;
+}
+
+.blog-content li {
+  display: list-item !important;
+  list-style-position: outside !important;
+}
+
 /* View Transition Animations */
 ::view-transition-old(root) {
   animation: fade-out 0.3s ease-in-out;
