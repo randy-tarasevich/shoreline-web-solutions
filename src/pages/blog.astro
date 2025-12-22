@@ -8,10 +8,11 @@ import { getAllTags, createTagSlug } from '../utils/tags';
 // Get all blog posts from the posts collection
 const posts = await getCollection('posts');
 
-// Sort posts by date (newest first)
+// Sort posts by date in descending order (newest to oldest)
 const sortedPosts = posts.sort((a, b) => {
   const dateA = new Date(a.data.date);
   const dateB = new Date(b.data.date);
+  // Return positive if dateB is newer (descending order: newest first)
   return dateB.getTime() - dateA.getTime();
 });
 
