@@ -34,11 +34,26 @@ const { currentPage } = Astro.props;
 					<div class="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-white/20">
 						<div class="py-2">
 							<a href="/services" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">All Services</a>
+							
+							<!-- Custom AI Solutions with submenu -->
+							<div class="relative ai-solutions-submenu">
+								<a href="/custom-ai-solutions" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors flex items-center justify-between">
+									<span>Custom AI Solutions</span>
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</a>
+								<div class="absolute left-full top-0 ml-2 w-56 bg-white/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible ai-solutions-submenu-content transition-all duration-200 border border-white/20">
+									<div class="py-2">
+										<a href="/ai-review-response" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">AI Review Response</a>
+										<a href="/services/ai-chat-assistant" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">AI Chat Assistant</a>
+									</div>
+								</div>
+							</div>
+							
 							<a href="/services/custom-web-development" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Custom Web Development</a>
 							<a href="/services/ecommerce-solutions" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">E-commerce Solutions</a>
-							<a href="/services/ai-chat-assistant" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">AI Chat Assistant</a>
 							<a href="/services/seo-digital-marketing" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">SEO & Digital Marketing</a>
-							<a href="/services/performance-optimization" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Performance Optimization</a>
 							<a href="/services/maintenance-support" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Maintenance & Support</a>
 						</div>
 					</div>
@@ -86,11 +101,35 @@ const { currentPage } = Astro.props;
 					</button>
 					<div class="hidden pl-4 pt-1 space-y-1" id="mobile-services-menu" role="menu">
 						<a href="/services" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">All Services</a>
+						
+						<!-- Mobile Custom AI Solutions Submenu -->
+						<div class="mobile-ai-solutions">
+							<a 
+								href="/custom-ai-solutions"
+								class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10"
+							>
+								Custom AI Solutions
+							</a>
+							<button 
+								class="w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10 flex items-center justify-between"
+								id="mobile-ai-solutions-button"
+								aria-label="Toggle AI Solutions menu"
+								aria-expanded="false"
+							>
+								<span>AI Services</span>
+								<svg class="w-4 h-4 transition-transform" id="mobile-ai-solutions-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+								</svg>
+							</button>
+							<div class="hidden pl-4 pt-1 space-y-1" id="mobile-ai-solutions-menu">
+								<a href="/ai-review-response" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">AI Review Response</a>
+								<a href="/services/ai-chat-assistant" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">AI Chat Assistant</a>
+							</div>
+						</div>
+						
 						<a href="/services/custom-web-development" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">Custom Web Development</a>
 						<a href="/services/ecommerce-solutions" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">E-commerce Solutions</a>
-						<a href="/services/ai-chat-assistant" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">AI Chat Assistant</a>
 						<a href="/services/seo-digital-marketing" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">SEO & Digital Marketing</a>
-						<a href="/services/performance-optimization" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">Performance Optimization</a>
 						<a href="/services/maintenance-support" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">Maintenance & Support</a>
 					</div>
 				</div>
@@ -143,6 +182,21 @@ const { currentPage } = Astro.props;
 			});
 		}
 		
+		// Mobile AI Solutions submenu toggle
+		const mobileAISolutionsButton = document.getElementById('mobile-ai-solutions-button');
+		const mobileAISolutionsMenu = document.getElementById('mobile-ai-solutions-menu');
+		const mobileAISolutionsArrow = document.getElementById('mobile-ai-solutions-arrow');
+		
+		if (mobileAISolutionsButton && mobileAISolutionsMenu && mobileAISolutionsArrow) {
+			mobileAISolutionsButton.addEventListener('click', function(e) {
+				e.preventDefault();
+				const isHidden = mobileAISolutionsMenu.classList.contains('hidden');
+				mobileAISolutionsMenu.classList.toggle('hidden');
+				mobileAISolutionsArrow.classList.toggle('rotate-180');
+				mobileAISolutionsButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+			});
+		}
+		
 		// Desktop services dropdown - update aria-expanded on hover
 		const desktopServicesButton = document.getElementById('desktop-services-button');
 		const desktopServicesDropdown = document.getElementById('services-dropdown');
@@ -182,3 +236,11 @@ const { currentPage } = Astro.props;
 	// Re-initialize after Astro page transitions
 	document.addEventListener('astro:page-load', initNavigation);
 </script>
+
+<style>
+	/* AI Solutions submenu hover effect */
+	.ai-solutions-submenu:hover .ai-solutions-submenu-content {
+		opacity: 1;
+		visibility: visible;
+	}
+</style>
