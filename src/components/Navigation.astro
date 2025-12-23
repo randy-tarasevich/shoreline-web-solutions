@@ -103,24 +103,20 @@ const { currentPage } = Astro.props;
 						
 						<!-- Mobile Custom AI Solutions Submenu -->
 						<div class="mobile-ai-solutions">
-							<a 
-								href="/custom-ai-solutions"
-								class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10"
-							>
-								Custom AI Solutions
-							</a>
 							<button 
 								class="w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10 flex items-center justify-between"
 								id="mobile-ai-solutions-button"
-								aria-label="Toggle AI Solutions menu"
+								aria-label="Toggle Custom AI Solutions menu"
 								aria-expanded="false"
+								aria-haspopup="true"
+								aria-controls="mobile-ai-solutions-menu"
 							>
-								<span>AI Services</span>
+								<span>Custom AI Solutions</span>
 								<svg class="w-4 h-4 transition-transform" id="mobile-ai-solutions-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 								</svg>
 							</button>
-							<div class="hidden pl-4 pt-1 space-y-1" id="mobile-ai-solutions-menu">
+							<div class="hidden pl-4 pt-1 space-y-1" id="mobile-ai-solutions-menu" role="menu">
 								<a href="/ai-review-response" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">AI Review Response</a>
 								<a href="/services/ai-chat-assistant" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">AI Chat Assistant</a>
 							</div>
