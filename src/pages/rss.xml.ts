@@ -74,7 +74,7 @@ export const GET: APIRoute = async (context) => {
 	return rss({
 		title: "Shoreline Web Solutions Blog",
 		description:
-			"Professional web development insights, tips, and updates for Connecticut businesses.",
+			"Professional web development insights, tips, and updates for businesses.",
 		site: siteUrl,
 		items: items,
 		customData: `<language>en-us</language>`,

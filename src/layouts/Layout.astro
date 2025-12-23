@@ -14,9 +14,9 @@ export interface Props {
 }
 
 const { 
-	title = "Shoreline Web Solutions - Professional Web Development in Old Lyme, CT",
-	description = "Professional web development services in Old Lyme, Connecticut. Custom websites, performance optimization, and mobile-first design for businesses along the Connecticut shoreline.",
-	keywords = "web development, Old Lyme CT, Connecticut web developer, responsive design, custom websites",
+	title = "Shoreline Web Solutions - Professional Web Development Services",
+	description = "Professional web development services for businesses. Custom websites, performance optimization, and mobile-first design that drive results.",
+	keywords = "web development, web developer, responsive design, custom websites, web services",
 	canonical = Astro.url.href,
 	// TODO: Create a proper 1200x630px OG image at public/og-image.jpg
 	// For now, using favicon as fallback - replace with actual OG image
@@ -106,20 +106,10 @@ const fullCanonical = canonical.startsWith('http') ? canonical : `${siteUrl}${ca
 			"@context": "https://schema.org",
 			"@type": "LocalBusiness",
 			"name": "Shoreline Web Solutions",
-			"description": "Professional web development services in Old Lyme, Connecticut. Custom websites, performance optimization, and mobile-first design for businesses along the Connecticut shoreline.",
+			"description": "Professional web development services for businesses. Custom websites, performance optimization, and mobile-first design that drive results.",
 			"url": "https://shorelinewebsolutions.com",
 			"logo": "https://shorelinewebsolutions.com/favicon.svg",
 			"image": "https://shorelinewebsolutions.com/og-image.jpg",
-			"address": {
-				"@type": "PostalAddress",
-				"addressLocality": "Old Lyme",
-				"addressRegion": "CT",
-				"addressCountry": "US"
-			},
-			"areaServed": {
-				"@type": "State",
-				"name": "Connecticut"
-			},
 			"priceRange": "$$",
 			"telephone": "+1-860-XXX-XXXX"
 		})} />

@@ -152,11 +152,13 @@ const { currentPage } = Astro.props;
 			mobileMenuButton.replaceWith(mobileMenuButton.cloneNode(true));
 			const newMobileMenuButton = document.getElementById('mobile-menu-button');
 			
-			newMobileMenuButton.addEventListener('click', function() {
-				const isHidden = mobileMenu.classList.contains('hidden');
-				mobileMenu.classList.toggle('hidden');
-				newMobileMenuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-			});
+			if (newMobileMenuButton) {
+				newMobileMenuButton.addEventListener('click', function() {
+					const isHidden = mobileMenu.classList.contains('hidden');
+					mobileMenu.classList.toggle('hidden');
+					newMobileMenuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+				});
+			}
 		}
 		
 		// Mobile services dropdown toggle
@@ -167,13 +169,15 @@ const { currentPage } = Astro.props;
 			const newMobileServicesMenu = document.getElementById('mobile-services-menu');
 			const newMobileServicesArrow = document.getElementById('mobile-services-arrow');
 			
-			newMobileServicesButton.addEventListener('click', function(e) {
-				e.preventDefault();
-				const isHidden = newMobileServicesMenu.classList.contains('hidden');
-				newMobileServicesMenu.classList.toggle('hidden');
-				newMobileServicesArrow.classList.toggle('rotate-180');
-				newMobileServicesButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-			});
+			if (newMobileServicesButton && newMobileServicesMenu && newMobileServicesArrow) {
+				newMobileServicesButton.addEventListener('click', function(e) {
+					e.preventDefault();
+					const isHidden = newMobileServicesMenu.classList.contains('hidden');
+					newMobileServicesMenu.classList.toggle('hidden');
+					newMobileServicesArrow.classList.toggle('rotate-180');
+					newMobileServicesButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+				});
+			}
 		}
 		
 		// Mobile AI Solutions submenu toggle
@@ -182,13 +186,21 @@ const { currentPage } = Astro.props;
 		const mobileAISolutionsArrow = document.getElementById('mobile-ai-solutions-arrow');
 		
 		if (mobileAISolutionsButton && mobileAISolutionsMenu && mobileAISolutionsArrow) {
-			mobileAISolutionsButton.addEventListener('click', function(e) {
-				e.preventDefault();
-				const isHidden = mobileAISolutionsMenu.classList.contains('hidden');
-				mobileAISolutionsMenu.classList.toggle('hidden');
-				mobileAISolutionsArrow.classList.toggle('rotate-180');
-				mobileAISolutionsButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-			});
+			// Remove any existing event listeners to prevent duplicates
+			mobileAISolutionsButton.replaceWith(mobileAISolutionsButton.cloneNode(true));
+			const newMobileAISolutionsButton = document.getElementById('mobile-ai-solutions-button');
+			const newMobileAISolutionsMenu = document.getElementById('mobile-ai-solutions-menu');
+			const newMobileAISolutionsArrow = document.getElementById('mobile-ai-solutions-arrow');
+			
+			if (newMobileAISolutionsButton && newMobileAISolutionsMenu && newMobileAISolutionsArrow) {
+				newMobileAISolutionsButton.addEventListener('click', function(e) {
+					e.preventDefault();
+					const isHidden = newMobileAISolutionsMenu.classList.contains('hidden');
+					newMobileAISolutionsMenu.classList.toggle('hidden');
+					newMobileAISolutionsArrow.classList.toggle('rotate-180');
+					newMobileAISolutionsButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+				});
+			}
 		}
 		
 		// Desktop services dropdown - update aria-expanded on hover
