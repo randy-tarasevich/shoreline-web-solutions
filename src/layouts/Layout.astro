@@ -32,6 +32,15 @@ const fullCanonical = canonical.startsWith('http') ? canonical : `${siteUrl}${ca
 <!doctype html>
 <html lang="en">
 	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-ECJEXG46XH"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-ECJEXG46XH');
+		</script>
+		
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -80,19 +89,6 @@ const fullCanonical = canonical.startsWith('http') ? canonical : `${siteUrl}${ca
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 		<meta name="format-detection" content="telephone=no" />
-		
-		<!-- Analytics (Google Analytics) -->
-		{import.meta.env.PUBLIC_GA_ID && (
-			<>
-				<script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`}></script>
-				<script is:inline define:vars={{ gaId: import.meta.env.PUBLIC_GA_ID }}>
-					window.dataLayer = window.dataLayer || [];
-					function gtag(){dataLayer.push(arguments);}
-					gtag('js', new Date());
-					gtag('config', gaId);
-				</script>
-			</>
-		)}
 		
 	</head>
 	<body class="antialiased">
