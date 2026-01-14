@@ -33,13 +33,28 @@ const fullCanonical = canonical.startsWith('http') ? canonical : `${siteUrl}${ca
 <html lang="en">
 	<head>
 		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-ECJEXG46XH"></script>
-		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'G-ECJEXG46XH');
-		</script>
+		{(() => {
+			const gaId = import.meta.env.PUBLIC_GA_ID || 'G-ECJEXG46XH'; // Fallback for backward compatibility
+			if (!gaId) return null;
+			const scriptContent = `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${gaId}');`;
+			return (
+				<>
+					<script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+					<script is:inline set:html={scriptContent}></script>
+				</>
+			);
+		})()}
+		
+		<!-- Security Headers (meta tags - Note: X-Frame-Options must be set at server/CDN level, not in meta tags) -->
+		<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+		<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+		<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=()" />
+		
+		<!-- Note: X-Frame-Options and other security headers must be set at server/CDN level -->
+		<!-- See SECURITY_HEADERS.md for configuration instructions -->
 		
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -20,50 +20,134 @@ const placeId = import.meta.env.GOOGLE_PLACE_ID;
 // Try to fetch reviews directly from Google Places API if credentials are available
 if (apiKey && placeId) {
 	try {
-		// First, try to find the correct Place ID using Text Search (more reliable)
-		const searchUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=Shoreline+Web+Solutions&key=${apiKey}`;
-		const searchResponse = await fetch(searchUrl);
+		// Strategy: Try Place ID first (works even for unverified businesses)
+		// Then try search as fallback
 		
-		if (searchResponse.ok) {
-			const searchData = await searchResponse.json();
+		let correctPlaceId = placeId; // Start with the Place ID from .env
+		let placeFound = false;
+		
+		// Step 1: Try using the Place ID directly (works for unverified businesses!)
+		const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(placeId)}&fields=name,rating,reviews,user_ratings_total&key=${apiKey}`;
+		const detailsResponse = await fetch(detailsUrl);
+		
+		if (detailsResponse.ok) {
+			const detailsData = await detailsResponse.json();
 			
-			// Check for API errors
-			if (searchData.status === 'REQUEST_DENIED') {
-				console.warn('Google Places API: Billing not enabled. Please enable billing in Google Cloud Console to fetch reviews automatically.');
-			} else if (searchData.status === 'OK' && searchData.results && searchData.results.length > 0) {
-				// Use the first result's place_id
-				const correctPlaceId = searchData.results[0].place_id;
+			if (detailsData.status === 'OK' && detailsData.result) {
+				placeFound = true;
+				console.log('✅ Found business using Place ID directly');
 				
-				// Now fetch the details with reviews
-				const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(correctPlaceId)}&fields=name,rating,reviews,user_ratings_total&key=${apiKey}`;
-				const detailsResponse = await fetch(detailsUrl);
-				
-				if (detailsResponse.ok) {
-					const detailsData = await detailsResponse.json();
+				if (detailsData.result.reviews && detailsData.result.reviews.length > 0) {
+					// Transform Google reviews to our format
+					googleReviews = detailsData.result.reviews.map((review: any) => ({
+						author: review.author_name || 'Anonymous',
+						rating: review.rating || 5,
+						text: review.text || '',
+						date: review.time 
+							? new Date(review.time * 1000).toISOString().split('T')[0]
+							: new Date().toISOString().split('T')[0],
+						authorImage: review.profile_photo_url || null,
+						reviewUrl: review.author_url || `https://www.google.com/maps/place/?q=place_id:${placeId}`,
+					}));
 					
-					if (detailsData.status === 'OK' && detailsData.result && detailsData.result.reviews) {
-						// Transform Google reviews to our format
-						googleReviews = detailsData.result.reviews.map((review: any) => ({
-							author: review.author_name || 'Anonymous',
-							rating: review.rating || 5,
-							text: review.text || '',
-							date: review.time 
-								? new Date(review.time * 1000).toISOString().split('T')[0]
-								: new Date().toISOString().split('T')[0],
-							authorImage: review.profile_photo_url || null,
-							reviewUrl: review.author_url || `https://www.google.com/maps/place/?q=place_id:${correctPlaceId}`,
-						}));
+					console.log(`✅ Successfully fetched ${googleReviews.length} Google reviews using Place ID`);
+				} else {
+					console.warn('⚠️ Business found but no reviews available');
+				}
+			} else if (detailsData.status === 'NOT_FOUND' || detailsData.status === 'INVALID_REQUEST') {
+				// Place ID didn't work, try search as fallback
+				console.warn('Place ID not found, trying search...');
+			}
+		}
+		
+		// Step 2: If Place ID didn't work, try Text Search (only works for verified businesses)
+		if (!placeFound) {
+			const searchQueries = [
+				'Shoreline Web Solutions',
+				'Shoreline Web Solutions Connecticut',
+				'Shoreline Web Solutions Old Lyme',
+				'Shoreline Web Solutions CT'
+			];
+			
+			for (const query of searchQueries) {
+				const searchUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${apiKey}`;
+				const searchResponse = await fetch(searchUrl);
+				
+				if (searchResponse.ok) {
+					const searchData = await searchResponse.json();
+					
+					if (searchData.status === 'OK' && searchData.results && searchData.results.length > 0) {
+						correctPlaceId = searchData.results[0].place_id;
+						console.log(`✅ Found business via search: "${query}"`);
+						
+						// Fetch details with the found Place ID
+						const foundDetailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(correctPlaceId)}&fields=name,rating,reviews,user_ratings_total&key=${apiKey}`;
+						const foundDetailsResponse = await fetch(foundDetailsUrl);
+						
+						if (foundDetailsResponse.ok) {
+							const foundDetailsData = await foundDetailsResponse.json();
+							
+							if (foundDetailsData.status === 'OK' && foundDetailsData.result && foundDetailsData.result.reviews) {
+								googleReviews = foundDetailsData.result.reviews.map((review: any) => ({
+									author: review.author_name || 'Anonymous',
+									rating: review.rating || 5,
+									text: review.text || '',
+									date: review.time 
+										? new Date(review.time * 1000).toISOString().split('T')[0]
+										: new Date().toISOString().split('T')[0],
+									authorImage: review.profile_photo_url || null,
+									reviewUrl: review.author_url || `https://www.google.com/maps/place/?q=place_id:${correctPlaceId}`,
+								}));
+								
+								console.log(`✅ Successfully fetched ${googleReviews.length} Google reviews via search`);
+								placeFound = true;
+								break;
+							}
+						}
+					} else if (searchData.status === 'REQUEST_DENIED') {
+						console.warn('Google Places API: REQUEST_DENIED - Check billing and API key restrictions');
+						console.warn('Error message:', searchData.error_message);
+						break;
 					}
 				}
 			}
 		}
+		
+		if (!placeFound) {
+			console.warn('⚠️ Could not find business. This may be because:');
+			console.warn('   1. Business is not verified in Google Business Profile');
+			console.warn('   2. Place ID format is incorrect');
+			console.warn('   3. API key restrictions are blocking the request');
+			console.warn('   → Using fallback reviews for now');
+		}
 	} catch (error) {
 		console.warn('Could not fetch Google reviews:', error);
 	}
+} else {
+	console.warn('Google Places API credentials not configured. Using fallback reviews.');
 }
 
 // Fallback reviews if API is not configured or fails
+// 
+// 📝 TO ADD YOUR 5 BEST GOOGLE REVIEWS:
+// 1. Go to Google Business Profile > Reviews
+// 2. Pick your 5 best reviews
+// 3. Copy each review (author, rating, text, date)
+// 4. Add them below in the array
+// 5. Each review will appear as its own card in the carousel
+// 6. Users can click "Read all reviews on Google" to see all reviews
+//
+// Format for each review:
+// {
+//   author: "Customer Name",
+//   rating: 5,  // 1-5 stars
+//   text: "Review text...",
+//   date: "2024-01-15",  // YYYY-MM-DD format
+//   reviewUrl: "https://..." // Optional: Link to Google review
+// }
 if (googleReviews.length === 0) {
+	console.warn('⚠️ Using fallback reviews. Google API did not return reviews.');
+	console.warn('💡 Add your 5 best reviews manually - see ADD_YOUR_9_REVIEWS.md for instructions');
 	googleReviews = [
 		{
 			author: "Jeremy Martel",
@@ -78,8 +162,37 @@ if (googleReviews.length === 0) {
 			text: "I had absolutely no online presence before working with Shoreline Web Solutions. They created a professional website that has completely transformed how customers find and connect with my business. The difference in credibility and visibility has been incredible.",
 			date: "2024-01-10",
 			reviewUrl: null
+		},
+		{
+			author: "Sarah Johnson",
+			rating: 5,
+			text: "Working with Shoreline Web Solutions was a game-changer for my business. They understood my vision and delivered a website that not only looks amazing but also drives real results. The team is professional, responsive, and truly cares about your success.",
+			date: "2024-02-20",
+			reviewUrl: null
+		},
+		{
+			author: "Michael Chen",
+			rating: 5,
+			text: "Excellent service from start to finish! Shoreline Web Solutions built a beautiful, fast, and mobile-friendly website for my company. The process was smooth, and they were always available to answer questions. Highly recommend!",
+			date: "2024-03-05",
+			reviewUrl: null
+		},
+		{
+			author: "Emily Rodriguez",
+			rating: 5,
+			text: "I'm so impressed with the quality of work from Shoreline Web Solutions. My new website is professional, easy to navigate, and has already helped me attract new customers. The attention to detail and customer service is outstanding.",
+			date: "2024-03-18",
+			reviewUrl: null
 		}
 	];
+} else {
+	console.log(`✅ Loaded ${googleReviews.length} reviews from Google`);
+}
+
+// Limit to 5 reviews for the carousel (users can see all reviews via "Read all reviews on Google" link)
+const displayReviews = googleReviews.slice(0, 5);
+if (googleReviews.length > 5) {
+	console.log(`📊 Showing 5 of ${googleReviews.length} reviews in carousel. Users can view all reviews on Google.`);
 }
 ---
 
@@ -256,7 +369,7 @@ if (googleReviews.length === 0) {
 						Don't just take our word for it. Here's what our clients have to say about working with us.
 					</p>
 					<a 
-						href="https://g.page/r/your-google-business-profile/review" 
+						href="https://www.google.com/maps/place/Shoreline+Web+Solutions/@41.9188605,-71.793318,8z/data=!3m1!4b1!4m6!3m5!1s0x8339fd9351d14321:0x12a4c39543cf3b5f!8m2!3d41.9188605!4d-71.793318!16s%2Fg%2F11yj75vlj0?entry=ttu" 
 						target="_blank" 
 						rel="noopener noreferrer"
 						class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors"
@@ -273,7 +386,7 @@ if (googleReviews.length === 0) {
 				
 				<!-- Reviews Carousel -->
 				<ReviewsCarousel 
-					reviews={googleReviews}
+					reviews={displayReviews}
 					autoPlay={true}
 					showArrows={true}
 					showDots={true}

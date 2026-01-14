@@ -114,6 +114,73 @@ Make sure `.env` is in your `.gitignore`:
 
 ### Step 5: For Production Deployment
 
+#### For S3 Static Hosting
+
+Since S3 is a static hosting solution, you have two options:
+
+**Option A: Build with Environment Variables (Recommended)**
+
+This is the simplest approach - reviews are fetched during the build and included in your static HTML.
+
+1. **Set environment variables before building:**
+
+   ```bash
+   export GOOGLE_PLACES_API_KEY=your_api_key_here
+   export GOOGLE_PLACE_ID=your_place_id_here
+   npm run build
+   ```
+
+   **Example:**
+
+   ```bash
+   export GOOGLE_PLACES_API_KEY=your_api_key_here
+   export GOOGLE_PLACE_ID=your_place_id_here
+   npm run build
+   ```
+
+   **⚠️ SECURITY:** Never commit your actual API keys to git!
+
+2. **Or use a `.env.production` file (Better for automation):**
+
+   Create `.env.production` in your project root:
+
+   ```bash
+   GOOGLE_PLACES_API_KEY=your_api_key_here
+   GOOGLE_PLACE_ID=your_place_id_here
+   ```
+
+   **⚠️ SECURITY:** Never commit `.env.production` to git!
+
+   Then run:
+
+   ```bash
+   npm run build
+   ```
+
+   Astro will automatically use `.env.production` during the build.
+
+3. **Upload to S3:**
+
+   - After building, upload the contents of the `dist/` folder to your S3 bucket
+   - Reviews are already baked into the HTML - no runtime API calls needed!
+
+4. **Note:** With S3 static hosting, the API endpoint (`/api/google-reviews.ts`) won't work at runtime. The reviews will be fetched at **build time** and baked into the static HTML. This is perfect for S3!
+
+**Option B: Use AWS Lambda + API Gateway (Advanced)**
+
+If you need dynamic API calls at runtime:
+
+1. Deploy the API endpoint as an AWS Lambda function
+2. Set up API Gateway to route `/api/google-reviews` to the Lambda
+3. Set environment variables in Lambda configuration
+4. Update your site to call the API Gateway URL
+
+**Option C: Client-Side Fetching**
+
+Modify the code to fetch reviews client-side (in the browser) instead of server-side. This requires exposing the API key (not recommended for security).
+
+#### For Other Hosting Platforms
+
 When deploying (Vercel, Netlify, etc.), add these environment variables in your hosting platform's settings:
 
 - `GOOGLE_PLACES_API_KEY` = your API key
@@ -123,22 +190,29 @@ When deploying (Vercel, Netlify, etc.), add these environment variables in your 
 
 ## 🎯 How It Works
 
-1. **API Endpoint** (`/api/google-reviews.ts`):
+**For S3 Static Hosting (Your Setup):**
 
-   - Fetches reviews from Google Places API
-   - Transforms them to our format
-   - Caches for 1 hour (reduces API calls)
+1. **Portfolio Page** (`/portfolio.astro`):
 
-2. **Portfolio Page** (`/portfolio.astro`):
-
-   - Fetches reviews from API at build time
+   - Fetches reviews from Google Places API **at build time**
+   - Reviews are baked into the static HTML during `npm run build`
    - Falls back to manual reviews if API not configured
-   - Displays all reviews in carousel
+   - Perfect for S3 static hosting!
 
-3. **Reviews Carousel**:
+2. **Build Process:**
+
+   - Set environment variables before building (or use `.env.production`)
+   - Run `npm run build`
+   - Reviews are fetched and included in the static HTML
+   - Upload `dist/` folder to S3
+
+3. **Reviews Carousel:**
    - Automatically displays all fetched reviews
    - Each review = one card
    - Auto-rotates through all reviews
+   - Shows navigation controls
+
+**Note:** The API endpoint (`/api/google-reviews.ts`) is available for server-side hosting (Vercel, Netlify, etc.) but not needed for S3 since we fetch at build time.
 
 ---
 

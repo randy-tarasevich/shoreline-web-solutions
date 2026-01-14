@@ -1,13 +1,19 @@
 # Security Headers Configuration
 
+**⚠️ IMPORTANT:** Security headers like `X-Frame-Options` **MUST** be set at the server/CDN level, NOT in HTML meta tags. Meta tags will cause browser errors and won't work.
+
 This document outlines the recommended security headers that should be configured at the hosting/deployment platform level. These headers help protect your website from common security vulnerabilities.
+
+**For S3 Static Hosting:** Configure these headers in CloudFront (if using AWS) or your CDN provider.
 
 ## Required Security Headers
 
 ### Content-Security-Policy (CSP)
+
 Prevents XSS attacks by controlling which resources can be loaded.
 
 **Recommended Configuration:**
+
 ```
 Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';
 ```
@@ -15,9 +21,11 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' '
 **Note:** Adjust based on your specific needs. If using external services (analytics, CDNs, etc.), add their domains to the appropriate directives.
 
 ### X-Frame-Options
+
 Prevents clickjacking attacks by controlling whether the page can be embedded in frames.
 
 **Recommended Configuration:**
+
 ```
 X-Frame-Options: DENY
 ```
@@ -25,30 +33,37 @@ X-Frame-Options: DENY
 **Alternative:** Use `SAMEORIGIN` if you need to embed pages in iframes from the same origin.
 
 ### X-Content-Type-Options
+
 Prevents MIME type sniffing attacks.
 
 **Recommended Configuration:**
+
 ```
 X-Content-Type-Options: nosniff
 ```
 
 ### Referrer-Policy
+
 Controls how much referrer information is sent with requests.
 
 **Recommended Configuration:**
+
 ```
 Referrer-Policy: strict-origin-when-cross-origin
 ```
 
 **Options:**
+
 - `no-referrer`: Never send referrer
 - `same-origin`: Only send referrer for same-origin requests
 - `strict-origin-when-cross-origin`: Send full URL for same-origin, origin only for cross-origin HTTPS→HTTPS, nothing for HTTPS→HTTP
 
 ### Permissions-Policy (formerly Feature-Policy)
+
 Controls which browser features and APIs can be used.
 
 **Recommended Configuration:**
+
 ```
 Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=()
 ```
@@ -56,9 +71,11 @@ Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
 **Note:** Adjust based on your site's needs. If you need certain features (e.g., camera for video calls), allow them explicitly.
 
 ### Strict-Transport-Security (HSTS)
+
 Forces browsers to use HTTPS connections.
 
 **Recommended Configuration (only if using HTTPS):**
+
 ```
 Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 ```
@@ -68,7 +85,9 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 ## Platform-Specific Configuration
 
 ### Netlify
+
 Add to `netlify.toml`:
+
 ```toml
 [[headers]]
   for = "/*"
@@ -83,49 +102,53 @@ Add to `netlify.toml`:
 ```
 
 ### Vercel
+
 Add to `vercel.json`:
+
 ```json
 {
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=()"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=31536000; includeSubDomains; preload"
-        }
-      ]
-    }
-  ]
+	"headers": [
+		{
+			"source": "/(.*)",
+			"headers": [
+				{
+					"key": "X-Frame-Options",
+					"value": "DENY"
+				},
+				{
+					"key": "X-Content-Type-Options",
+					"value": "nosniff"
+				},
+				{
+					"key": "X-XSS-Protection",
+					"value": "1; mode=block"
+				},
+				{
+					"key": "Referrer-Policy",
+					"value": "strict-origin-when-cross-origin"
+				},
+				{
+					"key": "Permissions-Policy",
+					"value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=()"
+				},
+				{
+					"key": "Content-Security-Policy",
+					"value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';"
+				},
+				{
+					"key": "Strict-Transport-Security",
+					"value": "max-age=31536000; includeSubDomains; preload"
+				}
+			]
+		}
+	]
 }
 ```
 
 ### Apache (.htaccess)
+
 Add to `.htaccess`:
+
 ```apache
 <IfModule mod_headers.c>
     Header set X-Frame-Options "DENY"
@@ -138,8 +161,36 @@ Add to `.htaccess`:
 </IfModule>
 ```
 
+### S3 + CloudFront (Your Setup)
+
+**Option 1: CloudFront Response Headers Policy (Recommended)**
+
+1. Go to AWS CloudFront Console
+2. Create or edit a Response Headers Policy
+3. Add Custom Headers:
+
+   - `X-Frame-Options: DENY`
+   - `X-Content-Type-Options: nosniff`
+   - `X-XSS-Protection: 1; mode=block`
+   - `Referrer-Policy: strict-origin-when-cross-origin`
+   - `Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=()`
+   - `Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://maps.googleapis.com; frame-ancestors 'none';`
+   - `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload` (only if using HTTPS)
+
+4. Attach the policy to your CloudFront distribution
+
+**Option 2: Lambda@Edge Function**
+
+For more control, use a Lambda@Edge function to add headers to responses.
+
+**Option 3: S3 Bucket Policy + CloudFront**
+
+Configure headers at the CloudFront level using Response Headers Policy (easiest).
+
 ### Nginx
+
 Add to your server block:
+
 ```nginx
 add_header X-Frame-Options "DENY" always;
 add_header X-Content-Type-Options "nosniff" always;
@@ -155,10 +206,12 @@ add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; prelo
 After configuring headers, test them using:
 
 1. **Browser DevTools:**
+
    - Open Network tab
    - Check Response Headers for your site
 
 2. **Online Tools:**
+
    - [SecurityHeaders.com](https://securityheaders.com/)
    - [Mozilla Observatory](https://observatory.mozilla.org/)
 
@@ -173,7 +226,6 @@ After configuring headers, test them using:
   - External scripts (analytics, chat widgets, etc.)
   - CDN resources
   - Third-party embeds
-  
 - **HSTS:** Only enable if you're fully committed to HTTPS. Once set, browsers will enforce HTTPS for the specified duration.
 
 - **Testing:** Always test security headers in a staging environment before deploying to production.
@@ -183,6 +235,3 @@ After configuring headers, test them using:
 - [MDN: HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
 - [OWASP: Secure Headers](https://owasp.org/www-project-secure-headers/)
 - [Content Security Policy Reference](https://content-security-policy.com/)
-
-
-

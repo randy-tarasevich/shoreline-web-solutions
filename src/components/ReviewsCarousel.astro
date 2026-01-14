@@ -20,13 +20,15 @@ export interface Props {
 	autoPlay?: boolean;
 	showArrows?: boolean;
 	showDots?: boolean;
+	cardsPerView?: number; // Number of cards to show at once
 }
 
 const { 
 	reviews = [], 
 	autoPlay = true,
 	showArrows = true,
-	showDots = true
+	showDots = true,
+	cardsPerView = 3 // Default: show 3 cards at once
 } = Astro.props;
 
 // Default reviews (replace with Google reviews when API is set up)
@@ -52,7 +54,7 @@ const defaultReviews = reviews.length > 0 ? reviews : [
 const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
 ---
 
-<div class="reviews-carousel-container">
+<div class="reviews-carousel-container" data-cards-per-view={cardsPerView} style={`--cards-per-view: ${cardsPerView}`}>
 	<div class="reviews-carousel-wrapper" data-autoplay={autoPlay}>
 		<div class="reviews-carousel-track">
 			{displayReviews.map((review, index) => (
@@ -164,33 +166,27 @@ const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
 		position: relative;
 		max-width: 1200px;
 		margin: 0 auto;
+		padding: 0 60px; /* Space for navigation arrows */
 	}
 	
 	.reviews-carousel-wrapper {
 		position: relative;
 		overflow: hidden;
+		width: 100%;
 	}
 	
 	.reviews-carousel-track {
-		position: relative;
-		width: 100%;
-		min-height: 300px;
+		display: flex;
+		transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		will-change: transform;
+		gap: 24px; /* Space between cards */
 	}
 	
 	.review-card {
-		width: 100%;
-		opacity: 0;
-		visibility: hidden;
-		position: absolute;
-		top: 0;
-		left: 0;
-		transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-	}
-	
-	.review-card.active {
-		opacity: 1;
-		visibility: visible;
-		position: relative;
+		flex: 0 0 calc((100% - (var(--cards-per-view, 3) - 1) * 24px) / var(--cards-per-view, 3));
+		min-width: 0; /* Allow flex shrinking */
+		padding: 0;
+		box-sizing: border-box;
 	}
 	
 	.reviews-carousel-nav {
@@ -230,11 +226,13 @@ const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
 	}
 	
 	.reviews-carousel-prev {
-		margin-left: -24px;
+		left: 0;
+		margin-left: -60px;
 	}
 	
 	.reviews-carousel-next {
-		margin-right: -24px;
+		right: 0;
+		margin-right: -60px;
 	}
 	
 	.reviews-carousel-dots {
@@ -265,7 +263,17 @@ const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
 		background: #94a3b8;
 	}
 	
+	@media (max-width: 1024px) {
+		.reviews-carousel-container[data-cards-per-view="3"] .review-card {
+			flex: 0 0 calc((100% - 24px) / 2); /* Show 2 cards on tablet */
+		}
+	}
+	
 	@media (max-width: 768px) {
+		.reviews-carousel-container {
+			padding: 0 50px;
+		}
+		
 		.reviews-carousel-prev,
 		.reviews-carousel-next {
 			width: 40px;
@@ -273,11 +281,16 @@ const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
 		}
 		
 		.reviews-carousel-prev {
-			margin-left: -20px;
+			margin-left: -50px;
 		}
 		
 		.reviews-carousel-next {
-			margin-right: -20px;
+			margin-right: -50px;
+		}
+		
+		/* Show 1 card on mobile */
+		.review-card {
+			flex: 0 0 100% !important;
 		}
 	}
 </style>
@@ -294,44 +307,96 @@ const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
 		const dots = container.querySelectorAll('.reviews-carousel-dot');
 		const wrapper = container.querySelector('.reviews-carousel-wrapper');
 		const autoplay = wrapper && wrapper.getAttribute('data-autoplay') === 'true';
+		const cardsPerView = parseInt(container.getAttribute('data-cards-per-view') || '3', 10);
 		
-		if (!track || cards.length === 0) return;
+		if (!track) {
+			console.warn('Reviews carousel: track not found');
+			return;
+		}
+		
+		if (cards.length === 0) {
+			console.warn('Reviews carousel: no review cards found');
+			return;
+		}
+		
+		console.log(`Reviews carousel initialized with ${cards.length} reviews, showing ${cardsPerView} cards per view`);
 		
 		let currentIndex = 0;
 		let autoplayInterval = null;
+		let isTransitioning = false;
 		
-		function showCard(index) {
-			// Remove active class from all cards
-			cards.forEach(function(card, i) {
-				if (i === index) {
-					card.classList.add('active');
-				} else {
-					card.classList.remove('active');
-				}
-			});
+		// Get the width of one card (including gap)
+		function getCardWidth() {
+			if (cards.length === 0) return 0;
+			const card = cards[0];
+			const cardRect = card.getBoundingClientRect();
+			const trackRect = track.getBoundingClientRect();
+			const gap = 24; // Gap between cards in pixels
+			return cardRect.width + gap;
+		}
+		
+		// Calculate max index based on cards per view
+		function getMaxIndex() {
+			return Math.max(0, cards.length - cardsPerView);
+		}
+		
+		function slideToIndex(index) {
+			// Clamp index to valid range
+			const maxIndex = getMaxIndex();
+			if (index < 0) index = 0;
+			if (index > maxIndex) index = maxIndex;
+			
+			if (isTransitioning) return;
+			isTransitioning = true;
+			
+			currentIndex = index;
+			const cardWidth = getCardWidth();
+			const translateX = -currentIndex * cardWidth;
+			
+			track.style.transform = `translateX(${translateX}px)`;
 			
 			// Update dots
-			dots.forEach(function(dot, i) {
-				if (i === index) {
-					dot.classList.add('active');
-				} else {
-					dot.classList.remove('active');
-				}
-			});
+			if (dots && dots.length > 0) {
+				dots.forEach(function(dot, i) {
+					if (i === index) {
+						dot.classList.add('active');
+					} else {
+						dot.classList.remove('active');
+					}
+				});
+			}
+			
+			// Reset transition lock after animation completes
+			setTimeout(function() {
+				isTransitioning = false;
+			}, 600);
 		}
 		
 		function nextCard() {
-			currentIndex = (currentIndex + 1) % cards.length;
-			showCard(currentIndex);
+			const maxIndex = getMaxIndex();
+			const nextIndex = currentIndex + 1;
+			// Loop back to start if we've reached the end
+			if (nextIndex > maxIndex) {
+				slideToIndex(0);
+			} else {
+				slideToIndex(nextIndex);
+			}
 		}
 		
 		function prevCard() {
-			currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-			showCard(currentIndex);
+			const maxIndex = getMaxIndex();
+			const prevIndex = currentIndex - 1;
+			// Loop to end if we're at the start
+			if (prevIndex < 0) {
+				slideToIndex(maxIndex);
+			} else {
+				slideToIndex(prevIndex);
+			}
 		}
 		
 		function startAutoplay() {
 			if (!autoplay) return;
+			stopAutoplay(); // Clear any existing interval
 			autoplayInterval = window.setInterval(nextCard, 5000);
 		}
 		
@@ -361,8 +426,7 @@ const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
 		
 		dots.forEach(function(dot, index) {
 			dot.addEventListener('click', function() {
-				currentIndex = index;
-				showCard(currentIndex);
+				slideToIndex(index);
 				stopAutoplay();
 				startAutoplay();
 			});
@@ -372,8 +436,17 @@ const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
 		container.addEventListener('mouseenter', stopAutoplay);
 		container.addEventListener('mouseleave', startAutoplay);
 		
+		// Handle window resize to recalculate card width
+		let resizeTimeout;
+		window.addEventListener('resize', function() {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(function() {
+				slideToIndex(currentIndex);
+			}, 250);
+		});
+		
 		// Initialize
-		showCard(0);
+		slideToIndex(0);
 		startAutoplay();
 	}
 	
