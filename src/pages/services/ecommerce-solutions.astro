@@ -1,11 +1,19 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
+import { Image } from 'astro:assets';
+
+// Import E-commerce images (add your images to src/assets/images/services/ecommerce/)
+// Uncomment when you add images:
+// import ecommerceHeroImage from '../../assets/images/services/ecommerce/hero.jpg';
+// import ecommerceMockupImage from '../../assets/images/services/ecommerce/store-mockup.jpg';
+// import checkoutMockupImage from '../../assets/images/services/ecommerce/checkout-mockup.jpg';
 
 const pageTitle = "E-commerce Solutions - Shoreline Web Solutions | Online Store Development";
 const pageDescription = "Professional e-commerce development services for businesses. We build complete online stores with shopping cart integration, payment processing, and inventory management.";
 const pageKeywords = "e-commerce development, online store development, e-commerce, shopping cart integration, payment processing, online retail, ecommerce solutions, online stores";
 const canonicalUrl = "/services/ecommerce-solutions";
+const siteUrl = "https://shorelinewebsolutions.com";
 ---
 
 <Layout 
@@ -15,6 +23,32 @@ const canonicalUrl = "/services/ecommerce-solutions";
 	canonical={canonicalUrl}
 	ogType="website"
 >
+	<!-- Breadcrumb Structured Data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "Home",
+				"item": `${siteUrl}/`
+			},
+			{
+				"@type": "ListItem",
+				"position": 2,
+				"name": "Services",
+				"item": `${siteUrl}/services`
+			},
+			{
+				"@type": "ListItem",
+				"position": 3,
+				"name": "E-commerce Solutions",
+				"item": `${siteUrl}${canonicalUrl}`
+			}
+		]
+	})} />
+	
 	<!-- Structured Data for Service -->
 	<script type="application/ld+json" set:html={JSON.stringify({
 		"@context": "https://schema.org",
@@ -32,16 +66,33 @@ const canonicalUrl = "/services/ecommerce-solutions";
 		<Navigation currentPage="services" />
 
 		<!-- Hero Section -->
-		<section class="pt-20 pb-16 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
-			<div class="max-w-7xl mx-auto px-6">
-				<div class="text-center">
-					<h1 class="hero-title text-5xl md:text-6xl font-bold text-white mb-6">
-						E-commerce <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Solutions</span>
-					</h1>
-					<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-						Complete online stores that effectively convert visitors into customers and drive sales growth.
-					</p>
-				</div>
+		<section class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+			<!-- Background Image -->
+			<div class="absolute inset-0 z-0">
+				<!-- Uncomment when you add hero.jpg:
+				<Image 
+					src={ecommerceHeroImage} 
+					alt=""
+					class="w-full h-full object-cover"
+					loading="eager"
+					aria-hidden="true"
+				/>
+				-->
+				<!-- Placeholder gradient background -->
+				<div class="w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"></div>
+			</div>
+			
+			<!-- Dark overlay for text readability -->
+			<div class="absolute inset-0 bg-gradient-to-b from-slate-900/75 via-slate-900/65 to-slate-900/80 z-10"></div>
+			
+			<!-- Content -->
+			<div class="relative z-20 text-center px-6 max-w-5xl mx-auto">
+				<h1 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6">
+					E-commerce <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Solutions</span>
+				</h1>
+				<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+					Complete online stores that effectively convert visitors into customers and drive sales growth.
+				</p>
 			</div>
 		</section>
 
@@ -49,7 +100,7 @@ const canonicalUrl = "/services/ecommerce-solutions";
 		<section class="py-20 bg-white">
 			<div class="max-w-7xl mx-auto px-6">
 				<div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
-					<div>
+					<div class="order-2 lg:order-1">
 						<div class="w-16 h-16 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg flex items-center justify-center mb-6">
 							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
@@ -65,7 +116,84 @@ const canonicalUrl = "/services/ecommerce-solutions";
 							Whether you're selling physical products, digital downloads, or services, we create a seamless shopping experience that makes it easy for customers to find what they need and complete their purchase.
 						</p>
 					</div>
-					<div class="bg-gradient-to-br from-teal-50 to-blue-50 p-8 rounded-xl shadow-lg">
+					<div class="order-1 lg:order-2 relative rounded-2xl overflow-hidden shadow-2xl">
+						<!-- E-commerce Store Mockup -->
+						<!-- Uncomment when you add store-mockup.jpg:
+						<Image 
+							src={ecommerceMockupImage} 
+							alt="E-commerce store mockup showing product catalog and shopping cart"
+							class="w-full h-auto"
+						/>
+						-->
+						<div class="aspect-[4/3] bg-gradient-to-br from-teal-50 to-blue-50 flex items-center justify-center">
+							<div class="text-center p-8">
+								<svg class="w-16 h-16 text-teal-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+								</svg>
+								<p class="text-slate-600 font-medium">Add mockup: store-mockup.jpg</p>
+								<p class="text-sm text-slate-500 mt-2">Online store interface or product catalog</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Checkout Mockup Section -->
+				<div class="mb-16">
+					<div class="grid md:grid-cols-2 gap-8 items-center">
+						<div class="relative rounded-xl overflow-hidden shadow-lg">
+							<!-- Uncomment when you add checkout-mockup.jpg:
+							<Image 
+								src={checkoutMockupImage} 
+								alt="Secure checkout process mockup"
+								class="w-full h-auto"
+							/>
+							-->
+							<div class="aspect-video bg-gradient-to-br from-teal-50 to-blue-50 flex items-center justify-center">
+								<div class="text-center p-6">
+									<svg class="w-12 h-12 text-teal-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+									</svg>
+									<p class="text-slate-600 font-medium text-sm">Add: checkout-mockup.jpg</p>
+								</div>
+							</div>
+						</div>
+						<div>
+							<h3 class="text-2xl font-bold text-slate-900 mb-4">Secure Checkout Experience</h3>
+							<p class="text-slate-600 leading-relaxed mb-4">
+								We build seamless, secure checkout processes that instill confidence in your customers and reduce cart abandonment.
+							</p>
+							<ul class="space-y-2 text-slate-600">
+								<li class="flex items-start gap-2">
+									<svg class="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+									<span>PCI-compliant payment processing</span>
+								</li>
+								<li class="flex items-start gap-2">
+									<svg class="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+									<span>Multiple payment options</span>
+								</li>
+								<li class="flex items-start gap-2">
+									<svg class="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+									<span>Guest checkout option</span>
+								</li>
+								<li class="flex items-start gap-2">
+									<svg class="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+									<span>Order confirmation & tracking</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<!-- E-commerce Features List -->
+				<div class="bg-gradient-to-br from-teal-50 to-blue-50 p-8 rounded-xl shadow-lg mb-16">
 						<h3 class="text-2xl font-bold text-slate-900 mb-6">E-commerce Features</h3>
 						<ul class="space-y-4">
 							<li class="flex items-start gap-3">

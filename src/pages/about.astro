@@ -1,24 +1,59 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+import { Image } from 'astro:assets';
+
+// Import About page images (add your images to src/assets/images/about/)
+// Uncomment when you add images:
+// import aboutHeroImage from '../assets/images/about/about-hero.jpg';
+// import ourStoryImage from '../assets/images/about/our-story.jpg';
+// import workspaceImage from '../assets/images/about/workspace.jpg';
+
+const pageTitle = "About Us - Shoreline Web Solutions | Professional Web Development";
+const pageDescription = "Learn about Shoreline Web Solutions, a Connecticut-based web development company specializing in custom websites, AI solutions, and digital marketing services. Local expertise, global standards.";
+const pageKeywords = "web development company, Connecticut web developer, custom websites, web design services, Old Lyme CT";
+const canonicalUrl = "/about";
 ---
 
-<Layout title="About Us - Shoreline Web Solutions | Professional Web Development">
+<Layout 
+	title={pageTitle}
+	description={pageDescription}
+	keywords={pageKeywords}
+	canonical={canonicalUrl}
+	ogType="website"
+>
 	<main>
 		<!-- Navigation -->
 		<Navigation currentPage="about" />
 
 		<!-- Hero Section -->
-		<section class="pt-20 pb-16 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
-			<div class="max-w-7xl mx-auto px-6">
-				<div class="text-center">
-					<h1 class="hero-title text-5xl md:text-6xl font-bold text-white mb-6">
-						About <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Us</span>
-					</h1>
-					<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-						Creating exceptional web experiences that help businesses thrive in the digital landscape.
-					</p>
-				</div>
+		<section class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+			<!-- Background Image -->
+			<div class="absolute inset-0 z-0">
+				<!-- Uncomment when you add about-hero.jpg:
+				<Image 
+					src={aboutHeroImage} 
+					alt=""
+					class="w-full h-full object-cover"
+					loading="eager"
+					aria-hidden="true"
+				/>
+				-->
+				<!-- Placeholder gradient background -->
+				<div class="w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"></div>
+			</div>
+			
+			<!-- Dark overlay for text readability -->
+			<div class="absolute inset-0 bg-gradient-to-b from-slate-900/75 via-slate-900/65 to-slate-900/80 z-10"></div>
+			
+			<!-- Content -->
+			<div class="relative z-20 text-center px-6 max-w-5xl mx-auto">
+				<h1 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6">
+					About <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Us</span>
+				</h1>
+				<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+					Creating exceptional web experiences that help businesses thrive in the digital landscape.
+				</p>
 			</div>
 		</section>
 
@@ -26,7 +61,7 @@ import Navigation from '../components/Navigation.astro';
 		<section class="py-20 bg-white">
 			<div class="max-w-7xl mx-auto px-6">
 				<div class="grid lg:grid-cols-2 gap-12 items-center">
-					<div class="content-text text-center lg:text-left">
+					<div class="content-text text-center lg:text-left order-2 lg:order-1">
 						<h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-8">
 							Our Story
 						</h2>
@@ -43,30 +78,52 @@ import Navigation from '../components/Navigation.astro';
 						</div>
 					</div>
 					
-					<div class="content-visual relative">
-						<div class="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-8 text-white shadow-2xl text-center lg:text-left">
-							<h3 class="text-2xl font-bold mb-6">Why We Do What We Do</h3>
-							<p class="text-lg leading-relaxed mb-6">
-								We believe that every business, regardless of size, deserves access to professional web development services. Our mission is to bridge the gap between small businesses and enterprise-level web solutions.
-							</p>
-							<div class="space-y-4">
-								<div class="flex items-start gap-3">
-									<svg class="w-6 h-6 text-cyan-300 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+					<div class="content-visual relative order-1 lg:order-2">
+						<!-- Our Story Photo -->
+						<div class="relative rounded-2xl overflow-hidden shadow-2xl">
+							<!-- Uncomment when you add our-story.jpg:
+							<Image 
+								src={ourStoryImage} 
+								alt="Shoreline Web Solutions team or workspace in Connecticut"
+								class="w-full h-auto"
+							/>
+							-->
+							<div class="aspect-[4/3] bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center">
+								<div class="text-center p-8">
+									<svg class="w-16 h-16 text-blue-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
 									</svg>
-									<span>Deep understanding of business needs and functions</span>
+									<p class="text-slate-600 font-medium">Add photo: our-story.jpg</p>
+									<p class="text-sm text-slate-500 mt-2">Team, workspace, or Connecticut location</p>
 								</div>
-								<div class="flex items-start gap-3">
-									<svg class="w-6 h-6 text-cyan-300 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Personalized service and support</span>
-								</div>
-								<div class="flex items-start gap-3">
-									<svg class="w-6 h-6 text-cyan-300 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Modern, cutting-edge technologies</span>
+							</div>
+							<!-- Overlay card with mission -->
+							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/95 to-transparent p-6">
+								<div class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-xl">
+									<h3 class="text-xl font-bold text-slate-900 mb-4">Why We Do What We Do</h3>
+									<p class="text-slate-700 text-sm leading-relaxed mb-4">
+										We believe that every business, regardless of size, deserves access to professional web development services.
+									</p>
+									<div class="space-y-2">
+										<div class="flex items-start gap-2">
+											<svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<span class="text-slate-700 text-sm">Deep understanding of business needs</span>
+										</div>
+										<div class="flex items-start gap-2">
+											<svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<span class="text-slate-700 text-sm">Personalized service and support</span>
+										</div>
+										<div class="flex items-start gap-2">
+											<svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<span class="text-slate-700 text-sm">Modern, cutting-edge technologies</span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -88,49 +145,91 @@ import Navigation from '../components/Navigation.astro';
 				</div>
 				
 				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-					<div class="feature-card group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center">
-						<div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform mx-auto">
-							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-							</svg>
+					<div class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+						<!-- Image area for skill card -->
+						<div class="relative h-48 bg-gradient-to-br from-blue-50 to-cyan-50 overflow-hidden">
+							<!-- Uncomment when you add skill images:
+							<Image 
+								src={webDevSkillImage} 
+								alt="Web development workspace showing code and responsive design"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+							-->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+									</svg>
+								</div>
+							</div>
 						</div>
-						<h3 class="text-xl font-bold text-slate-900 mb-4">Results-Driven Web Development</h3>
-						<ul class="space-y-2 text-slate-600 text-left">
-							<li>• Mobile-responsive designs that convert visitors to customers</li>
-							<li>• Fast-loading websites that keep users engaged</li>
-							<li>• Professional branding that builds trust with your audience</li>
-							<li>• Easy-to-update content management for busy business owners</li>
-						</ul>
+						<div class="p-8 text-center">
+							<h3 class="text-xl font-bold text-slate-900 mb-4">Results-Driven Web Development</h3>
+							<ul class="space-y-2 text-slate-600 text-left">
+								<li>• Mobile-responsive designs that convert visitors to customers</li>
+								<li>• Fast-loading websites that keep users engaged</li>
+								<li>• Professional branding that builds trust with your audience</li>
+								<li>• Easy-to-update content management for busy business owners</li>
+							</ul>
+						</div>
 					</div>
 					
-					<div class="feature-card group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center">
-						<div class="w-16 h-16 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform mx-auto">
-							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"></path>
-							</svg>
+					<div class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+						<!-- Image area for skill card -->
+						<div class="relative h-48 bg-gradient-to-br from-teal-50 to-blue-50 overflow-hidden">
+							<!-- Uncomment when you add skill images:
+							<Image 
+								src={automationSkillImage} 
+								alt="Business automation dashboard showing integrations and workflows"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+							-->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="w-16 h-16 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"></path>
+									</svg>
+								</div>
+							</div>
 						</div>
-						<h3 class="text-xl font-bold text-slate-900 mb-4">Business Automation & Integration</h3>
-						<ul class="space-y-2 text-slate-600 text-left">
-							<li>• Contact forms that automatically notify your team</li>
-							<li>• Customer database management and lead tracking</li>
-							<li>• Integration with your existing business tools</li>
-							<li>• Secure, reliable hosting that scales with your growth</li>
-						</ul>
+						<div class="p-8 text-center">
+							<h3 class="text-xl font-bold text-slate-900 mb-4">Business Automation & Integration</h3>
+							<ul class="space-y-2 text-slate-600 text-left">
+								<li>• Contact forms that automatically notify your team</li>
+								<li>• Customer database management and lead tracking</li>
+								<li>• Integration with your existing business tools</li>
+								<li>• Secure, reliable hosting that scales with your growth</li>
+							</ul>
+						</div>
 					</div>
 					
-					<div class="feature-card group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center">
-						<div class="w-16 h-16 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform mx-auto">
-							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-							</svg>
+					<div class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+						<!-- Image area for skill card -->
+						<div class="relative h-48 bg-gradient-to-br from-cyan-50 to-teal-50 overflow-hidden">
+							<!-- Uncomment when you add skill images:
+							<Image 
+								src={marketingSkillImage} 
+								alt="SEO and digital marketing analytics dashboard showing growth metrics"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+							-->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="w-16 h-16 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+									</svg>
+								</div>
+							</div>
 						</div>
-						<h3 class="text-xl font-bold text-slate-900 mb-4">Local Marketing & Growth</h3>
-						<ul class="space-y-2 text-slate-600 text-left">
-							<li>• Google search optimization to attract local customers</li>
-							<li>• Fast-loading sites that rank higher in search results</li>
-							<li>• Mobile-friendly design for customers on-the-go</li>
-							<li>• Analytics to track your website's business impact</li>
-						</ul>
+						<div class="p-8 text-center">
+							<h3 class="text-xl font-bold text-slate-900 mb-4">Local Marketing & Growth</h3>
+							<ul class="space-y-2 text-slate-600 text-left">
+								<li>• Google search optimization to attract local customers</li>
+								<li>• Fast-loading sites that rank higher in search results</li>
+								<li>• Mobile-friendly design for customers on-the-go</li>
+								<li>• Analytics to track your website's business impact</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>

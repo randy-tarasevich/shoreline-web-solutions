@@ -1,11 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
+import { Image } from 'astro:assets';
+
+// Import SEO images (add your images to src/assets/images/services/seo/)
+// Uncomment when you add images:
+// import seoHeroImage from '../../assets/images/services/seo/hero.jpg';
+// import analyticsMockupImage from '../../assets/images/services/seo/analytics-mockup.jpg';
 
 const pageTitle = "SEO & Digital Marketing Services - Shoreline Web Solutions | Search Engine Optimization";
 const pageDescription = "Professional SEO and digital marketing services for businesses. We provide technical SEO, local search optimization, content strategy, and analytics to improve your search rankings and drive traffic.";
 const pageKeywords = "SEO services, digital marketing, SEO, local SEO, search engine optimization, content marketing, technical SEO, digital marketing services";
 const canonicalUrl = "/services/seo-digital-marketing";
+const siteUrl = "https://shorelinewebsolutions.com";
 ---
 
 <Layout 
@@ -15,6 +22,32 @@ const canonicalUrl = "/services/seo-digital-marketing";
 	canonical={canonicalUrl}
 	ogType="website"
 >
+	<!-- Breadcrumb Structured Data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "Home",
+				"item": `${siteUrl}/`
+			},
+			{
+				"@type": "ListItem",
+				"position": 2,
+				"name": "Services",
+				"item": `${siteUrl}/services`
+			},
+			{
+				"@type": "ListItem",
+				"position": 3,
+				"name": "SEO & Digital Marketing",
+				"item": `${siteUrl}${canonicalUrl}`
+			}
+		]
+	})} />
+	
 	<!-- Structured Data for Service -->
 	<script type="application/ld+json" set:html={JSON.stringify({
 		"@context": "https://schema.org",
@@ -32,16 +65,33 @@ const canonicalUrl = "/services/seo-digital-marketing";
 		<Navigation currentPage="services" />
 
 		<!-- Hero Section -->
-		<section class="pt-20 pb-16 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
-			<div class="max-w-7xl mx-auto px-6">
-				<div class="text-center">
-					<h1 class="hero-title text-5xl md:text-6xl font-bold text-white mb-6">
-						SEO & <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Digital Marketing</span>
-					</h1>
-					<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-						Strategic optimization techniques to improve search rankings and drive targeted traffic to your website.
-					</p>
-				</div>
+		<section class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+			<!-- Background Image -->
+			<div class="absolute inset-0 z-0">
+				<!-- Uncomment when you add hero.jpg:
+				<Image 
+					src={seoHeroImage} 
+					alt=""
+					class="w-full h-full object-cover"
+					loading="eager"
+					aria-hidden="true"
+				/>
+				-->
+				<!-- Placeholder gradient background -->
+				<div class="w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"></div>
+			</div>
+			
+			<!-- Dark overlay for text readability -->
+			<div class="absolute inset-0 bg-gradient-to-b from-slate-900/75 via-slate-900/65 to-slate-900/80 z-10"></div>
+			
+			<!-- Content -->
+			<div class="relative z-20 text-center px-6 max-w-5xl mx-auto">
+				<h1 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6">
+					SEO & <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Digital Marketing</span>
+				</h1>
+				<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+					Strategic optimization techniques to improve search rankings and drive targeted traffic to your website.
+				</p>
 			</div>
 		</section>
 
@@ -49,7 +99,7 @@ const canonicalUrl = "/services/seo-digital-marketing";
 		<section class="py-20 bg-white">
 			<div class="max-w-7xl mx-auto px-6">
 				<div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
-					<div>
+					<div class="order-2 lg:order-1">
 						<div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center mb-6">
 							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -65,7 +115,29 @@ const canonicalUrl = "/services/seo-digital-marketing";
 							We combine technical SEO expertise with strategic content marketing to improve your visibility, drive qualified traffic, and increase conversions. From local businesses to national brands, we help you reach your target audience.
 						</p>
 					</div>
-					<div class="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg">
+					<div class="order-1 lg:order-2 relative rounded-2xl overflow-hidden shadow-2xl">
+						<!-- Analytics Dashboard Mockup -->
+						<!-- Uncomment when you add analytics-mockup.jpg:
+						<Image 
+							src={analyticsMockupImage} 
+							alt="SEO analytics dashboard showing search rankings and traffic growth"
+							class="w-full h-auto"
+						/>
+						-->
+						<div class="aspect-[4/3] bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
+							<div class="text-center p-8">
+								<svg class="w-16 h-16 text-purple-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+								</svg>
+								<p class="text-slate-600 font-medium">Add mockup: analytics-mockup.jpg</p>
+								<p class="text-sm text-slate-500 mt-2">SEO analytics dashboard or rankings visualization</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Marketing Services List -->
+				<div class="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg mb-16">
 						<h3 class="text-2xl font-bold text-slate-900 mb-6">Marketing Services</h3>
 						<ul class="space-y-4">
 							<li class="flex items-start gap-3">

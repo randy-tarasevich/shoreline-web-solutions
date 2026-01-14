@@ -1,6 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+import { Image } from 'astro:assets';
+
+// Import homepage images (add your images to src/assets/images/homepage/)
+// Uncomment when you add the hero background image:
+// import heroImage from '../assets/images/homepage/hero-background.jpg';
+// import workspaceImage from '../assets/images/homepage/workspace.jpg';
+// import aiSolutionMockup from '../assets/images/homepage/ai-solution-mockup.png';
+// import webDevMockup from '../assets/images/homepage/web-dev-mockup.png';
+// import ecommerceMockup from '../assets/images/homepage/ecommerce-mockup.png';
+// import seoMockup from '../assets/images/homepage/seo-mockup.png';
 
 const pageTitle = "Shoreline Web Solutions - Professional Web Development Services";
 const pageDescription = "Professional web development services for businesses. We create custom websites, e-commerce solutions, and web applications that drive results. Expert solutions, global standards.";
@@ -20,32 +30,39 @@ const canonicalUrl = "/";
 	
 	<main>
 		<!-- Hero Section -->
-		<section class="relative min-h-screen flex items-center justify-center overflow-hidden hero-section">
-			<!-- Dark overlay for text readability -->
-			<div class="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-blue-900/70 to-slate-800/80 z-0"></div>
-			
-			<!-- Animated background elements -->
-			<div class="absolute inset-0 opacity-20 pointer-events-none">
-				<div class="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-				<div class="absolute top-40 right-10 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
-				<div class="absolute -bottom-32 left-20 w-80 h-80 bg-teal-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
+		<section class="relative h-[600px] md:h-[700px] flex items-center justify-center overflow-hidden hero-section">
+			<!-- Background Image -->
+			<div class="absolute inset-0 z-0">
+				<!-- Uncomment when you add hero-background.jpg:
+				<Image 
+					src={heroImage} 
+					alt=""
+					class="w-full h-full object-cover"
+					loading="eager"
+					aria-hidden="true"
+				/>
+				-->
+				<!-- Placeholder gradient background (remove when image is added) -->
+				<div class="w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"></div>
 			</div>
 			
-			<div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
-				<div class="mb-8">
-					<h1 class="hero-title text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-						<span class="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
-							Shoreline
-						</span>
-						<br>
-						<span class="text-white">Web Solutions</span>
-					</h1>
-					<p class="hero-subtitle text-lg text-slate-300 mb-12 max-w-3xl mx-auto">
-						Crafting custom digital products for the modern web
-					</p>
-				</div>
+			<!-- Dark overlay for text readability -->
+			<div class="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/60 to-slate-900/80 z-10"></div>
+			
+			<!-- Content -->
+			<div class="relative z-20 text-center px-6 max-w-5xl mx-auto py-12">
+				<h1 class="hero-title text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+					<span class="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+						Shoreline
+					</span>
+					<br>
+					<span class="text-white">Web Solutions</span>
+				</h1>
+				<p class="hero-subtitle text-lg md:text-xl text-slate-200 mb-10 max-w-3xl mx-auto leading-relaxed">
+					Crafting custom digital products for the modern web
+				</p>
 				
-				<div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
 					<a href="/portfolio" 
 						 class="hero-cta group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-cyan-500">
 						<span class="flex items-center gap-2">
@@ -56,7 +73,7 @@ const canonicalUrl = "/";
 						</span>
 					</a>
 					<a href="/contact" 
-						 class="hero-cta group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-cyan-500">
+						 class="hero-cta group px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-300 hover:scale-105">
 						<span class="flex items-center gap-2">
 							Contact Us
 							<svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,13 +82,6 @@ const canonicalUrl = "/";
 						</span>
 					</a>
 				</div>
-			</div>
-			
-			<!-- Scroll indicator -->
-			<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-				<svg class="w-6 h-6 text-white opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-				</svg>
 			</div>
 		</section>
 
@@ -90,77 +100,149 @@ const canonicalUrl = "/";
 					</a>
 				</div>
 				
-				<div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+				<div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
 					<!-- Custom AI Solutions -->
-					<a href="/custom-ai-solutions" class="group flex items-start gap-4 p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-200">
-						<div class="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-							<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-							</svg>
+					<a href="/custom-ai-solutions" class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-slate-200">
+						<div class="relative h-48 bg-gradient-to-br from-indigo-50 to-purple-50 overflow-hidden">
+							<!-- Placeholder for mockup image - Replace with actual image -->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<!-- Uncomment when you add the image:
+								<Image 
+									src={aiSolutionMockup} 
+									alt="AI chatbot interface mockup showing automated customer support"
+									class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+								/>
+								-->
+								<div class="text-center p-6">
+									<div class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+										<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+										</svg>
+									</div>
+									<p class="text-sm text-slate-500">Add mockup image: ai-solution-mockup.png</p>
+								</div>
+							</div>
 						</div>
-						<div class="flex-grow">
+						<div class="p-6">
 							<h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">Custom AI Solutions</h3>
-							<p class="text-slate-600 text-sm leading-relaxed">
+							<p class="text-slate-600 text-sm leading-relaxed mb-4">
 								Transform your business with AI-powered solutions that automate repetitive tasks, save time, and capture more leads.
 							</p>
+							<div class="flex items-center text-indigo-600 font-medium text-sm">
+								<span>Learn More</span>
+								<svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</div>
 						</div>
-						<svg class="w-5 h-5 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-						</svg>
 					</a>
 					
 					<!-- Custom Web Development -->
-					<a href="/services/custom-web-development" class="group flex items-start gap-4 p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-200">
-						<div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-							<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-							</svg>
+					<a href="/services/custom-web-development" class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-slate-200">
+						<div class="relative h-48 bg-gradient-to-br from-blue-50 to-cyan-50 overflow-hidden">
+							<!-- Placeholder for mockup image - Replace with actual image -->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<!-- Uncomment when you add the image:
+								<Image 
+									src={webDevMockup} 
+									alt="Custom website mockup showing responsive design on multiple devices"
+									class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+								/>
+								-->
+								<div class="text-center p-6">
+									<div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+										<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+										</svg>
+									</div>
+									<p class="text-sm text-slate-500">Add mockup image: web-dev-mockup.png</p>
+								</div>
+							</div>
 						</div>
-						<div class="flex-grow">
+						<div class="p-6">
 							<h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Custom Web Development</h3>
-							<p class="text-slate-600 text-sm leading-relaxed">
+							<p class="text-slate-600 text-sm leading-relaxed mb-4">
 								Tailored websites and web applications that align with your specific business needs and objectives.
 							</p>
+							<div class="flex items-center text-blue-600 font-medium text-sm">
+								<span>Learn More</span>
+								<svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</div>
 						</div>
-						<svg class="w-5 h-5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-						</svg>
 					</a>
 					
 					<!-- E-commerce Solutions -->
-					<a href="/services/ecommerce-solutions" class="group flex items-start gap-4 p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-200">
-						<div class="w-12 h-12 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-							<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-							</svg>
+					<a href="/services/ecommerce-solutions" class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-slate-200">
+						<div class="relative h-48 bg-gradient-to-br from-teal-50 to-blue-50 overflow-hidden">
+							<!-- Placeholder for mockup image - Replace with actual image -->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<!-- Uncomment when you add the image:
+								<Image 
+									src={ecommerceMockup} 
+									alt="E-commerce store mockup showing shopping cart and product pages"
+									class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+								/>
+								-->
+								<div class="text-center p-6">
+									<div class="w-16 h-16 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+										<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+										</svg>
+									</div>
+									<p class="text-sm text-slate-500">Add mockup image: ecommerce-mockup.png</p>
+								</div>
+							</div>
 						</div>
-						<div class="flex-grow">
+						<div class="p-6">
 							<h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-teal-600 transition-colors">E-commerce Solutions</h3>
-							<p class="text-slate-600 text-sm leading-relaxed">
+							<p class="text-slate-600 text-sm leading-relaxed mb-4">
 								Complete online stores that effectively convert visitors into customers and drive sales growth.
 							</p>
+							<div class="flex items-center text-teal-600 font-medium text-sm">
+								<span>Learn More</span>
+								<svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</div>
 						</div>
-						<svg class="w-5 h-5 text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-						</svg>
 					</a>
 					
 					<!-- SEO & Digital Marketing -->
-					<a href="/services/seo-digital-marketing" class="group flex items-start gap-4 p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-200">
-						<div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-							<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-							</svg>
+					<a href="/services/seo-digital-marketing" class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-slate-200">
+						<div class="relative h-48 bg-gradient-to-br from-purple-50 to-blue-50 overflow-hidden">
+							<!-- Placeholder for mockup image - Replace with actual image -->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<!-- Uncomment when you add the image:
+								<Image 
+									src={seoMockup} 
+									alt="SEO analytics dashboard mockup showing search rankings and traffic data"
+									class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+								/>
+								-->
+								<div class="text-center p-6">
+									<div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+										<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+										</svg>
+									</div>
+									<p class="text-sm text-slate-500">Add mockup image: seo-mockup.png</p>
+								</div>
+							</div>
 						</div>
-						<div class="flex-grow">
+						<div class="p-6">
 							<h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">SEO & Digital Marketing</h3>
-							<p class="text-slate-600 text-sm leading-relaxed">
+							<p class="text-slate-600 text-sm leading-relaxed mb-4">
 								Strategic optimization techniques to improve search rankings and drive targeted traffic to your website.
 							</p>
+							<div class="flex items-center text-purple-600 font-medium text-sm">
+								<span>Learn More</span>
+								<svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</div>
 						</div>
-						<svg class="w-5 h-5 text-slate-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-						</svg>
 					</a>
 				</div>
 			</div>
@@ -170,7 +252,7 @@ const canonicalUrl = "/";
 		<section class="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
 			<div class="max-w-7xl mx-auto px-6">
 				<div class="grid lg:grid-cols-2 gap-12 items-center">
-					<div class="content-text text-center lg:text-left">
+					<div class="content-text text-center lg:text-left order-2 lg:order-1">
 						<h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
 							Local Expertise,<br>
 							<span class="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
@@ -194,35 +276,58 @@ const canonicalUrl = "/";
 						</div>
 					</div>
 					
-					<div class="content-visual relative">
-						<div class="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-8 text-white shadow-2xl">
-							<h3 class="text-2xl font-bold mb-6 text-center">Why Choose Shoreline Web Solutions?</h3>
-							<ul class="space-y-4">
-								<li class="flex items-start gap-3">
-									<svg class="w-6 h-6 text-cyan-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+					<div class="content-visual relative order-1 lg:order-2">
+						<!-- Workspace/Team Image - Replace with actual photo -->
+						<div class="relative rounded-2xl overflow-hidden shadow-2xl">
+							<!-- Uncomment when you add the image:
+							<Image 
+								src={workspaceImage} 
+								alt="Shoreline Web Solutions workspace in Old Lyme, Connecticut showing modern development environment"
+								class="w-full h-auto"
+							/>
+							-->
+							<div class="aspect-[4/3] bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center">
+								<div class="text-center p-8">
+									<svg class="w-16 h-16 text-blue-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
 									</svg>
-									<span>Deep understanding of business needs</span>
-								</li>
-								<li class="flex items-start gap-3">
-									<svg class="w-6 h-6 text-cyan-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Modern, cutting-edge technologies</span>
-								</li>
-								<li class="flex items-start gap-3">
-									<svg class="w-6 h-6 text-cyan-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Personalized service and support</span>
-								</li>
-								<li class="flex items-start gap-3">
-									<svg class="w-6 h-6 text-cyan-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>SEO-optimized for local search</span>
-								</li>
-							</ul>
+									<p class="text-slate-600 font-medium">Add workspace/team photo</p>
+									<p class="text-sm text-slate-500 mt-2">workspace.jpg</p>
+									<p class="text-xs text-slate-400 mt-1">Suggested: Office space, Connecticut location, or team photo</p>
+								</div>
+							</div>
+							<!-- Overlay with benefits card -->
+							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6">
+								<div class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-xl">
+									<h3 class="text-xl font-bold text-slate-900 mb-4">Why Choose Shoreline Web Solutions?</h3>
+									<ul class="space-y-3">
+										<li class="flex items-start gap-3">
+											<svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<span class="text-slate-700 text-sm">Deep understanding of business needs</span>
+										</li>
+										<li class="flex items-start gap-3">
+											<svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<span class="text-slate-700 text-sm">Modern, cutting-edge technologies</span>
+										</li>
+										<li class="flex items-start gap-3">
+											<svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<span class="text-slate-700 text-sm">Personalized service and support</span>
+										</li>
+										<li class="flex items-start gap-3">
+											<svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<span class="text-slate-700 text-sm">SEO-optimized for local search</span>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -255,47 +360,27 @@ const canonicalUrl = "/";
 	</main>
 
 	<style>
+		/* Hero section styling */
 		.hero-section {
-			background-image: url('/hero-image.jpg');
-			background-size: cover;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-attachment: fixed;
+			/* Full-width container with standard height */
+			/* Height: 600px on mobile, 700px on desktop */
 		}
 		
-		/* Fallback gradient if image doesn't load */
-		.hero-section::before {
-			content: '';
-			position: absolute;
-			inset: 0;
-			background: linear-gradient(to bottom right, #0f172a, #1e3a8a, #0f172a);
-			z-index: -1;
+		/* Ensure hero image covers full area */
+		.hero-section img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
 		}
 		
-		@keyframes pulse {
-			0%, 100% {
-				transform: scale(1);
-				opacity: 0.2;
-			}
-			50% {
-				transform: scale(1.1);
-				opacity: 0.3;
-			}
+		/* Text shadow for better readability over images */
+		.hero-title {
+			text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 		}
 		
-		.animation-delay-2000 {
-			animation-delay: 2s;
-		}
-		
-		.animation-delay-4000 {
-			animation-delay: 4s;
-		}
-		
-		/* Responsive: disable fixed attachment on mobile for better performance */
-		@media (max-width: 768px) {
-			.hero-section {
-				background-attachment: scroll;
-			}
+		.hero-subtitle {
+			text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 		}
 	</style>
 

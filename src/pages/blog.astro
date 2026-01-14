@@ -101,12 +101,14 @@ const allTags = await getAllTags();
 							
 							<!-- Post Image -->
 							{post.data.image && (
-								<img 
-									src={post.data.image} 
-									alt={post.data.title}
-									class="w-full h-auto group-hover:scale-105 transition-transform duration-500"
-									loading="lazy"
-								/>
+								<div class="px-6 pt-6">
+									<img 
+										src={post.data.image} 
+										alt={`Featured image for blog post: ${post.data.title}`}
+										class="w-full max-w-2xl mx-auto h-auto rounded-lg shadow-md group-hover:scale-105 transition-transform duration-500"
+										loading="lazy"
+									/>
+								</div>
 							)}
 							
 							<div class="relative p-6 md:p-10">

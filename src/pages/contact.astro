@@ -1,6 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+import { Image } from 'astro:assets';
+
+// Import Contact page images (add your images to src/assets/images/contact/)
+// Uncomment when you add images:
+// import contactHeroImage from '../assets/images/contact/contact-hero.jpg';
+// import contactVisualImage from '../assets/images/contact/contact-visual.jpg';
 ---
 
 <Layout title="Contact Us - Shoreline Web Solutions | Professional Web Development">
@@ -9,16 +15,33 @@ import Navigation from '../components/Navigation.astro';
 		<Navigation currentPage="contact" />
 
 		<!-- Hero Section -->
-		<section class="pt-20 pb-16 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
-			<div class="max-w-7xl mx-auto px-6">
-				<div class="text-center">
-					<h1 class="hero-title text-5xl md:text-6xl font-bold text-white mb-6">
-						Get In <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Touch</span>
-					</h1>
-					<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-						Ready to start your next project? Let's discuss how we can help bring your vision to life.
-					</p>
-				</div>
+		<section class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+			<!-- Background Image -->
+			<div class="absolute inset-0 z-0">
+				<!-- Uncomment when you add contact-hero.jpg:
+				<Image 
+					src={contactHeroImage} 
+					alt=""
+					class="w-full h-full object-cover"
+					loading="eager"
+					aria-hidden="true"
+				/>
+				-->
+				<!-- Placeholder gradient background -->
+				<div class="w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"></div>
+			</div>
+			
+			<!-- Dark overlay for text readability -->
+			<div class="absolute inset-0 bg-gradient-to-b from-slate-900/75 via-slate-900/65 to-slate-900/80 z-10"></div>
+			
+			<!-- Content -->
+			<div class="relative z-20 text-center px-6 max-w-5xl mx-auto">
+				<h1 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6">
+					Get In <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Touch</span>
+				</h1>
+				<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+					Ready to start your next project? Let's discuss how we can help bring your vision to life.
+				</p>
 			</div>
 		</section>
 
@@ -26,13 +49,33 @@ import Navigation from '../components/Navigation.astro';
 		<section class="py-20 bg-white">
 			<div class="max-w-7xl mx-auto px-6">
 				<div class="grid lg:grid-cols-2 gap-12 items-center">
-					<div class="content-text">
+					<div class="content-text order-2 lg:order-1">
 						<h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-8 text-center md:text-left">
 							Let's Start a Conversation
 						</h2>
 						<p class="text-xl text-slate-600 leading-relaxed mb-8">
 							Whether you're looking to launch a new website or application, redesign an existing one, or need ongoing support, we're here to help. Reach out to us and let's discuss your project.
 						</p>
+						
+						<!-- Contact Visual Image (Optional) -->
+						<div class="mb-8 rounded-xl overflow-hidden shadow-lg">
+							<!-- Uncomment when you add contact-visual.jpg:
+							<Image 
+								src={contactVisualImage} 
+								alt="Professional communication and collaboration - Shoreline Web Solutions"
+								class="w-full h-auto"
+							/>
+							-->
+							<div class="aspect-video bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
+								<div class="text-center p-6">
+									<svg class="w-16 h-16 text-blue-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+									</svg>
+									<p class="text-slate-600 font-medium">Add image: contact-visual.jpg</p>
+									<p class="text-sm text-slate-500 mt-2">Optional: Communication/collaboration image</p>
+								</div>
+							</div>
+						</div>
 						
 						<div class="space-y-6">
 							<div class="flex items-start gap-4">
@@ -80,7 +123,7 @@ import Navigation from '../components/Navigation.astro';
 						</div>
 					</div>
 					
-					<div class="content-visual relative">
+					<div class="content-visual relative order-1 lg:order-2">
 						<div class="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-8 text-white shadow-2xl">
 							<h3 class="text-2xl font-bold mb-6 text-center md:text-left">Send Us a Message</h3>
 							<p class="text-lg leading-relaxed mb-6">

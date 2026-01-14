@@ -2,7 +2,6 @@
 import Layout from '../../../layouts/Layout.astro';
 import Navigation from '../../../components/Navigation.astro';
 import { getPostsByTag, getAllTags, createTagSlug } from '../../../utils/tags';
-import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   const allTags = await getAllTags();
@@ -18,9 +17,41 @@ const { tag, posts } = await getPostsByTag(tagSlug!);
 if (!tag) {
   return Astro.redirect('/blog');
 }
+
+const siteUrl = "https://shorelinewebsolutions.com";
+const pageDescription = `Explore articles about ${tag.name} on Shoreline Web Solutions blog. Discover insights, tips, and best practices for web development and digital marketing.`;
 ---
 
-<Layout title={`${tag.name} - Blog Posts | Shoreline Web Solutions`}>
+<Layout 
+	title={`${tag.name} - Blog Posts | Shoreline Web Solutions`}
+	description={pageDescription}
+	canonical={`/blog/tag/${tagSlug}`}
+>
+	<!-- Breadcrumb Structured Data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "Home",
+				"item": `${siteUrl}/`
+			},
+			{
+				"@type": "ListItem",
+				"position": 2,
+				"name": "Blog",
+				"item": `${siteUrl}/blog`
+			},
+			{
+				"@type": "ListItem",
+				"position": 3,
+				"name": tag.name,
+				"item": `${siteUrl}/blog/tag/${tagSlug}`
+			}
+		]
+	})} />
 	<main>
 		<!-- Navigation -->
 		<Navigation currentPage="blog" />
@@ -105,14 +136,14 @@ if (!tag) {
 							
 							<!-- Post Image -->
 							{post.data.image && (
-								<Image 
-									src={post.data.image} 
-									alt={post.data.title}
-									width={600}
-									height={400}
-									class="w-full h-auto group-hover:scale-105 transition-transform duration-500"
-									loading="lazy"
-								/>
+								<div class="px-6 pt-6">
+									<img 
+										src={post.data.image} 
+										alt={`Featured image for blog post: ${post.data.title} about ${tag.name}`}
+										class="w-full max-w-2xl mx-auto h-auto rounded-lg shadow-md group-hover:scale-105 transition-transform duration-500"
+										loading="lazy"
+									/>
+								</div>
 							)}
 							
 							<div class="relative p-6 md:p-10">

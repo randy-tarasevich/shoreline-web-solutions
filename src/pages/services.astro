@@ -1,11 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+import { Image } from 'astro:assets';
+
+// Import Services page images (add your images to src/assets/images/services/)
+// Uncomment when you add images:
+// import servicesHeroImage from '../assets/images/services/services-hero.jpg';
+// import aiServiceImage from '../assets/images/services/ai-service.jpg';
+// import webDevServiceImage from '../assets/images/services/web-dev-service.jpg';
+// import ecommerceServiceImage from '../assets/images/services/ecommerce-service.jpg';
+// import seoServiceImage from '../assets/images/services/seo-service.jpg';
 
 const pageTitle = "Services - Shoreline Web Solutions | Professional Web Development Services";
 const pageDescription = "Comprehensive web development services for businesses. Custom web development, e-commerce solutions, custom AI solutions, and SEO services.";
 const pageKeywords = "web development services, web developer, web services, custom websites, e-commerce development, SEO services, web design";
 const canonicalUrl = "/services";
+const siteUrl = "https://shorelinewebsolutions.com";
 ---
 
 <Layout 
@@ -15,21 +25,89 @@ const canonicalUrl = "/services";
 	canonical={canonicalUrl}
 	ogType="website"
 >
+	<!-- FAQ Structured Data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		"mainEntity": [
+			{
+				"@type": "Question",
+				"name": "What will this cost?",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "The cost depends on your specific needs. A five-page business website is very different from a custom booking system or e-commerce platform. We prefer to understand your project first and provide an accurate, personalized quote. Factors that affect cost include project scope, custom development requirements, design needs, content and assets, and timeline."
+				}
+			},
+			{
+				"@type": "Question",
+				"name": "What affects the cost of web development?",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "Several factors affect the cost: Project scope (number of pages, features, and functionality), custom development (booking systems, portals, and integrations add complexity), design requirements (custom designs vs. template-based approaches), content and assets (who provides copy, images, and other materials), and timeline (rush projects may require additional resources)."
+				}
+			},
+			{
+				"@type": "Question",
+				"name": "Do you offer free consultations?",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "Yes, we offer free consultations. During our initial consultation, we'll discuss your vision, timeline, and budget expectations. You'll walk away with a clear understanding of what's possible and what it would cost—no pressure, no obligation."
+				}
+			}
+		]
+	})} />
+	
+	<!-- Breadcrumb Structured Data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "Home",
+				"item": `${siteUrl}/`
+			},
+			{
+				"@type": "ListItem",
+				"position": 2,
+				"name": "Services",
+				"item": `${siteUrl}${canonicalUrl}`
+			}
+		]
+	})} />
 	<main>
 		<!-- Navigation -->
 		<Navigation currentPage="services" />
 
 		<!-- Hero Section -->
-		<section class="pt-20 pb-16 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
-			<div class="max-w-7xl mx-auto px-6">
-				<div class="text-center">
-					<h1 class="hero-title text-5xl md:text-6xl font-bold text-white mb-6">
-						Our <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Services</span>
-					</h1>
-					<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-						Comprehensive web development services designed to elevate your business's online presence and drive tangible results.
-					</p>
-				</div>
+		<section class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+			<!-- Background Image -->
+			<div class="absolute inset-0 z-0">
+				<!-- Uncomment when you add services-hero.jpg:
+				<Image 
+					src={servicesHeroImage} 
+					alt=""
+					class="w-full h-full object-cover"
+					loading="eager"
+					aria-hidden="true"
+				/>
+				-->
+				<!-- Placeholder gradient background -->
+				<div class="w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"></div>
+			</div>
+			
+			<!-- Dark overlay for text readability -->
+			<div class="absolute inset-0 bg-gradient-to-b from-slate-900/75 via-slate-900/65 to-slate-900/80 z-10"></div>
+			
+			<!-- Content -->
+			<div class="relative z-20 text-center px-6 max-w-5xl mx-auto">
+				<h1 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6">
+					Our <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Services</span>
+				</h1>
+				<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+					Comprehensive web development services designed to elevate your business's online presence and drive tangible results.
+				</p>
 			</div>
 		</section>
 
@@ -47,91 +125,143 @@ const canonicalUrl = "/services";
 				
 				<div class="grid md:grid-cols-2 gap-8">
 					<!-- Custom AI Solutions -->
-					<div id="ai-integration" class="feature-card group bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
-						<div class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
-							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-							</svg>
+					<div id="ai-integration" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
+						<div class="relative h-56 bg-gradient-to-br from-indigo-50 to-purple-50 overflow-hidden">
+							<!-- Uncomment when you add ai-service.jpg:
+							<Image 
+								src={aiServiceImage} 
+								alt="AI chatbot interface showing automated customer support"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+							-->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+									</svg>
+								</div>
+							</div>
 						</div>
-						<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">Custom AI Solutions</h3>
-					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
-						Transform your business with AI-powered solutions that automate repetitive tasks, save time, and capture more leads.
-					</p>
-						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
-							<li>• AI Chatbots for 24/7 support</li>
-							<li>• AI Review Management</li>
-							<li>• AI Content Generation</li>
-							<li>• Custom AI integrations</li>
-						</ul>
-						<a href="/custom-ai-solutions" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 hover:scale-105 text-center">
-							Learn More
-						</a>
+						<div class="p-8 flex flex-col flex-grow">
+							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">Custom AI Solutions</h3>
+							<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
+								Transform your business with AI-powered solutions that automate repetitive tasks, save time, and capture more leads.
+							</p>
+							<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
+								<li>• AI Chatbots for 24/7 support</li>
+								<li>• AI Review Management</li>
+								<li>• AI Content Generation</li>
+								<li>• Custom AI integrations</li>
+							</ul>
+							<a href="/custom-ai-solutions" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 hover:scale-105 text-center">
+								Learn More
+							</a>
+						</div>
 					</div>
 
 					<!-- Custom Web Development -->
-					<div id="web-development" class="feature-card group bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
-						<div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
-							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-							</svg>
+					<div id="web-development" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
+						<div class="relative h-56 bg-gradient-to-br from-blue-50 to-cyan-50 overflow-hidden">
+							<!-- Uncomment when you add web-dev-service.jpg:
+							<Image 
+								src={webDevServiceImage} 
+								alt="Custom website development showing responsive design on multiple devices"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+							-->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+									</svg>
+								</div>
+							</div>
 						</div>
-						<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">Custom Web Development</h3>
-					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
-						Tailored websites and web applications that align with your specific business needs and objectives.
-					</p>
-						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
-							<li>• Customer & employee portals</li>
-							<li>• Appointment booking systems</li>
-							<li>• Dashboards</li>
-							<li>• Restaurant & bar management systems</li>
-						</ul>
-						<a href="/services/custom-web-development" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 hover:scale-105 text-center">
-							Learn More
-						</a>
+						<div class="p-8 flex flex-col flex-grow">
+							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">Custom Web Development</h3>
+							<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
+								Tailored websites and web applications that align with your specific business needs and objectives.
+							</p>
+							<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
+								<li>• Customer & employee portals</li>
+								<li>• Appointment booking systems</li>
+								<li>• Dashboards</li>
+								<li>• Restaurant & bar management systems</li>
+							</ul>
+							<a href="/services/custom-web-development" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 hover:scale-105 text-center">
+								Learn More
+							</a>
+						</div>
 					</div>
 
 					<!-- E-commerce Solutions -->
-					<div id="ecommerce-solutions" class="feature-card group bg-gradient-to-br from-teal-50 to-blue-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
-						<div class="w-16 h-16 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
-							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-							</svg>
+					<div id="ecommerce-solutions" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
+						<div class="relative h-56 bg-gradient-to-br from-teal-50 to-blue-50 overflow-hidden">
+							<!-- Uncomment when you add ecommerce-service.jpg:
+							<Image 
+								src={ecommerceServiceImage} 
+								alt="E-commerce store interface showing shopping cart and product pages"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+							-->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="w-16 h-16 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+									</svg>
+								</div>
+							</div>
 						</div>
-						<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">E-commerce Solutions</h3>
-					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
-						Complete online stores that effectively convert visitors into customers and drive sales growth.
-					</p>
-						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
-							<li>• Shopping Cart Integration</li>
-							<li>• Payment Processing</li>
-							<li>• Inventory Management</li>
-							<li>• Order Tracking</li>
-						</ul>
-						<a href="/services/ecommerce-solutions" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold rounded-lg hover:from-teal-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 text-center">
-							Learn More
-						</a>
+						<div class="p-8 flex flex-col flex-grow">
+							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">E-commerce Solutions</h3>
+							<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
+								Complete online stores that effectively convert visitors into customers and drive sales growth.
+							</p>
+							<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
+								<li>• Shopping Cart Integration</li>
+								<li>• Payment Processing</li>
+								<li>• Inventory Management</li>
+								<li>• Order Tracking</li>
+							</ul>
+							<a href="/services/ecommerce-solutions" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold rounded-lg hover:from-teal-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 text-center">
+								Learn More
+							</a>
+						</div>
 					</div>
 
 					<!-- SEO & Digital Marketing -->
-					<div id="seo-marketing" class="feature-card group bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
-						<div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
-							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-							</svg>
+					<div id="seo-marketing" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
+						<div class="relative h-56 bg-gradient-to-br from-purple-50 to-blue-50 overflow-hidden">
+							<!-- Uncomment when you add seo-service.jpg:
+							<Image 
+								src={seoServiceImage} 
+								alt="SEO analytics dashboard showing search rankings and traffic growth"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+							/>
+							-->
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+									</svg>
+								</div>
+							</div>
 						</div>
-						<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">SEO & Digital Marketing</h3>
-					<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
-						Strategic optimization techniques to improve search rankings and drive targeted traffic to your website.
-					</p>
-						<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
-							<li>• Technical SEO</li>
-							<li>• Local Search Optimization</li>
-							<li>• Content Strategy</li>
-							<li>• Analytics & Reporting</li>
-						</ul>
-						<a href="/services/seo-digital-marketing" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 text-center">
-							Learn More
-						</a>
+						<div class="p-8 flex flex-col flex-grow">
+							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">SEO & Digital Marketing</h3>
+							<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
+								Strategic optimization techniques to improve search rankings and drive targeted traffic to your website.
+							</p>
+							<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
+								<li>• Technical SEO</li>
+								<li>• Local Search Optimization</li>
+								<li>• Content Strategy</li>
+								<li>• Analytics & Reporting</li>
+							</ul>
+							<a href="/services/seo-digital-marketing" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 text-center">
+								Learn More
+							</a>
+						</div>
 					</div>
 
 				</div>

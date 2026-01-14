@@ -1,6 +1,5 @@
 ---
 import { getRelatedPosts, createTagSlug } from '../utils/tags';
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
@@ -32,11 +31,9 @@ const relatedPosts = await getRelatedPosts(currentPost, limit);
             <!-- Post Image -->
             {relatedPost.post.data.image && (
               <div class="md:w-1/3">
-                <Image 
+                <img 
                   src={relatedPost.post.data.image} 
-                  alt={relatedPost.post.data.title}
-                  width={300}
-                  height={200}
+                  alt={`Featured image for ${relatedPost.post.data.title} - related article`}
                   class="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />

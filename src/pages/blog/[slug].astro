@@ -21,9 +21,56 @@ const siteUrl = "https://shorelinewebsolutions.com";
 // Calculate reading time from post content
 const readingTime = calculateReadingTime(post.body);
 const readingTimeText = formatReadingTime(readingTime);
+
+// Generate meta description from post content if not provided
+// Take first 155 characters of content, removing markdown
+const getPostDescription = () => {
+	if (post.data.description) {
+		return post.data.description;
+	}
+	// Extract first paragraph from content, remove markdown, limit to 155 chars
+	const contentText = post.body.replace(/[#*\[\]()]/g, '').replace(/\n+/g, ' ').trim();
+	const firstParagraph = contentText.split('.')[0] || contentText;
+	return firstParagraph.substring(0, 155).trim() + (firstParagraph.length > 155 ? '...' : '');
+};
+
+const postDescription = getPostDescription();
+const postOgImage = post.data.image ? `${siteUrl}${post.data.image}` : `${siteUrl}/og-image.jpg`;
 ---
 
-<Layout title={`${post.data.title} - Shoreline Web Solutions Blog`}>
+<Layout 
+	title={`${post.data.title} - Shoreline Web Solutions Blog`}
+	description={postDescription}
+	canonical={`/blog/${post.slug}`}
+	ogImage={postOgImage}
+	ogType="article"
+>
+	<!-- Breadcrumb Structured Data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "Home",
+				"item": `${siteUrl}/`
+			},
+			{
+				"@type": "ListItem",
+				"position": 2,
+				"name": "Blog",
+				"item": `${siteUrl}/blog`
+			},
+			{
+				"@type": "ListItem",
+				"position": 3,
+				"name": post.data.title,
+				"item": `${siteUrl}/blog/${post.slug}`
+			}
+		]
+	})} />
+	
 	<!-- Blog Post Structured Data (Article Schema) -->
 	<script type="application/ld+json" set:html={JSON.stringify({
 		"@context": "https://schema.org",
@@ -34,7 +81,7 @@ const readingTimeText = formatReadingTime(readingTime);
 			"name": post.data.author
 		},
 		"datePublished": post.data.date,
-		"dateModified": post.data.date,
+		"dateModified": post.data.dateModified || post.data.date,
 		"image": post.data.image ? `${siteUrl}${post.data.image}` : `${siteUrl}/og-image.jpg`,
 		"publisher": {
 			"@type": "Organization",
@@ -118,12 +165,14 @@ const readingTimeText = formatReadingTime(readingTime);
 
 				<!-- Article Image -->
 				{post.data.image && (
-					<img 
-						src={post.data.image} 
-						alt={post.data.title}
-						class="w-full h-auto mb-8 rounded-lg"
-						loading="eager"
-					/>
+					<div class="mb-10">
+						<img 
+							src={post.data.image} 
+							alt={`Featured image for ${post.data.title} - ${post.data.author}'s article on web development and digital marketing`}
+							class="w-full max-w-3xl mx-auto h-auto rounded-lg shadow-lg"
+							loading="eager"
+						/>
+					</div>
 				)}
 
 			</div>
