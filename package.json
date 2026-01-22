@@ -12,7 +12,7 @@
     "lint": "astro check"
   },
   "lint-staged": {
-    "*.{astro,ts,tsx}": [
+    "*.{astro,js}": [
       "astro check --mode lint"
     ]
   },

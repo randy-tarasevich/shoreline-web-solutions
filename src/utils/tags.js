@@ -1,25 +1,11 @@
 import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
-
-export interface TagInfo {
-  name: string;
-  slug: string;
-  count: number;
-  posts: CollectionEntry<"posts">[];
-}
-
-export interface RelatedPost {
-  post: CollectionEntry<"posts">;
-  sharedTags: string[];
-  relevanceScore: number;
-}
 
 /**
  * Get all unique tags from all blog posts
  */
-export async function getAllTags(): Promise<TagInfo[]> {
+export async function getAllTags() {
   const posts = await getCollection("posts");
-  const tagMap = new Map<string, CollectionEntry<"posts">[]>();
+  const tagMap = new Map();
 
   // Group posts by tag
   posts.forEach((post) => {
@@ -27,7 +13,7 @@ export async function getAllTags(): Promise<TagInfo[]> {
       if (!tagMap.has(tag)) {
         tagMap.set(tag, []);
       }
-      tagMap.get(tag)!.push(post);
+      tagMap.get(tag).push(post);
     });
   });
 
@@ -48,10 +34,7 @@ export async function getAllTags(): Promise<TagInfo[]> {
 /**
  * Get posts filtered by a specific tag
  */
-export async function getPostsByTag(tagSlug: string): Promise<{
-  tag: TagInfo | null;
-  posts: CollectionEntry<"posts">[];
-}> {
+export async function getPostsByTag(tagSlug) {
   const allTags = await getAllTags();
   const tag = allTags.find((t) => t.slug === tagSlug);
 
@@ -68,14 +51,11 @@ export async function getPostsByTag(tagSlug: string): Promise<{
 /**
  * Get related posts based on shared tags
  */
-export async function getRelatedPosts(
-  currentPost: CollectionEntry<"posts">,
-  limit: number = 3
-): Promise<RelatedPost[]> {
+export async function getRelatedPosts(currentPost, limit = 3) {
   const allPosts = await getCollection("posts");
   const currentTags = currentPost.data.tags;
 
-  const relatedPosts: RelatedPost[] = [];
+  const relatedPosts = [];
 
   allPosts.forEach((post) => {
     if (post.slug === currentPost.slug) return; // Skip current post
@@ -106,7 +86,7 @@ export async function getRelatedPosts(
 /**
  * Get popular tags (most used)
  */
-export async function getPopularTags(limit: number = 10): Promise<TagInfo[]> {
+export async function getPopularTags(limit = 10) {
   const allTags = await getAllTags();
   return allTags.slice(0, limit);
 }
@@ -114,10 +94,7 @@ export async function getPopularTags(limit: number = 10): Promise<TagInfo[]> {
 /**
  * Search posts by tag name (case-insensitive)
  */
-export async function searchPostsByTag(searchTerm: string): Promise<{
-  tags: TagInfo[];
-  posts: CollectionEntry<"posts">[];
-}> {
+export async function searchPostsByTag(searchTerm) {
   const allTags = await getAllTags();
   const searchLower = searchTerm.toLowerCase();
 
@@ -125,7 +102,7 @@ export async function searchPostsByTag(searchTerm: string): Promise<{
     tag.name.toLowerCase().includes(searchLower)
   );
 
-  const allMatchingPosts = new Set<CollectionEntry<"posts">>();
+  const allMatchingPosts = new Set();
   matchingTags.forEach((tag) => {
     tag.posts.forEach((post) => allMatchingPosts.add(post));
   });
@@ -142,7 +119,7 @@ export async function searchPostsByTag(searchTerm: string): Promise<{
 /**
  * Create a URL-friendly slug from a tag name
  */
-export function createTagSlug(tagName: string): string {
+export function createTagSlug(tagName) {
   return tagName
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
@@ -154,13 +131,7 @@ export function createTagSlug(tagName: string): string {
 /**
  * Get tag statistics for analytics
  */
-export async function getTagStats(): Promise<{
-  totalTags: number;
-  totalPosts: number;
-  averageTagsPerPost: number;
-  mostUsedTag: TagInfo | null;
-  leastUsedTag: TagInfo | null;
-}> {
+export async function getTagStats() {
   const allTags = await getAllTags();
   const allPosts = await getCollection("posts");
 
@@ -187,13 +158,9 @@ export async function getTagStats(): Promise<{
 /**
  * Get posts with similar tags (for recommendations)
  */
-export async function getPostsWithSimilarTags(
-  targetTags: string[],
-  excludeSlug?: string,
-  limit: number = 5
-): Promise<CollectionEntry<"posts">[]> {
+export async function getPostsWithSimilarTags(targetTags, excludeSlug, limit = 5) {
   const allPosts = await getCollection("posts");
-  const scoredPosts: { post: CollectionEntry<"posts">; score: number }[] = [];
+  const scoredPosts = [];
 
   allPosts.forEach((post) => {
     if (excludeSlug && post.slug === excludeSlug) return;

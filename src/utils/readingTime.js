@@ -4,7 +4,7 @@
  * @param wordsPerMinute - Average reading speed (default: 200 words per minute)
  * @returns Estimated reading time in minutes
  */
-export function calculateReadingTime(content: string, wordsPerMinute: number = 200): number {
+export function calculateReadingTime(content, wordsPerMinute = 200) {
 	// Remove markdown syntax and HTML tags for accurate word count
 	const plainText = content
 		.replace(/```[\s\S]*?```/g, '') // Remove code blocks
@@ -27,9 +27,6 @@ export function calculateReadingTime(content: string, wordsPerMinute: number = 2
  * @param minutes - Reading time in minutes
  * @returns Formatted string (e.g., "5 min read")
  */
-export function formatReadingTime(minutes: number): string {
+export function formatReadingTime(minutes) {
 	return `${minutes} min read`;
 }
-
-
-

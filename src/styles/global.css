@@ -615,3 +615,31 @@ button:focus-visible {
     transform: translateY(0) scale(1);
   }
 }
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Ensure elements are visible without animation */
+  .section-title,
+  .feature-card,
+  .gallery-item,
+  .content-text,
+  .content-visual,
+  .cta-content,
+  .blog-card,
+  .hero-title,
+  .hero-subtitle,
+  .hero-cta,
+  .nav-slide-down {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

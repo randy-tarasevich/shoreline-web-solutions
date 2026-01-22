@@ -1,5 +1,3 @@
-import type { APIRoute } from "astro";
-
 // Google Reviews API Endpoint
 // This fetches reviews from Google Places API
 //
@@ -11,11 +9,11 @@ import type { APIRoute } from "astro";
 // - Request size limits
 
 // Simple in-memory rate limiting (for production, use Redis or similar)
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const RATE_LIMIT_MAX_REQUESTS = 10; // 10 requests per minute per IP
 
-function checkRateLimit(ip: string): boolean {
+function checkRateLimit(ip) {
 	const now = Date.now();
 	const record = rateLimitMap.get(ip);
 
@@ -42,7 +40,7 @@ setInterval(() => {
 	}
 }, RATE_LIMIT_WINDOW * 2);
 
-function getClientIP(request: Request): string {
+function getClientIP(request) {
 	// Try to get real IP from headers (if behind proxy)
 	const forwarded = request.headers.get("x-forwarded-for");
 	if (forwarded) {
@@ -56,7 +54,7 @@ function getClientIP(request: Request): string {
 	return "unknown";
 }
 
-function validatePlaceId(placeId: string): boolean {
+function validatePlaceId(placeId) {
 	// Basic validation: should be alphanumeric with some special chars
 	// Google Place IDs can be various formats (ChIJ..., 0x...:0x..., etc.)
 	if (!placeId || typeof placeId !== "string") {
@@ -71,7 +69,7 @@ function validatePlaceId(placeId: string): boolean {
 	return /^[a-zA-Z0-9:._-]+$/.test(placeId);
 }
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET = async ({ request }) => {
 	// Security: Check rate limiting
 	const clientIP = getClientIP(request);
 	if (!checkRateLimit(clientIP)) {
@@ -203,7 +201,7 @@ export const GET: APIRoute = async ({ request }) => {
 		}
 
 		// Transform Google reviews to our format
-		const reviews = (data.result.reviews || []).map((review: any) => ({
+		const reviews = (data.result.reviews || []).map((review) => ({
 			author: review.author_name || "Anonymous",
 			rating: review.rating || 5,
 			text: review.text || "",

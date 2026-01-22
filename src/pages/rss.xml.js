@@ -1,8 +1,7 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
-import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async (context) => {
+export const GET = async (context) => {
 	const posts = await getCollection("posts");
 	const siteUrl = context.site?.href || "https://shorelinewebsolutions.com";
 
@@ -16,14 +15,8 @@ export const GET: APIRoute = async (context) => {
 		return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
 	});
 
-	// Build RSS items - ensure all required fields are present and properly typed
-	const items: Array<{
-		title: string;
-		pubDate: Date;
-		description: string;
-		link: string;
-		enclosure?: { url: string; length: number; type: string };
-	}> = [];
+	// Build RSS items - ensure all required fields are present
+	const items = [];
 
 	for (const post of sortedPosts) {
 		if (!post.data.title || !post.data.date) {
@@ -44,13 +37,7 @@ export const GET: APIRoute = async (context) => {
 			`Read ${title} by ${post.data.author} on Shoreline Web Solutions blog.`,
 		);
 
-		const item: {
-			title: string;
-			pubDate: Date;
-			description: string;
-			link: string;
-			enclosure?: { url: string; length: number; type: string };
-		} = {
+		const item = {
 			title: title,
 			pubDate: pubDate,
 			description: description,
