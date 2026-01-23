@@ -97,3 +97,4 @@ You can remove the manual reviews and the API will fetch them automatically!
 ---
 
 **Quick Start:** Just copy your 9 reviews and paste them into the code. The carousel is ready to display them!
+

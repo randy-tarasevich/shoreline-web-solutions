@@ -12,8 +12,8 @@ import { Image } from 'astro:assets';
 // import seoServiceImage from '../assets/images/services/seo-service.jpg';
 
 const pageTitle = "Services - Shoreline Web Solutions | Professional Web Development Services";
-const pageDescription = "Comprehensive web development services for businesses. Custom web development, e-commerce solutions, custom AI solutions, and SEO services.";
-const pageKeywords = "web development services, web developer, web services, custom websites, e-commerce development, SEO services, web design";
+const pageDescription = "Comprehensive web development services for businesses. Custom web development, e-commerce solutions, custom AI solutions, and custom application development.";
+const pageKeywords = "web development services, web developer, web services, custom websites, e-commerce development, custom application development, software development, web design";
 const canonicalUrl = "/services";
 const siteUrl = "https://shorelinewebsolutions.com";
 ---
@@ -80,32 +80,35 @@ const siteUrl = "https://shorelinewebsolutions.com";
 		<!-- Navigation -->
 		<Navigation currentPage="services" />
 
-		<!-- Hero Section -->
-		<section class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
-			<!-- Background Image -->
-			<div class="absolute inset-0 z-0">
-				<!-- Uncomment when you add services-hero.jpg:
-				<Image 
-					src={servicesHeroImage} 
-					alt=""
-					class="w-full h-full object-cover"
-					loading="eager"
-					aria-hidden="true"
-				/>
-				-->
-				<!-- Placeholder gradient background -->
-				<div class="w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"></div>
+		<!-- Hero Section - Minimal & Confident -->
+		<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-br from-blue-700 to-cyan-700 hero-section">
+			<!-- Subtle gradient overlay -->
+			<div class="absolute inset-0 bg-gradient-to-br from-blue-700/90 via-blue-600/80 to-cyan-600/90"></div>
+
+			<!-- Decorative wave motif -->
+			<div class="absolute bottom-0 left-0 right-0 h-24 md:h-32 opacity-20">
+				<svg class="w-full h-full" viewBox="0 0 1440 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 60C240 20 480 100 720 60C960 20 1200 100 1440 60V120H0V60Z" fill="url(#wave-gradient-services)"/>
+					<path d="M0 80C240 40 480 120 720 80C960 40 1200 120 1440 80V120H0V80Z" fill="url(#wave-gradient-services)" opacity="0.5"/>
+					<defs>
+						<linearGradient id="wave-gradient-services" x1="0" y1="0" x2="1440" y2="0">
+							<stop offset="0%" stop-color="#ffffff"/>
+							<stop offset="50%" stop-color="#e0f2fe"/>
+							<stop offset="100%" stop-color="#ffffff"/>
+						</linearGradient>
+					</defs>
+				</svg>
 			</div>
-			
-			<!-- Dark overlay for text readability -->
-			<div class="absolute inset-0 bg-gradient-to-b from-slate-900/75 via-slate-900/65 to-slate-900/80 z-10"></div>
-			
+
+			<!-- Accent line -->
+			<div class="absolute top-24 left-1/2 -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-white/60 via-cyan-200 to-white/60 rounded-full"></div>
+
 			<!-- Content -->
-			<div class="relative z-20 text-center px-6 max-w-5xl mx-auto">
-				<h1 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6">
-					Our <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Services</span>
+			<div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+				<h1 class="hero-title text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight">
+					Our <span class="text-cyan-200">Services</span>
 				</h1>
-				<p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+				<p class="hero-subtitle text-lg md:text-xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
 					Comprehensive web development services designed to elevate your business's online presence and drive tangible results.
 				</p>
 			</div>
@@ -229,36 +232,36 @@ const siteUrl = "https://shorelinewebsolutions.com";
 						</div>
 					</div>
 
-					<!-- SEO & Digital Marketing -->
-					<div id="seo-marketing" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
-						<div class="relative h-56 bg-gradient-to-br from-purple-50 to-blue-50 overflow-hidden">
-							<!-- Uncomment when you add seo-service.jpg:
+					<!-- Custom Application Development -->
+					<div id="custom-application-development" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
+						<div class="relative h-56 bg-gradient-to-br from-emerald-50 to-teal-50 overflow-hidden">
+							<!-- Uncomment when you add app-dev-service.jpg:
 							<Image 
-								src={seoServiceImage} 
-								alt="SEO analytics dashboard showing search rankings and traffic growth"
+								src={appDevServiceImage} 
+								alt="Custom application development showing software interface"
 								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
 							/>
 							-->
 							<div class="absolute inset-0 flex items-center justify-center">
-								<div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+								<div class="w-16 h-16 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
 									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
 									</svg>
 								</div>
 							</div>
 						</div>
 						<div class="p-8 flex flex-col flex-grow">
-							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">SEO & Digital Marketing</h3>
+							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">Custom Application Development</h3>
 							<p class="text-slate-600 leading-relaxed mb-4 text-center md:text-left">
-								Strategic optimization techniques to improve search rankings and drive targeted traffic to your website.
+								Tailored software applications designed to solve your unique business challenges and streamline your operations.
 							</p>
 							<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
-								<li>• Technical SEO</li>
-								<li>• Local Search Optimization</li>
-								<li>• Content Strategy</li>
-								<li>• Analytics & Reporting</li>
+								<li>• Desktop Applications</li>
+								<li>• Progressive Web Apps</li>
+								<li>• Enterprise Software</li>
+								<li>• API Development</li>
 							</ul>
-							<a href="/services/seo-digital-marketing" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:from-purple-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 text-center">
+							<a href="/services/custom-application-development" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-lg hover:from-emerald-500 hover:to-teal-500 transition-all duration-300 hover:scale-105 text-center">
 								Learn More
 							</a>
 						</div>
@@ -466,7 +469,7 @@ const siteUrl = "https://shorelinewebsolutions.com";
 		</section>
 
 		<!-- CTA Section -->
-		<section class="py-20 bg-gradient-to-r from-slate-900 to-blue-900">
+		<section class="py-20 bg-gradient-to-br from-blue-700 to-cyan-700">
 			<div class="max-w-4xl mx-auto text-center px-6">
 				<div class="cta-content">
 					<h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -477,11 +480,11 @@ const siteUrl = "https://shorelinewebsolutions.com";
 					</p>
 					<div class="flex flex-col sm:flex-row gap-4 justify-center">
 						<a href="/contact" 
-							 class="magnetic-button px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105">
+							 class="magnetic-button px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105 shadow-lg">
 							Start Your Project
 						</a>
 						<a href="/portfolio" 
-							 class="magnetic-button px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-slate-900 transition-all duration-300">
+							 class="magnetic-button px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105 shadow-lg">
 							View Portfolio
 						</a>
 					</div>

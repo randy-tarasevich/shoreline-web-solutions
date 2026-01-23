@@ -1,0 +1,82 @@
+import { b as createAstro, c as createComponent, r as renderComponent, a as renderTemplate, e as addAttribute, m as maybeRenderHead, u as unescapeHTML } from '../../../chunks/astro/server_Djp_mt0f.mjs';
+import 'kleur/colors';
+import { $ as $$Layout, a as $$Navigation } from '../../../chunks/Navigation_dPntXoiq.mjs';
+import { g as getPostsByTag, a as getAllTags, c as createTagSlug } from '../../../chunks/tags_CpxmCQdR.mjs';
+export { renderers } from '../../../renderers.mjs';
+
+var __freeze = Object.freeze;
+var __defProp = Object.defineProperty;
+var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(cooked.slice()) }));
+var _a;
+const $$Astro = createAstro("https://shorelinewebsolutions.com");
+async function getStaticPaths() {
+  const allTags = await getAllTags();
+  return allTags.map((tag) => ({
+    params: { tag: tag.slug },
+    props: { tag }
+  }));
+}
+const $$tag = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+  Astro2.self = $$tag;
+  const { tag: tagSlug } = Astro2.params;
+  const { tag, posts } = await getPostsByTag(tagSlug);
+  if (!tag) {
+    return Astro2.redirect("/blog");
+  }
+  const siteUrl = "https://shorelinewebsolutions.com";
+  const pageDescription = `Explore articles about ${tag.name} on Shoreline Web Solutions blog. Discover insights, tips, and best practices for web development and digital marketing.`;
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": `${tag.name} - Blog Posts | Shoreline Web Solutions`, "description": pageDescription, "canonical": `/blog/tag/${tagSlug}` }, { "default": async ($$result2) => renderTemplate(_a || (_a = __template(['  <script type="application/ld+json">', "<\/script> ", "<main> <!-- Navigation --> ", ' <!-- Hero Section --> <section class="relative pt-20 pb-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden"> <!-- Background Elements --> <div class="absolute inset-0"> <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div> <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div> <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/5 rounded-full blur-2xl"></div> </div> <div class="relative max-w-7xl mx-auto px-6"> <div class="text-center"> <!-- Breadcrumb --> <nav class="mb-8"> <div class="flex items-center justify-center space-x-2 text-blue-200"> <a href="/blog" class="hover:text-white transition-colors duration-300">Blog</a> <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"> <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path> </svg> <span class="text-white font-medium">', '</span> </div> </nav> <div class="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-blue-200 text-sm font-medium mb-8 border border-white/20"> <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"> <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path> </svg> ', " ", ' </div> <h1 class="hero-title text-5xl md:text-7xl font-bold text-white mb-8 leading-tight"> <span class="bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-300 bg-clip-text text-transparent relative"> ', ' <div class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-60"></div> </span> </h1> <p class="hero-subtitle text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-8">\nExplore our collection of articles about ', '. Discover insights, tips, and best practices.\n</p> <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-blue-200"> <div class="flex items-center"> <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"> <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path> </svg> <span>', ' articles</span> </div> <div class="hidden sm:block w-1 h-1 bg-blue-300 rounded-full"></div> <div class="flex items-center"> <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"> <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path> </svg> <span>Curated content</span> </div> </div> </div> </div> </section> <!-- Posts Section --> <section class="py-20 bg-gradient-to-b from-gray-50 to-white"> <div class="max-w-6xl mx-auto px-6"> <!-- Section Header --> <div class="text-center mb-16"> <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">\nArticles about <span class="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">', '</span> </h2> <p class="text-lg text-gray-600 max-w-2xl mx-auto">\nDiscover our latest insights and best practices related to ', '.\n</p> </div> <div class="grid gap-8 md:gap-12"> ', " </div> <!-- No posts message --> ", ` </div> </section> <!-- CTA Section --> <section class="py-20 bg-gradient-to-r from-slate-900 to-blue-900"> <div class="max-w-4xl mx-auto text-center px-6"> <div class="cta-content"> <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+Ready to Elevate Your Web Presence?
+</h2> <p class="text-xl text-blue-200 mb-8 leading-relaxed">
+Let's discuss how we can help bring your vision to life with a website that truly represents your business.
+</p> <div class="flex flex-col sm:flex-row gap-4 justify-center"> <a href="/contact" class="magnetic-button px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105">
+Start Your Project
+</a> <a href="/blog" class="magnetic-button px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-slate-900 transition-all duration-300">
+See More Posts
+</a> </div> </div> </div> </section> </main> `])), unescapeHTML(JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${siteUrl}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": `${siteUrl}/blog`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": tag.name,
+        "item": `${siteUrl}/blog/tag/${tagSlug}`
+      }
+    ]
+  })), maybeRenderHead(), renderComponent($$result2, "Navigation", $$Navigation, { "currentPage": "blog" }), tag.name, posts.length, posts.length === 1 ? "Article" : "Articles", tag.name, tag.name.toLowerCase(), posts.length, tag.name, tag.name.toLowerCase(), posts.map((post, index) => renderTemplate`<article class="group blog-card bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-200 relative"> <!-- Card Gradient Overlay --> <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-cyan-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <!-- Post Image --> ${post.data.image && renderTemplate`<div class="px-6 pt-6"> <img${addAttribute(post.data.image, "src")}${addAttribute(`Featured image for blog post: ${post.data.title} about ${tag.name}`, "alt")} class="w-full max-w-2xl mx-auto h-auto rounded-lg shadow-md group-hover:scale-105 transition-transform duration-500" loading="lazy"> </div>`} <div class="relative p-6 md:p-10"> <!-- Title --> <h2 class="text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight group-hover:text-blue-600 transition-colors duration-300"> <a${addAttribute(`/blog/${post.slug}`, "href")} class="block"> ${post.data.title} </a> </h2> <!-- Synopsis - Only show on mobile --> <div class="md:hidden mb-4"> <p class="text-gray-600 text-sm leading-relaxed line-clamp-2"> ${post.data.title.includes("Custom Websites") ? "Discover why custom websites outperform templates and how they can transform your business growth and online presence." : "Explore insights and strategies for modern web development and digital marketing success."} </p> </div> <!-- Meta Information --> <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 md:pt-6 border-t border-gray-100"> <div class="flex items-center space-x-4 md:space-x-6 text-sm text-gray-500"> <div class="flex items-center"> <div class="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-xs md:text-sm mr-2 md:mr-3"> ${post.data.author.charAt(0)} </div> <span class="font-medium text-xs md:text-sm">By ${post.data.author}</span> </div> <div class="flex items-center"> <svg class="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" fill="currentColor" viewBox="0 0 20 20"> <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path> </svg> <time${addAttribute(post.data.date, "datetime")} class="text-xs md:text-sm"> ${new Date(post.data.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  })} </time> </div> </div> </div> <!-- Tags --> <div class="mt-3 md:mt-4"> <div class="flex flex-wrap gap-1.5 md:gap-2 mb-4 md:mb-6"> ${post.data.tags.map((postTag) => renderTemplate`<a${addAttribute(`/blog/tag/${createTagSlug(postTag)}`, "href")}${addAttribute(`px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm font-medium rounded-full border transition-all duration-300 ${postTag === tag.name ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white border-blue-600" : "bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800 border-blue-200 hover:from-blue-200 hover:to-cyan-200"}`, "class")}> ${postTag} </a>`)} </div> </div> <!-- Read More Button --> <a${addAttribute(`/blog/${post.slug}`, "href")} class="inline-flex items-center justify-center px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 group/btn text-center text-sm md:text-base"> <span>Read Article</span> <svg class="w-3 h-3 md:w-4 md:h-4 ml-1 md:ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path> </svg> </a> </div> <!-- Hover Effect Border --> <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-200 transition-colors duration-500 pointer-events-none"></div> </article>`), posts.length === 0 && renderTemplate`<div class="text-center py-20"> <div class="max-w-md mx-auto"> <div class="w-20 h-20 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6"> <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path> </svg> </div> <h3 class="text-2xl font-bold text-gray-900 mb-4">No articles found</h3> <p class="text-lg text-gray-600 mb-6">We don't have any articles tagged with "${tag.name}" yet.</p> <a href="/blog" class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-100 transition-colors"> <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path> </svg>
+Back to all articles
+</a> </div> </div>`) })}`;
+}, "/Users/rtarasevich/shoreline-web-solutions/src/pages/blog/tag/[tag].astro", void 0);
+
+const $$file = "/Users/rtarasevich/shoreline-web-solutions/src/pages/blog/tag/[tag].astro";
+const $$url = "/blog/tag/[tag]";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+	__proto__: null,
+	default: $$tag,
+	file: $$file,
+	getStaticPaths,
+	url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

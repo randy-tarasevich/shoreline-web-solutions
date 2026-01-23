@@ -1,0 +1,99 @@
+import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead, u as unescapeHTML } from '../../chunks/astro/server_Djp_mt0f.mjs';
+import 'kleur/colors';
+import { $ as $$Layout, a as $$Navigation } from '../../chunks/Navigation_dPntXoiq.mjs';
+export { renderers } from '../../renderers.mjs';
+
+var __freeze = Object.freeze;
+var __defProp = Object.defineProperty;
+var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(cooked.slice()) }));
+var _a;
+const $$SeoDigitalMarketing = createComponent(($$result, $$props, $$slots) => {
+  const pageTitle = "SEO & Digital Marketing Services - Shoreline Web Solutions | Search Engine Optimization";
+  const pageDescription = "Professional SEO and digital marketing services for businesses. We provide technical SEO, local search optimization, content strategy, and analytics to improve your search rankings and drive traffic.";
+  const pageKeywords = "SEO services, digital marketing, SEO, local SEO, search engine optimization, content marketing, technical SEO, digital marketing services";
+  const canonicalUrl = "/services/seo-digital-marketing";
+  const siteUrl = "https://shorelinewebsolutions.com";
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": pageTitle, "description": pageDescription, "keywords": pageKeywords, "canonical": canonicalUrl, "ogType": "website" }, { "default": ($$result2) => renderTemplate(_a || (_a = __template(['  <script type="application/ld+json">', '<\/script>  <script type="application/ld+json">', "<\/script> ", "<main> <!-- Navigation --> ", ` <!-- Hero Section --> <section class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden"> <!-- Background Image --> <div class="absolute inset-0 z-0"> <!-- Uncomment when you add hero.jpg:
+				<Image 
+					src={seoHeroImage} 
+					alt=""
+					class="w-full h-full object-cover"
+					loading="eager"
+					aria-hidden="true"
+				/>
+				--> <!-- Placeholder gradient background --> <div class="w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"></div> </div> <!-- Dark overlay for text readability --> <div class="absolute inset-0 bg-gradient-to-b from-slate-900/75 via-slate-900/65 to-slate-900/80 z-10"></div> <!-- Content --> <div class="relative z-20 text-center px-6 max-w-5xl mx-auto"> <h1 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6">
+SEO & <span class="bg-gradient-to-r from-blue-200 to-cyan-200 bg-clip-text text-transparent">Digital Marketing</span> </h1> <p class="hero-subtitle text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+Strategic optimization techniques to improve search rankings and drive targeted traffic to your website.
+</p> </div> </section> <!-- Service Details Section --> <section class="py-20 bg-white"> <div class="max-w-7xl mx-auto px-6"> <div class="grid lg:grid-cols-2 gap-12 items-center mb-16"> <div class="order-2 lg:order-1"> <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center mb-6"> <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path> </svg> </div> <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+Get Found by Your Ideal Customers
+</h2> <p class="text-lg text-slate-600 leading-relaxed mb-6">
+Having a beautiful website is only half the battle\u2014you need people to find it. Our SEO and digital marketing services ensure your website ranks well in search engines and attracts the right visitors who are ready to become customers.
+</p> <p class="text-lg text-slate-600 leading-relaxed">
+We combine technical SEO expertise with strategic content marketing to improve your visibility, drive qualified traffic, and increase conversions. From local businesses to national brands, we help you reach your target audience.
+</p> </div> <div class="order-1 lg:order-2 relative rounded-2xl overflow-hidden shadow-2xl"> <!-- Analytics Dashboard Mockup --> <!-- Uncomment when you add analytics-mockup.jpg:
+						<Image 
+							src={analyticsMockupImage} 
+							alt="SEO analytics dashboard showing search rankings and traffic growth"
+							class="w-full h-auto"
+						/>
+						--> <div class="aspect-[4/3] bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center"> <div class="text-center p-8"> <svg class="w-16 h-16 text-purple-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path> </svg> <p class="text-slate-600 font-medium">Add mockup: analytics-mockup.jpg</p> <p class="text-sm text-slate-500 mt-2">SEO analytics dashboard or rankings visualization</p> </div> </div> </div> </div> <!-- Marketing Services List --> <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg mb-16"> <h3 class="text-2xl font-bold text-slate-900 mb-6">Marketing Services</h3> <ul class="space-y-4"> <li class="flex items-start gap-3"> <svg class="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path> </svg> <span class="text-slate-700">Technical SEO optimization</span> </li> <li class="flex items-start gap-3"> <svg class="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path> </svg> <span class="text-slate-700">Local search optimization</span> </li> <li class="flex items-start gap-3"> <svg class="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path> </svg> <span class="text-slate-700">Content strategy & creation</span> </li> <li class="flex items-start gap-3"> <svg class="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path> </svg> <span class="text-slate-700">Analytics & performance reporting</span> </li> <li class="flex items-start gap-3"> <svg class="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path> </svg> <span class="text-slate-700">Link building & outreach</span> </li> </ul> </div> </div> <!-- Benefits Section --> <div class="grid md:grid-cols-3 gap-8 mb-16"> <div class="feature-card bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl"> <h3 class="text-xl font-bold text-slate-900 mb-4">Higher Rankings</h3> <p class="text-slate-600">
+Improve your search engine visibility to appear on the first page when customers search for your services.
+</p> </div> <div class="feature-card bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl"> <h3 class="text-xl font-bold text-slate-900 mb-4">Local Visibility</h3> <p class="text-slate-600">
+Optimize for local searches to attract customers in your area who are ready to buy.
+</p> </div> <div class="feature-card bg-gradient-to-br from-cyan-50 to-purple-50 p-6 rounded-xl"> <h3 class="text-xl font-bold text-slate-900 mb-4">Measurable Results</h3> <p class="text-slate-600">
+Track your progress with detailed analytics and reporting to see exactly how your marketing efforts are performing.
+</p> </div> </div> </section> <!-- CTA Section --> <section class="py-20 bg-gradient-to-r from-slate-900 to-blue-900"> <div class="max-w-4xl mx-auto text-center px-6"> <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+Ready to Improve Your Search Rankings?
+</h2> <p class="text-xl text-blue-200 mb-8 leading-relaxed">
+Let's develop a digital marketing strategy that drives qualified traffic to your website.
+</p> <a href="/contact" class="inline-block px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105">
+Boost Your Visibility
+</a> </div> </section> </main> `])), unescapeHTML(JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${siteUrl}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": `${siteUrl}/services`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "SEO & Digital Marketing",
+        "item": `${siteUrl}${canonicalUrl}`
+      }
+    ]
+  })), unescapeHTML(JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "SEO & Digital Marketing",
+    "provider": {
+      "@type": "Organization",
+      "name": "Shoreline Web Solutions"
+    },
+    "description": pageDescription,
+    "name": "SEO & Digital Marketing Services"
+  })), maybeRenderHead(), renderComponent($$result2, "Navigation", $$Navigation, { "currentPage": "services" })) })}`;
+}, "/Users/rtarasevich/shoreline-web-solutions/src/pages/services/seo-digital-marketing.astro", void 0);
+
+const $$file = "/Users/rtarasevich/shoreline-web-solutions/src/pages/services/seo-digital-marketing.astro";
+const $$url = "/services/seo-digital-marketing";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+	__proto__: null,
+	default: $$SeoDigitalMarketing,
+	file: $$file,
+	url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

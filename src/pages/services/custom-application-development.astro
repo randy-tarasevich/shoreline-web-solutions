@@ -1,0 +1,228 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import { Image } from 'astro:assets';
+
+// Import Custom Application Development images (add your images to src/assets/images/services/custom-app-dev/)
+// Uncomment when you add images:
+// import appDevHeroImage from '../../assets/images/services/custom-app-dev/hero.jpg';
+// import appDevMockupImage from '../../assets/images/services/custom-app-dev/mockup.jpg';
+
+const pageTitle = "Custom Application Development Services - Shoreline Web Solutions";
+const pageDescription = "Professional custom application development services for businesses. We build tailored software applications, desktop applications, mobile web apps, and enterprise solutions.";
+const pageKeywords = "custom application development, software development, app development, desktop applications, enterprise software, business applications, custom software solutions";
+const canonicalUrl = "/services/custom-application-development";
+const siteUrl = "https://shorelinewebsolutions.com";
+---
+
+<Layout 
+	title={pageTitle}
+	description={pageDescription}
+	keywords={pageKeywords}
+	canonical={canonicalUrl}
+	ogType="website"
+>
+	<!-- Breadcrumb Structured Data -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "Home",
+				"item": `${siteUrl}/`
+			},
+			{
+				"@type": "ListItem",
+				"position": 2,
+				"name": "Services",
+				"item": `${siteUrl}/services`
+			},
+			{
+				"@type": "ListItem",
+				"position": 3,
+				"name": "Custom Application Development",
+				"item": `${siteUrl}${canonicalUrl}`
+			}
+		]
+	})} />
+	
+	<!-- Structured Data for Service -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Service",
+		"serviceType": "Application Development",
+		"provider": {
+			"@type": "Organization",
+			"name": "Shoreline Web Solutions"
+		},
+		"description": pageDescription,
+		"name": "Custom Application Development Services"
+	})} />
+	<main>
+		<!-- Navigation -->
+		<Navigation currentPage="services" />
+
+		<!-- Hero Section - Minimal & Confident -->
+		<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-br from-blue-700 to-cyan-700 hero-section">
+			<!-- Subtle gradient overlay -->
+			<div class="absolute inset-0 bg-gradient-to-br from-blue-700/90 via-blue-600/80 to-cyan-600/90"></div>
+
+			<!-- Decorative wave motif -->
+			<div class="absolute bottom-0 left-0 right-0 h-24 md:h-32 opacity-20">
+				<svg class="w-full h-full" viewBox="0 0 1440 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 60C240 20 480 100 720 60C960 20 1200 100 1440 60V120H0V60Z" fill="url(#wave-gradient-appdev)"/>
+					<path d="M0 80C240 40 480 120 720 80C960 40 1200 120 1440 80V120H0V80Z" fill="url(#wave-gradient-appdev)" opacity="0.5"/>
+					<defs>
+						<linearGradient id="wave-gradient-appdev" x1="0" y1="0" x2="1440" y2="0">
+							<stop offset="0%" stop-color="#ffffff"/>
+							<stop offset="50%" stop-color="#e0f2fe"/>
+							<stop offset="100%" stop-color="#ffffff"/>
+						</linearGradient>
+					</defs>
+				</svg>
+			</div>
+
+			<!-- Accent line -->
+			<div class="absolute top-24 left-1/2 -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-white/60 via-cyan-200 to-white/60 rounded-full"></div>
+
+			<!-- Content -->
+			<div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+				<h1 class="hero-title text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight">
+					Custom <span class="text-cyan-200">Application Development</span>
+				</h1>
+				<p class="hero-subtitle text-lg md:text-xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
+					Tailored software applications designed to solve your unique business challenges and streamline your operations.
+				</p>
+			</div>
+		</section>
+
+		<!-- Service Details Section -->
+		<section class="py-20 bg-white">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+					<div class="order-2 lg:order-1">
+						<div class="w-16 h-16 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg flex items-center justify-center mb-6">
+							<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+							</svg>
+						</div>
+						<h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+							Build Software That Works for You
+						</h2>
+						<p class="text-lg text-slate-600 leading-relaxed mb-6">
+							Off-the-shelf software often falls short of meeting your specific business needs. Our custom application development services create software solutions that are perfectly tailored to your workflows, processes, and objectives.
+						</p>
+						<p class="text-lg text-slate-600 leading-relaxed">
+							From desktop applications to progressive web apps, we build robust, scalable software that integrates seamlessly with your existing systems and grows with your business.
+						</p>
+					</div>
+					<div class="order-1 lg:order-2 relative rounded-2xl overflow-hidden shadow-2xl">
+						<!-- Application Mockup Image -->
+						<!-- Uncomment when you add mockup.jpg:
+						<Image 
+							src={appDevMockupImage} 
+							alt="Custom application development mockup showing software interface"
+							class="w-full h-auto"
+						/>
+						-->
+						<div class="aspect-[4/3] bg-gradient-to-br from-emerald-50 to-teal-50 flex items-center justify-center">
+							<div class="text-center p-8">
+								<svg class="w-16 h-16 text-emerald-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+								</svg>
+								<p class="text-slate-600 font-medium">Add mockup: mockup.jpg</p>
+								<p class="text-sm text-slate-500 mt-2">Application interface or development workspace</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Application Types Section -->
+				<div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-8 rounded-xl shadow-lg mb-16">
+					<h3 class="text-2xl font-bold text-slate-900 mb-6">Application Development Services</h3>
+					<ul class="space-y-4">
+						<li class="flex items-start gap-3">
+							<svg class="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+							</svg>
+							<span class="text-slate-700">Desktop applications for Windows, macOS, and Linux</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg class="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+							</svg>
+							<span class="text-slate-700">Progressive Web Applications (PWAs)</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg class="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+							</svg>
+							<span class="text-slate-700">Enterprise software solutions</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg class="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+							</svg>
+							<span class="text-slate-700">API development and integration</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg class="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+							</svg>
+							<span class="text-slate-700">Database design and management systems</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg class="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+							</svg>
+							<span class="text-slate-700">Legacy system modernization</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Benefits Section -->
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="grid md:grid-cols-3 gap-8 mb-16">
+					<div class="feature-card bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-xl">
+						<h3 class="text-xl font-bold text-slate-900 mb-4">Tailored Solutions</h3>
+						<p class="text-slate-600">
+							Every application is built specifically for your business needs, ensuring it fits perfectly into your workflow and processes.
+						</p>
+					</div>
+					<div class="feature-card bg-gradient-to-br from-teal-50 to-emerald-50 p-6 rounded-xl">
+						<h3 class="text-xl font-bold text-slate-900 mb-4">Scalable Architecture</h3>
+						<p class="text-slate-600">
+							Built with scalability in mind, your application can grow and adapt as your business evolves and expands.
+						</p>
+					</div>
+					<div class="feature-card bg-gradient-to-br from-cyan-50 to-emerald-50 p-6 rounded-xl">
+						<h3 class="text-xl font-bold text-slate-900 mb-4">Ongoing Support</h3>
+						<p class="text-slate-600">
+							We provide continuous maintenance, updates, and support to ensure your application remains secure and performs optimally.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="py-20 bg-gradient-to-br from-blue-700 to-cyan-700">
+			<div class="max-w-4xl mx-auto text-center px-6">
+				<h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+					Ready to Build Your Custom Application?
+				</h2>
+				<p class="text-xl text-blue-200 mb-8 leading-relaxed">
+					Let's discuss your requirements and create a software solution that perfectly fits your business needs.
+				</p>
+				<a href="/contact" 
+					 class="inline-block px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105 shadow-lg">
+					Get Started Today
+				</a>
+			</div>
+		</section>
+	</main>
+</Layout>
+
