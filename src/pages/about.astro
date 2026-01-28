@@ -6,7 +6,7 @@ import { Image } from 'astro:assets';
 // Import About page images (add your images to src/assets/images/about/)
 // Uncomment when you add images:
 // import aboutHeroImage from '../assets/images/about/about-hero.jpg';
-// import ourStoryImage from '../assets/images/about/our-story.jpg';
+import ourStoryImage from '../assets/images/about/our-story.jpeg';
 // import workspaceImage from '../assets/images/about/workspace.jpg';
 
 const pageTitle = "About Us - Shoreline Web Solutions | Professional Web Development";
@@ -63,8 +63,8 @@ const canonicalUrl = "/about";
 		<!-- Our Story Section -->
 		<section class="py-20 bg-white">
 			<div class="max-w-7xl mx-auto px-6">
-				<div class="grid lg:grid-cols-2 gap-12 items-center">
-					<div class="content-text text-center lg:text-left order-2 lg:order-1">
+				<div class="grid lg:grid-cols-12 gap-12 items-center">
+					<div class="content-text text-center lg:text-left order-2 lg:order-1 lg:col-span-4">
 						<h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-8">
 							Our Story
 						</h2>
@@ -84,47 +84,36 @@ const canonicalUrl = "/about";
 						</div>
 					</div>
 					
-					<div class="content-visual relative order-1 lg:order-2">
+					<div class="content-visual relative order-1 lg:order-2 lg:col-span-8">
 						<!-- Our Story Photo -->
 						<div class="relative rounded-2xl overflow-hidden shadow-2xl">
-							<!-- Uncomment when you add our-story.jpg:
 							<Image 
 								src={ourStoryImage} 
-								alt="Shoreline Web Solutions team or workspace in Connecticut"
+								alt="Connecticut shoreline coastal landscape representing Shoreline Web Solutions' local connection and inspiration"
 								class="w-full h-auto"
 							/>
-							-->
-							<div class="aspect-[4/3] bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center">
-								<div class="text-center p-8">
-									<svg class="w-16 h-16 text-blue-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-									</svg>
-									<p class="text-slate-600 font-medium">Add photo: our-story.jpg</p>
-									<p class="text-sm text-slate-500 mt-2">Team, workspace, or Connecticut location</p>
-								</div>
-							</div>
 							<!-- Overlay card with mission -->
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/95 to-transparent p-6">
-								<div class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-xl">
-									<h3 class="text-xl font-bold text-slate-900 mb-4">Why We Do What We Do</h3>
-									<p class="text-slate-700 text-sm leading-relaxed mb-4">
+							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 to-transparent p-3">
+								<div class="bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-xl">
+									<h3 class="text-xl font-bold text-slate-900 mb-2">Why We Do What We Do</h3>
+									<p class="text-slate-700 text-sm leading-relaxed mb-3">
 										We believe that every business, regardless of size, deserves access to professional web development services.
 									</p>
-									<div class="space-y-2">
+									<div class="space-y-1.5">
 										<div class="flex items-start gap-2">
-											<svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 											</svg>
 											<span class="text-slate-700 text-sm">Deep understanding of business needs</span>
 										</div>
 										<div class="flex items-start gap-2">
-											<svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 											</svg>
 											<span class="text-slate-700 text-sm">Personalized service and support</span>
 										</div>
 										<div class="flex items-start gap-2">
-											<svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<svg class="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 											</svg>
 											<span class="text-slate-700 text-sm">Modern, cutting-edge technologies</span>

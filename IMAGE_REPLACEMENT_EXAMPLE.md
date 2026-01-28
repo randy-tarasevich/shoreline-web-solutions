@@ -9,6 +9,7 @@ This shows exactly what to change when you add `our-story.jpg` to the About page
 **File:** `src/pages/about.astro`
 
 ### Import Section (Line 8-10):
+
 ```astro
 // Import About page images (add your images to src/assets/images/about/)
 // Uncomment when you add images:
@@ -16,12 +17,13 @@ This shows exactly what to change when you add `our-story.jpg` to the About page
 ```
 
 ### Image Section (Lines 90-105):
+
 ```astro
 <!-- Our Story Photo -->
 <div class="relative rounded-2xl overflow-hidden shadow-2xl">
     <!-- Uncomment when you add our-story.jpg:
-    <Image 
-        src={ourStoryImage} 
+    <Image
+        src={ourStoryImage}
         alt="Shoreline Web Solutions team or workspace in Connecticut"
         class="w-full h-auto"
     />
@@ -47,23 +49,26 @@ This shows exactly what to change when you add `our-story.jpg` to the About page
 ## ✅ After (When Image is Added)
 
 ### Step 1: Add the image file
+
 ```bash
 # Place your image here:
 src/assets/images/about/our-story.jpg
 ```
 
 ### Step 2: Update Import Section (Line 9)
+
 ```astro
 // Import About page images (add your images to src/assets/images/about/)
 import ourStoryImage from '../assets/images/about/our-story.jpg';
 ```
 
 ### Step 3: Update Image Section (Lines 90-105)
+
 ```astro
 <!-- Our Story Photo -->
 <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-    <Image 
-        src={ourStoryImage} 
+    <Image
+        src={ourStoryImage}
         alt="Shoreline Web Solutions team or workspace in Connecticut"
         class="w-full h-auto"
     />
@@ -91,6 +96,7 @@ That's it! The overlay card stays in place (it's the white card that appears ove
 ## 🧪 Test It
 
 After making changes:
+
 ```bash
 npm run build
 npm run preview
@@ -111,4 +117,3 @@ Visit `http://localhost:4321/about` and you should see your image!
 ---
 
 **Ready to try it? Add your image file, then make these 3 simple changes!**
-

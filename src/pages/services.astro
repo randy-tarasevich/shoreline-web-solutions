@@ -1,6 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+import ChatbotMockup from '../components/ChatbotMockup.astro';
+import WebDashboardMockup from '../components/WebDashboardMockup.astro';
+import EcommerceMockup from '../components/EcommerceMockup.astro';
+import AppDevMockup from '../components/AppDevMockup.astro';
 import { Image } from 'astro:assets';
 
 // Import Services page images (add your images to src/assets/images/services/)
@@ -130,20 +134,8 @@ const siteUrl = "https://shorelinewebsolutions.com";
 					<!-- Custom AI Solutions -->
 					<div id="ai-integration" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
 						<div class="relative h-56 bg-gradient-to-br from-indigo-50 to-purple-50 overflow-hidden">
-							<!-- Uncomment when you add ai-service.jpg:
-							<Image 
-								src={aiServiceImage} 
-								alt="AI chatbot interface showing automated customer support"
-								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-							/>
-							-->
-							<div class="absolute inset-0 flex items-center justify-center">
-								<div class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-									</svg>
-								</div>
-							</div>
+							<!-- Chatbot Mockup -->
+							<ChatbotMockup />
 						</div>
 						<div class="p-8 flex flex-col flex-grow">
 							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">AI Solutions</h3>
@@ -153,7 +145,7 @@ const siteUrl = "https://shorelinewebsolutions.com";
 							<ul class="space-y-2 text-sm text-slate-600 mb-6 flex-grow">
 								<li>• AI Chatbots for 24/7 support</li>
 								<li>• AI Review Management</li>
-								<li>• AI Content Generation</li>
+								<li>• AI Voice Agent</li>
 								<li>• Custom AI integrations</li>
 							</ul>
 							<a href="/custom-ai-solutions" class="mt-auto inline-block px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 hover:scale-105 text-center">
@@ -165,20 +157,8 @@ const siteUrl = "https://shorelinewebsolutions.com";
 					<!-- Custom Web Development -->
 					<div id="web-development" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
 						<div class="relative h-56 bg-gradient-to-br from-blue-50 to-cyan-50 overflow-hidden">
-							<!-- Uncomment when you add web-dev-service.jpg:
-							<Image 
-								src={webDevServiceImage} 
-								alt="Custom website development showing responsive design on multiple devices"
-								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-							/>
-							-->
-							<div class="absolute inset-0 flex items-center justify-center">
-								<div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-									</svg>
-								</div>
-							</div>
+							<!-- Dashboard Mockup -->
+							<WebDashboardMockup />
 						</div>
 						<div class="p-8 flex flex-col flex-grow">
 							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">Web Development</h3>
@@ -200,20 +180,8 @@ const siteUrl = "https://shorelinewebsolutions.com";
 					<!-- E-commerce Solutions -->
 					<div id="ecommerce-solutions" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
 						<div class="relative h-56 bg-gradient-to-br from-teal-50 to-blue-50 overflow-hidden">
-							<!-- Uncomment when you add ecommerce-service.jpg:
-							<Image 
-								src={ecommerceServiceImage} 
-								alt="E-commerce store interface showing shopping cart and product pages"
-								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-							/>
-							-->
-							<div class="absolute inset-0 flex items-center justify-center">
-								<div class="w-16 h-16 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-									</svg>
-								</div>
-							</div>
+							<!-- E-commerce Mockup -->
+							<EcommerceMockup />
 						</div>
 						<div class="p-8 flex flex-col flex-grow">
 							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">E-commerce Solutions</h3>
@@ -235,20 +203,8 @@ const siteUrl = "https://shorelinewebsolutions.com";
 					<!-- Custom Application Development -->
 					<div id="custom-application-development" class="feature-card group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
 						<div class="relative h-56 bg-gradient-to-br from-emerald-50 to-teal-50 overflow-hidden">
-							<!-- Uncomment when you add app-dev-service.jpg:
-							<Image 
-								src={appDevServiceImage} 
-								alt="Custom application development showing software interface"
-								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-							/>
-							-->
-							<div class="absolute inset-0 flex items-center justify-center">
-								<div class="w-16 h-16 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-									</svg>
-								</div>
-							</div>
+							<!-- Custom App Mockup -->
+							<AppDevMockup />
 						</div>
 						<div class="p-8 flex flex-col flex-grow">
 							<h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">Custom Application Development</h3>
