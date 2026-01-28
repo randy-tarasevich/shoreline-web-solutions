@@ -1,0 +1,211 @@
+---
+// WebDashboardMockup.astro
+// Animated dashboard interface mockup
+// Shows a modern web application dashboard with metrics and charts
+
+// Generate unique ID for this instance
+const dashboardId = `dashboard-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="dashboard-interface w-full h-full bg-white rounded-lg overflow-hidden flex flex-col shadow-sm">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header h-12 bg-gradient-to-r from-blue-600 to-cyan-600 text-white flex items-center justify-between px-4 flex-shrink-0">
+        <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-white/20 rounded flex items-center justify-center text-xs">⚡</div>
+            <h3 class="text-sm font-semibold m-0">Dashboard</h3>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+            <span>Admin</span>
+            <div class="w-6 h-6 bg-white/20 rounded-full"></div>
+        </div>
+    </div>
+    
+    <!-- Dashboard Content -->
+    <div class="flex-1 p-3 bg-gray-50 overflow-hidden">
+        <!-- Stats Row -->
+        <div class="grid grid-cols-3 gap-2 mb-3">
+            <div class="stat-card bg-white rounded-lg p-2 shadow-sm">
+                <div class="text-xs text-gray-500 mb-1">Users</div>
+                <div id={`${dashboardId}-stat1`} class="text-lg font-bold text-blue-600">0</div>
+            </div>
+            <div class="stat-card bg-white rounded-lg p-2 shadow-sm">
+                <div class="text-xs text-gray-500 mb-1">Revenue</div>
+                <div id={`${dashboardId}-stat2`} class="text-lg font-bold text-green-600">$0</div>
+            </div>
+            <div class="stat-card bg-white rounded-lg p-2 shadow-sm">
+                <div class="text-xs text-gray-500 mb-1">Growth</div>
+                <div id={`${dashboardId}-stat3`} class="text-lg font-bold text-purple-600">0%</div>
+            </div>
+        </div>
+        
+        <!-- Chart Area -->
+        <div class="bg-white rounded-lg p-2 shadow-sm mb-3">
+            <div class="text-xs font-semibold text-gray-700 mb-2">Analytics Overview</div>
+            <div class="chart-container h-16 relative">
+                <svg class="w-full h-full" viewBox="0 0 200 60" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id={`${dashboardId}-gradient`} x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0" />
+                        </linearGradient>
+                    </defs>
+                    <path id={`${dashboardId}-chart`} 
+                          fill={`url(#${dashboardId}-gradient)`} 
+                          stroke="#3b82f6" 
+                          stroke-width="1.5"
+                          d="M0,50 L20,45 L40,35 L60,30 L80,25 L100,20 L120,15 L140,18 L160,22 L180,25 L200,20 L200,60 L0,60 Z"
+                          class="chart-line"
+                    />
+                </svg>
+            </div>
+        </div>
+        
+        <!-- Activity Feed -->
+        <div class="bg-white rounded-lg p-2 shadow-sm">
+            <div class="text-xs font-semibold text-gray-700 mb-2">Recent Activity</div>
+            <div id={`${dashboardId}-activity`} class="space-y-1.5">
+                <!-- Activity items will be added here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard-interface {
+        min-height: 100%;
+    }
+    
+    .stat-card {
+        transition: transform 0.2s;
+    }
+    
+    .chart-line {
+        opacity: 0;
+        animation: drawChart 2s ease-out forwards;
+    }
+    
+    @keyframes drawChart {
+        from {
+            opacity: 0;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+        }
+        to {
+            opacity: 1;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 0;
+        }
+    }
+    
+    .activity-item {
+        animation: fadeInUp 0.4s forwards;
+        opacity: 0;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script define:vars={{ dashboardId }}>
+    const activities = [
+        { icon: '✓', text: 'New user registered', time: '2m ago' },
+        { icon: '📊', text: 'Report generated', time: '5m ago' },
+        { icon: '💳', text: 'Payment processed', time: '10m ago' },
+        { icon: '📧', text: 'Email sent', time: '15m ago' }
+    ];
+
+    function initDashboard() {
+        const stat1El = document.getElementById(`${dashboardId}-stat1`);
+        const stat2El = document.getElementById(`${dashboardId}-stat2`);
+        const stat3El = document.getElementById(`${dashboardId}-stat3`);
+        const activityContainer = document.getElementById(`${dashboardId}-activity`);
+
+        if (!stat1El || !stat2El || !stat3El || !activityContainer) {
+            console.warn('Dashboard elements not found:', dashboardId);
+            return;
+        }
+
+        // Animate stats counting up
+        function animateStat(element, target, prefix = '', suffix = '') {
+            const duration = 2000;
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (suffix === '%') {
+                    element.textContent = `${prefix}${Math.floor(current)}${suffix}`;
+                } else if (prefix === '$') {
+                    element.textContent = `${prefix}${Math.floor(current).toLocaleString()}`;
+                } else {
+                    element.textContent = `${prefix}${Math.floor(current).toLocaleString()}${suffix}`;
+                }
+            }, 16);
+        }
+
+        // Start stat animations
+        setTimeout(() => {
+            animateStat(stat1El, 1247, '', '');
+            animateStat(stat2El, 45230, '$', '');
+            animateStat(stat3El, 24, '', '%');
+        }, 500);
+
+        // Add activity items with delay
+        let activityIndex = 0;
+        function addActivityItem() {
+            if (activityIndex < activities.length) {
+                const activity = activities[activityIndex];
+                const item = document.createElement('div');
+                item.className = 'activity-item flex items-center gap-2 text-xs';
+                item.innerHTML = `
+                    <span class="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-[10px] flex-shrink-0">${activity.icon}</span>
+                    <span class="flex-1 text-gray-700">${activity.text}</span>
+                    <span class="text-gray-400 text-[10px]">${activity.time}</span>
+                `;
+                activityContainer.appendChild(item);
+                activityIndex++;
+                setTimeout(addActivityItem, 1500);
+            } else {
+                // Loop the animation
+                setTimeout(() => {
+                    activityContainer.innerHTML = '';
+                    activityIndex = 0;
+                    stat1El.textContent = '0';
+                    stat2El.textContent = '$0';
+                    stat3El.textContent = '0%';
+                    setTimeout(() => {
+                        animateStat(stat1El, 1247, '', '');
+                        animateStat(stat2El, 45230, '$', '');
+                        animateStat(stat3El, 24, '', '%');
+                        addActivityItem();
+                    }, 500);
+                }, 3000);
+            }
+        }
+
+        // Start activity feed
+        setTimeout(addActivityItem, 1000);
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    } else {
+        setTimeout(initDashboard, 100);
+    }
+</script>
+

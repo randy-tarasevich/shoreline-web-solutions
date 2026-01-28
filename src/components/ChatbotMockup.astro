@@ -1,0 +1,194 @@
+---
+// ChatbotMockup.astro
+// Animated chatbot conversation interface
+// Shows chat bubbles in action without device frame
+
+// Generate unique ID for this instance
+const chatId = `chat-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="chat-interface w-full h-full bg-white rounded-lg overflow-hidden flex flex-col shadow-sm">
+    <!-- Chat Header -->
+    <div class="chat-header-gradient h-14 text-white flex items-center px-4 gap-3 flex-shrink-0">
+        <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-lg">
+            🤖
+        </div>
+        <div>
+            <h3 class="text-sm font-semibold m-0">AI Assistant</h3>
+            <p class="text-xs m-0 opacity-90">Online now</p>
+        </div>
+    </div>
+    
+    <!-- Chat Container -->
+    <div id={chatId} class="chat-container flex-1 overflow-y-auto p-4 bg-gray-50">
+        <!-- Messages will be added here by JavaScript -->
+    </div>
+    
+    <!-- Input Area -->
+    <div class="h-14 bg-white border-t border-gray-200 flex items-center px-3 gap-2 flex-shrink-0">
+        <div class="flex-1 h-9 bg-gray-100 rounded-full px-3 flex items-center text-sm text-gray-500">
+            Type a message...
+        </div>
+        <div class="message-gradient w-9 h-9 rounded-full text-white flex items-center justify-center text-sm cursor-pointer">
+            ▲
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+    
+    .message {
+        animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes typing {
+        0%, 60%, 100% {
+            transform: translateY(0);
+            opacity: 0.7;
+        }
+        30% {
+            transform: translateY(-10px);
+            opacity: 1;
+        }
+    }
+
+    .typing-dot {
+        animation: typing 1.4s infinite;
+    }
+
+    .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    .chat-header-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .message-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .chat-interface {
+        min-height: 100%;
+    }
+</style>
+
+<script define:vars={{ chatId }}>
+    const messages = [
+        { type: 'bot', text: "Hi! Welcome to Shoreline Cafe. How can I help you today?" },
+        { type: 'user', text: "Are you open tomorrow?" },
+        { type: 'bot', text: "Yes! We're open tomorrow from 7am to 8pm. Would you like to make a reservation?" },
+        { type: 'user', text: "Do you have outdoor seating?" },
+        { type: 'bot', text: "Absolutely! We have a beautiful waterfront patio with 20 outdoor tables. It's first-come, first-served for walk-ins, or you can reserve a table online." },
+        { type: 'user', text: "Perfect! Can I see your menu?" },
+        { type: 'bot', text: "Of course! I'll send you our full menu. We also have daily specials - tomorrow features fresh lobster rolls and homemade clam chowder. 🦞" },
+        { type: 'user', text: "Sounds amazing, thanks!" },
+        { type: 'bot', text: "You're welcome! Feel free to ask if you need anything else. See you tomorrow! 😊" }
+    ];
+
+    function initChatbot() {
+        const container = document.getElementById(chatId);
+        if (!container) {
+            console.warn('Chatbot container not found:', chatId);
+            return;
+        }
+
+        let messageIndex = 0;
+
+        function addMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message opacity-0 flex mb-3 ${message.type === 'user' ? 'justify-end' : ''}`;
+            
+            const bubble = document.createElement('div');
+            bubble.className = `max-w-[80%] px-3 py-2 rounded-xl text-xs leading-relaxed ${
+                message.type === 'bot' 
+                    ? 'bg-white text-gray-800 rounded-bl-sm shadow-sm' 
+                    : 'message-gradient text-white rounded-br-sm'
+            }`;
+            bubble.textContent = message.text;
+            
+            messageDiv.appendChild(bubble);
+            container.appendChild(messageDiv);
+            
+            // Trigger fade-in animation
+            requestAnimationFrame(() => {
+                messageDiv.classList.remove('opacity-0');
+            });
+            
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message opacity-0 flex mb-3';
+            typingDiv.setAttribute('data-typing', 'true');
+            
+            const indicator = document.createElement('div');
+            indicator.className = 'flex gap-1 px-3 py-2 bg-white rounded-xl rounded-bl-sm w-fit shadow-sm';
+            indicator.innerHTML = '<div class="typing-dot w-1.5 h-1.5 rounded-full bg-indigo-500"></div><div class="typing-dot w-1.5 h-1.5 rounded-full bg-indigo-500"></div><div class="typing-dot w-1.5 h-1.5 rounded-full bg-indigo-500"></div>';
+            
+            typingDiv.appendChild(indicator);
+            container.appendChild(typingDiv);
+            
+            // Trigger animation
+            requestAnimationFrame(() => {
+                typingDiv.classList.remove('opacity-0');
+            });
+            
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typing = container.querySelector('[data-typing="true"]');
+            if (typing) {
+                typing.remove();
+            }
+        }
+
+        function animateChat() {
+            if (messageIndex < messages.length) {
+                const message = messages[messageIndex];
+                
+                if (message.type === 'bot') {
+                    showTypingIndicator();
+                    setTimeout(() => {
+                        hideTypingIndicator();
+                        addMessage(message);
+                        messageIndex++;
+                        setTimeout(animateChat, 1000);
+                    }, 2000);
+                } else {
+                    addMessage(message);
+                    messageIndex++;
+                    setTimeout(animateChat, 1500);
+                }
+            } else {
+                // Loop the animation
+                setTimeout(() => {
+                    container.innerHTML = '';
+                    messageIndex = 0;
+                    animateChat();
+                }, 3000);
+            }
+        }
+
+        // Start the animation after a short delay
+        setTimeout(animateChat, 1000);
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initChatbot);
+    } else {
+        // DOM already loaded, but wait a bit to ensure component is rendered
+        setTimeout(initChatbot, 100);
+    }
+</script>
+

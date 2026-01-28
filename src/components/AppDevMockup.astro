@@ -1,0 +1,175 @@
+---
+// AppDevMockup.astro
+// Animated custom application interface mockup
+// Shows a business application with tasks, status, and interactive elements
+
+// Generate unique ID for this instance
+const appId = `app-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="app-interface w-full h-full bg-white rounded-lg overflow-hidden flex flex-col shadow-sm">
+    <!-- App Header -->
+    <div class="app-header h-12 bg-gradient-to-r from-emerald-600 to-teal-600 text-white flex items-center justify-between px-4 flex-shrink-0">
+        <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-white/20 rounded flex items-center justify-center text-xs">⚙️</div>
+            <h3 class="text-sm font-semibold m-0">Workflow</h3>
+        </div>
+        <div class="flex items-center gap-1.5">
+            <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+            <div class="w-1.5 h-1.5 bg-white/60 rounded-full"></div>
+            <div class="w-1.5 h-1.5 bg-white/40 rounded-full"></div>
+        </div>
+    </div>
+    
+    <!-- App Content -->
+    <div class="flex-1 p-3 bg-gray-50 overflow-hidden">
+        <!-- Task List -->
+        <div id={`${appId}-tasks`} class="space-y-2">
+            <!-- Tasks will be added here -->
+        </div>
+    </div>
+</div>
+
+<style>
+    .app-interface {
+        min-height: 100%;
+    }
+    
+    .task-item {
+        animation: slideInLeft 0.4s forwards;
+        opacity: 0;
+    }
+    
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    .status-badge {
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.7;
+        }
+    }
+    
+    .progress-bar {
+        animation: fillProgress 2s ease-out forwards;
+        width: 0%;
+    }
+    
+    @keyframes fillProgress {
+        to {
+            width: var(--progress-width);
+        }
+    }
+</style>
+
+<script define:vars={{ appId }}>
+    const tasks = [
+        { title: 'Design System Update', status: 'in-progress', progress: 75, priority: 'high' },
+        { title: 'API Integration', status: 'pending', progress: 0, priority: 'medium' },
+        { title: 'User Testing', status: 'completed', progress: 100, priority: 'low' },
+        { title: 'Documentation', status: 'in-progress', progress: 45, priority: 'medium' }
+    ];
+
+    function initApp() {
+        const tasksContainer = document.getElementById(`${appId}-tasks`);
+
+        if (!tasksContainer) {
+            console.warn('App elements not found:', appId);
+            return;
+        }
+
+        let taskIndex = 0;
+
+        function getStatusColor(status) {
+            switch(status) {
+                case 'completed':
+                    return 'bg-green-500';
+                case 'in-progress':
+                    return 'bg-blue-500';
+                case 'pending':
+                    return 'bg-gray-400';
+                default:
+                    return 'bg-gray-400';
+            }
+        }
+
+        function getPriorityColor(priority) {
+            switch(priority) {
+                case 'high':
+                    return 'text-red-600';
+                case 'medium':
+                    return 'text-yellow-600';
+                case 'low':
+                    return 'text-green-600';
+                default:
+                    return 'text-gray-600';
+            }
+        }
+
+        function addTask(task, delay) {
+            setTimeout(() => {
+                const taskItem = document.createElement('div');
+                taskItem.className = 'task-item bg-white rounded-lg p-2 shadow-sm';
+                
+                const statusColor = getStatusColor(task.status);
+                const priorityColor = getPriorityColor(task.priority);
+                
+                taskItem.innerHTML = `
+                    <div class="flex items-center justify-between mb-1.5">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 ${statusColor} rounded-full status-badge"></div>
+                            <span class="text-xs font-semibold text-gray-800">${task.title}</span>
+                        </div>
+                        <span class="text-[10px] ${priorityColor} font-medium">${task.priority}</span>
+                    </div>
+                    ${task.status !== 'pending' ? `
+                        <div class="w-full bg-gray-200 rounded-full h-1 overflow-hidden">
+                            <div class="progress-bar h-full ${statusColor}" style="--progress-width: ${task.progress}%"></div>
+                        </div>
+                    ` : ''}
+                `;
+                
+                tasksContainer.appendChild(taskItem);
+            }, delay);
+        }
+
+        function showTasks() {
+            tasksContainer.innerHTML = '';
+            taskIndex = 0;
+
+            tasks.forEach((task, index) => {
+                addTask(task, index * 400);
+            });
+
+            // Loop the animation
+            setTimeout(() => {
+                showTasks();
+            }, tasks.length * 400 + 3000);
+        }
+
+        // Start showing tasks
+        setTimeout(showTasks, 500);
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+        setTimeout(initApp, 100);
+    }
+</script>
+
