@@ -30,6 +30,10 @@ A modern, responsive business website for Shoreline Web Solutions - a profession
 └── package.json     # Project dependencies
 ```
 
+## 📚 Documentation
+
+- **[Security headers](docs/SECURITY_HEADERS.md)** – Recommended security headers for deployment (CloudFront, Netlify, Vercel, etc.)
+
 ## 📝 License
 
 © 2025 Shoreline Web Solutions. All rights reserved.

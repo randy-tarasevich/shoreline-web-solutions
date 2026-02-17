@@ -31,29 +31,12 @@ const {
 	cardsPerView = 3 // Default: show 3 cards at once
 } = Astro.props;
 
-// Default reviews (replace with Google reviews when API is set up)
-const defaultReviews = reviews.length > 0 ? reviews : [
-	{
-		author: "Jeremy Martel",
-		rating: 5,
-		text: "Shoreline Web Solutions took my business from just a basic Facebook page to a professional website that truly represents my work. The transformation has brought in more customers and given me the credibility I needed to grow my business.",
-		date: "2024-01-15",
-		authorImage: null,
-		reviewUrl: null
-	},
-	{
-		author: "Tayler Nadalny-Sipes",
-		rating: 5,
-		text: "I had absolutely no online presence before working with Shoreline Web Solutions. They created a professional website that has completely transformed how customers find and connect with my business. The difference in credibility and visibility has been incredible.",
-		date: "2024-01-10",
-		authorImage: null,
-		reviewUrl: null
-	}
-];
-
-const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
+// No placeholder reviews — use only what is passed in (from API or src/data/google-reviews.ts)
+const displayReviews = reviews.length > 0 ? reviews : [];
+const hasReviews = displayReviews.length > 0;
 ---
 
+{hasReviews ? (
 <div class="reviews-carousel-container" data-cards-per-view={cardsPerView} style={`--cards-per-view: ${cardsPerView}`}>
 	<div class="reviews-carousel-wrapper" data-autoplay={autoPlay}>
 		<div class="reviews-carousel-track">
@@ -160,6 +143,7 @@ const displayReviews = reviews.length > 0 ? reviews : defaultReviews;
 		</div>
 	)}
 </div>
+) : null}
 
 <style>
 	.reviews-carousel-container {
