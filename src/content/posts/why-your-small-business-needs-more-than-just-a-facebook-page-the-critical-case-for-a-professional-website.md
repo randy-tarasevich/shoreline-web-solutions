@@ -2,7 +2,7 @@
 title: "Why Your Small Business Needs More Than Just a Social Media Page: The Critical Case for a Professional Website"
 author: "Randy Tarasevich"
 date: "2026-02-18"
-image: "/images/blog/social-media-vs-professional-website.png"
+image: "/images/blog/why-your-small-business-needs-more-than-just-a-facebook-page-the-critical-case-for-a-professional-website.png"
 tags:
   [
     "small business",

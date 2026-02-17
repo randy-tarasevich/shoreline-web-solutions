@@ -2,7 +2,7 @@
 title: "Understanding Software Development Pricing: What You're Really Paying For"
 author: "Randy Tarasevich"
 date: "2026-01-29"
-image: "/images/blog/post-6.png"
+image: "/images/blog/understanding-software-development-pricing-what-youre-really-paying-for.png"
 description: "A transparent look at how software development projects are priced and why expertise matters more than hours worked."
 tags: ["pricing", "web development", "business", "client education"]
 ---

@@ -2,7 +2,7 @@
 title: "5 Practical Ways Small Businesses Can Use AI (Without the Tech Headache)"
 author: "Randy Tarasevich"
 date: "2025-12-20"
-image: "/images/blog/post-5.png"
+image: "/images/blog/5-practical-ways-small-businesses-can-use-ai-without-the-tech-headache.png"
 tags:
   [
     "ai",

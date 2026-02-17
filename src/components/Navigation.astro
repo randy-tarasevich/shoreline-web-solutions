@@ -1,26 +1,33 @@
 ---
 export interface Props {
 	currentPage?: string;
+	heroVariant?: 'dark' | 'light';
 }
 
-const { currentPage } = Astro.props;
+const { currentPage, heroVariant = 'dark' } = Astro.props;
+const isLight = heroVariant === 'light';
+const logoClass = isLight ? 'font-bold text-xl text-slate-900' : 'font-bold text-xl text-white drop-shadow-lg';
+const logoAccent = isLight ? 'text-blue-600' : 'text-cyan-200';
+const linkBase = isLight ? 'font-medium transition-colors text-slate-700 hover:text-blue-600' : 'font-medium transition-colors drop-shadow-sm text-white hover:text-blue-300';
+const linkActive = isLight ? 'text-blue-600' : 'text-blue-300';
+const navBg = isLight ? 'bg-white/90 backdrop-blur-md border-b border-slate-200/60' : 'bg-transparent backdrop-blur-md';
 ---
 
-<nav class="fixed top-0 w-full bg-transparent backdrop-blur-md z-50 transition-all duration-300" id="navbar">
+<nav class={`fixed top-0 w-full ${navBg} z-50 transition-all duration-300`} id="navbar" data-hero-variant={heroVariant}>
 	<div class="max-w-7xl mx-auto px-6">
 		<div class="flex items-center justify-between h-16">
-			<a href="/" class="font-bold text-xl text-white drop-shadow-lg">
-				<span class="text-cyan-200">Shoreline</span> Web Solutions
+			<a href="/" class={logoClass}>
+				<span class={logoAccent}>Shoreline</span> Web Solutions
 			</a>
 			
 			<div class="hidden md:flex space-x-8 items-center">
-				<a href="/" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'home' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Home</a>
-				<a href="/about" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'about' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>About</a>
+				<a href="/" class={`${linkBase} ${currentPage === 'home' ? linkActive : ''}`}>Home</a>
+				<a href="/about" class={`${linkBase} ${currentPage === 'about' ? linkActive : ''}`}>About</a>
 				
 				<!-- Services Dropdown -->
 				<div class="relative group" id="services-dropdown">
 					<button 
-						class={`font-medium transition-colors drop-shadow-sm flex items-center gap-1 ${currentPage === 'services' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}
+						class={`${linkBase} flex items-center gap-1 ${currentPage === 'services' ? linkActive : ''}`}
 						aria-label="Services menu"
 						aria-expanded="false"
 						aria-haspopup="true"
@@ -31,19 +38,19 @@ const { currentPage } = Astro.props;
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</button>
-					<div class="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-white/20">
+					<div class="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-slate-200/80">
 						<div class="py-2">
 							<a href="/services" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">All Services</a>
 							
 							<!-- Custom AI Solutions with submenu -->
 							<div class="relative ai-solutions-submenu">
-								<a href="/custom-ai-solutions" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors flex items-center justify-between">
+								<a href="/custom-ai-solutions" class="flex items-center justify-between px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
 									<span>AI Solutions</span>
 									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
 									</svg>
 								</a>
-								<div class="absolute left-full top-0 ml-2 w-56 bg-white/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible ai-solutions-submenu-content transition-all duration-200 border border-white/20">
+								<div class="absolute left-full top-0 ml-2 w-56 bg-white/95 backdrop-blur-md rounded-lg shadow-xl opacity-0 invisible ai-solutions-submenu-content transition-all duration-200 border border-slate-200/80">
 									<div class="py-2">
 										<a href="/ai-review-response" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">AI Review Response</a>
 										<a href="/services/ai-chat-assistant" class="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">AI Chat Assistant</a>
@@ -59,14 +66,14 @@ const { currentPage } = Astro.props;
 					</div>
 				</div>
 				
-				<a href="/portfolio" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'portfolio' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Portfolio</a>
-				<a href="/blog" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'blog' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Blog</a>
-				<a href="/contact" class={`font-medium transition-colors drop-shadow-sm ${currentPage === 'contact' ? 'text-blue-300' : 'text-white hover:text-blue-300'}`}>Contact</a>
+				<a href="/portfolio" class={`${linkBase} ${currentPage === 'portfolio' ? linkActive : ''}`}>Portfolio</a>
+				<a href="/blog" class={`${linkBase} ${currentPage === 'blog' ? linkActive : ''}`}>Blog</a>
+				<a href="/contact" class={`${linkBase} ${currentPage === 'contact' ? linkActive : ''}`}>Contact</a>
 			</div>
 			
 			<!-- Mobile menu button -->
 			<button 
-				class="md:hidden p-2 text-white drop-shadow-sm" 
+				class={`md:hidden p-2 ${isLight ? 'text-slate-800' : 'text-white drop-shadow-sm'}`}
 				id="mobile-menu-button"
 				aria-label="Toggle navigation menu"
 				aria-expanded="false"
@@ -80,14 +87,14 @@ const { currentPage } = Astro.props;
 		
 		<!-- Mobile menu -->
 		<div class="md:hidden hidden" id="mobile-menu">
-			<div class="px-2 pt-2 pb-3 space-y-1 bg-transparent backdrop-blur-md border-t border-white/20 rounded-b-lg mx-2">
-				<a href="/" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'home' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Home</a>
-				<a href="/about" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'about' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>About</a>
+			<div class={`px-2 pt-2 pb-3 space-y-1 backdrop-blur-md rounded-b-lg mx-2 ${isLight ? 'bg-white/95 border-t border-slate-200' : 'bg-transparent border-t border-white/20'}`}>
+				<a href="/" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === 'home' ? (isLight ? 'text-blue-600 bg-blue-50' : 'text-blue-300 bg-white/10') : (isLight ? 'text-slate-700 hover:text-blue-600 hover:bg-slate-50' : 'text-white hover:text-blue-300 hover:bg-white/10')}`}>Home</a>
+				<a href="/about" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === 'about' ? (isLight ? 'text-blue-600 bg-blue-50' : 'text-blue-300 bg-white/10') : (isLight ? 'text-slate-700 hover:text-blue-600 hover:bg-slate-50' : 'text-white hover:text-blue-300 hover:bg-white/10')}`}>About</a>
 				
 				<!-- Mobile Services Dropdown -->
 				<div class="services-mobile-dropdown">
 					<button 
-						class={`w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm flex items-center justify-between ${currentPage === 'services' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`} 
+						class={`w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center justify-between ${currentPage === 'services' ? (isLight ? 'text-blue-600 bg-blue-50' : 'text-blue-300 bg-white/10') : (isLight ? 'text-slate-700 hover:text-blue-600 hover:bg-slate-50' : 'text-white hover:text-blue-300 hover:bg-white/10')}`}
 						id="mobile-services-button"
 						aria-label="Toggle services menu"
 						aria-expanded="false"
@@ -100,12 +107,12 @@ const { currentPage } = Astro.props;
 						</svg>
 					</button>
 					<div class="hidden pl-4 pt-1 space-y-1" id="mobile-services-menu" role="menu">
-						<a href="/services" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">All Services</a>
+						<a href="/services" class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isLight ? 'text-slate-600 hover:text-blue-600 hover:bg-slate-50' : 'text-blue-200 hover:text-blue-300 hover:bg-white/10'}`}>All Services</a>
 						
 						<!-- Mobile Custom AI Solutions Submenu -->
 						<div class="mobile-ai-solutions">
 							<button 
-								class="w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10 flex items-center justify-between"
+								class={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center justify-between ${isLight ? 'text-slate-600 hover:text-blue-600 hover:bg-slate-50' : 'text-blue-200 hover:text-blue-300 hover:bg-white/10'}`}
 								id="mobile-ai-solutions-button"
 								aria-label="Toggle AI Solutions menu"
 								aria-expanded="false"
@@ -118,21 +125,21 @@ const { currentPage } = Astro.props;
 								</svg>
 							</button>
 							<div class="hidden pl-4 pt-1 space-y-1" id="mobile-ai-solutions-menu" role="menu">
-								<a href="/ai-review-response" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">AI Review Response</a>
-								<a href="/services/ai-chat-assistant" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">AI Chat Assistant</a>
-								<a href="/services/ai-voice-agent" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">AI Voice Agent</a>
+								<a href="/ai-review-response" class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isLight ? 'text-slate-600 hover:text-blue-600 hover:bg-slate-50' : 'text-blue-200 hover:text-blue-300 hover:bg-white/10'}`}>AI Review Response</a>
+								<a href="/services/ai-chat-assistant" class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isLight ? 'text-slate-600 hover:text-blue-600 hover:bg-slate-50' : 'text-blue-200 hover:text-blue-300 hover:bg-white/10'}`}>AI Chat Assistant</a>
+								<a href="/services/ai-voice-agent" class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isLight ? 'text-slate-600 hover:text-blue-600 hover:bg-slate-50' : 'text-blue-200 hover:text-blue-300 hover:bg-white/10'}`}>AI Voice Agent</a>
 							</div>
 						</div>
 						
-						<a href="/services/custom-web-development" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">Web Development</a>
-						<a href="/services/ecommerce-solutions" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">E-commerce Solutions</a>
-						<a href="/services/custom-application-development" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm text-blue-200 hover:text-blue-300 hover:bg-white/10">Custom Application Development</a>
+						<a href="/services/custom-web-development" class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isLight ? 'text-slate-600 hover:text-blue-600 hover:bg-slate-50' : 'text-blue-200 hover:text-blue-300 hover:bg-white/10'}`}>Web Development</a>
+						<a href="/services/ecommerce-solutions" class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isLight ? 'text-slate-600 hover:text-blue-600 hover:bg-slate-50' : 'text-blue-200 hover:text-blue-300 hover:bg-white/10'}`}>E-commerce Solutions</a>
+						<a href="/services/custom-application-development" class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isLight ? 'text-slate-600 hover:text-blue-600 hover:bg-slate-50' : 'text-blue-200 hover:text-blue-300 hover:bg-white/10'}`}>Custom Application Development</a>
 					</div>
 				</div>
 				
-				<a href="/portfolio" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'portfolio' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Portfolio</a>
-				<a href="/blog" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'blog' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Blog</a>
-				<a href="/contact" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors drop-shadow-sm ${currentPage === 'contact' ? 'text-blue-300 bg-white/10' : 'text-white hover:text-blue-300 hover:bg-white/10'}`}>Contact</a>
+				<a href="/portfolio" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === 'portfolio' ? (isLight ? 'text-blue-600 bg-blue-50' : 'text-blue-300 bg-white/10') : (isLight ? 'text-slate-700 hover:text-blue-600 hover:bg-slate-50' : 'text-white hover:text-blue-300 hover:bg-white/10')}`}>Portfolio</a>
+				<a href="/blog" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === 'blog' ? (isLight ? 'text-blue-600 bg-blue-50' : 'text-blue-300 bg-white/10') : (isLight ? 'text-slate-700 hover:text-blue-600 hover:bg-slate-50' : 'text-white hover:text-blue-300 hover:bg-white/10')}`}>Blog</a>
+				<a href="/contact" class={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === 'contact' ? (isLight ? 'text-blue-600 bg-blue-50' : 'text-blue-300 bg-white/10') : (isLight ? 'text-slate-700 hover:text-blue-600 hover:bg-slate-50' : 'text-white hover:text-blue-300 hover:bg-white/10')}`}>Contact</a>
 			</div>
 		</div>
 	</div>
@@ -227,10 +234,20 @@ const { currentPage } = Astro.props;
 	
 	function handleNavbarScroll() {
 		const navbar = document.getElementById('navbar');
-		if (navbar) {
-			if (window.scrollY > 50) {
+		if (!navbar) return;
+		const isLight = navbar.getAttribute('data-hero-variant') === 'light';
+		if (window.scrollY > 50) {
+			if (isLight) {
+				navbar.classList.add('bg-white/95', 'shadow-sm');
+				navbar.classList.remove('bg-white/90');
+			} else {
 				navbar.classList.add('bg-black/20');
 				navbar.classList.remove('bg-transparent');
+			}
+		} else {
+			if (isLight) {
+				navbar.classList.add('bg-white/90');
+				navbar.classList.remove('bg-white/95', 'shadow-sm');
 			} else {
 				navbar.classList.add('bg-transparent');
 				navbar.classList.remove('bg-black/20');

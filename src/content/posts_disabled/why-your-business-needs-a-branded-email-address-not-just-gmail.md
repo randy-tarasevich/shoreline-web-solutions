@@ -2,7 +2,7 @@
 title: "Why Your Business Needs a Branded Email Address (Not Just Gmail)"
 author: "Randy Tarasevich"
 date: "2025-11-12"
-image: "/images/blog/post-3.png"
+image: "/images/blog/why-your-business-needs-a-branded-email-address-not-just-gmail.png"
 tags:
   [
     "small business",

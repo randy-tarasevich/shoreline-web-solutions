@@ -2,7 +2,7 @@
 title: "Why Custom Websites Win: Beyond the Template"
 author: "Randy Tarasevich"
 date: "2025-10-08"
-image: "/images/blog/post-2.png"
+image: "/images/blog/why-custom-websites-win-beyond-the-template.png"
 tags:
   [
     "small business",
